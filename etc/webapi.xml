@@ -11,18 +11,9 @@
             <parameter name="product.id" force="true">%product_id%</parameter>
         </data>
     </route>
-    <route url="/V1/wishlist/me" method="POST">
-        <service class="Appstractsoftware\MagentoAdapter\Api\WishlistManagementInterface" method="addProductToWishlistForCustomer"/>
-        <resources>
-            <resource ref="self"/>
-        </resources>
-        <data>
-            <parameter name="product.id" force="true">%product_id%</parameter>
-        </data>
-    </route>
 
     <route url="/V1/wishlist/:id" method="GET">
-        <service class="Appstractsoftware\MagentoAdapter\Api\WishlistRepositoryInterface" method="getById"/>
+        <service class="Appstractsoftware\MagentoAdapter\Api\WishlistManagementInterface" method="getWishlistById"/>
         <resources>
             <resource ref="Appstractsoftware_MagentoAdapter::admin"/>
         </resources>
@@ -33,8 +24,8 @@
             <resource ref="Appstractsoftware_MagentoAdapter::admin"/>
         </resources>
     </route>
-    <route url="/V1/wishlist/share/:sharingCode" method="GET">
-        <service class="Appstractsoftware\MagentoAdapter\Api\WishlistRepositoryInterface" method="get"/>
+    <route url="/V1/wishlist/sharing/:sharingCode" method="GET">
+        <service class="Appstractsoftware\MagentoAdapter\Api\WishlistManagementInterface" method="getWishlistBySharingCode"/>
         <resources>
             <resource ref="Appstractsoftware_MagentoAdapter::admin"/>
         </resources>

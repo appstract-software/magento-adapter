@@ -5,26 +5,40 @@ namespace Appstractsoftware\MagentoAdapter\Model;
 use Appstractsoftware\MagentoAdapter\Api\WishlistRepositoryInterface;
 
 use Magento\Framework\Api\ExtensibleDataObjectConverter;
+use Magento\Framework\Api\SearchCriteria\CollectionProcessorInterface;
 use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Framework\Exception\StateException;
-use \Magento\Wishlist\Model\WishlistFactory;
 use Magento\Wishlist\Model\ResourceModel\Wishlist as WishlistResource;
-use Magento\Framework\Api\SearchCriteria\CollectionProcessorInterface;
+use Magento\Wishlist\Model\Wishlist;
+use Magento\Wishlist\Model\WishlistFactory;
 
+/**
+ * WishlistRepository.
+ * 
+ * @author Mateusz Lesiak <mateusz.lesiak@appstract.software>
+ * @copyright 2020 Appstract Software
+ */
 class WishlistRepository implements WishlistRepositoryInterface
 {
-    /**
-     * @var WishlistResource
-     */
+    /** @var WishlistResource */
     private $wishlistResource;
-    /**
-     * @var WishlistFactory
-     */
+
+    /** @var WishlistFactory */
     private $wishlistFactory;
 
+    /**
+     * Sharing code column name in wishlist table in db.
+     */
+    const SHARING_CODE_FIELD = 'sharing_code';
+
+    /**
+     * Customer id column name in wishlist table in db.
+     */
+    const CUSTOMER_ID_FIELD = 'customer_id';
 
     /**
      * WishlistRepository constructor.
+     * 
      * @param WishlistFactory $wishlistFactory
      * @param WishlistResource $wishlistResource
      */
@@ -39,50 +53,54 @@ class WishlistRepository implements WishlistRepositoryInterface
     /**
      * @inheritdoc
      */
-    public function get($sharingCode)
+    public function get($sharingCode): Wishlist
     {
         $wishlist = $this->wishlistFactory->create();
-        $this->wishlistResource->load($wishlist, $sharingCode, 'sharing_code');
+        $this->wishlistResource->load($wishlist, $sharingCode, self::SHARING_CODE_FIELD);
         if (!$wishlist->getId()) {
             throw new NoSuchEntityException(__('Wishlist with sharing code "%1" does not exist.', $sharingCode));
         }
-        return $wishlist->getDataModel();
+        return $wishlist;
     }
-
+ 
     /**
      * @inheritdoc
      */
-    public function getById($id)
+    public function getById($id): Wishlist
     {
         $wishlist = $this->wishlistFactory->create();
         $this->wishlistResource->load($wishlist, $id);
-        if (!$id) {
+        if (!$wishlist->getId()) {
             throw new NoSuchEntityException(__('Wishlist with id "%1" does not exist.', $id));
         }
-        $wishlist_data = [];
-        $collection = $wishlist->getItemCollection();
-        foreach ($collection as $item) {
-            $data = [
-                "wishlist_item_id" => $item->getWishlistItemId(),
-                "wishlist_id"      => $item->getWishlistId(),
-                "product_id"       => $item->getProductId(),
-                "store_id"         => $item->getStoreId(),
-                "added_at"         => $item->getAddedAt(),
-                "description"      => $item->getDescription(),
-                "qty"              => round($item->getQty()),
-            ];
-            $wishlist_data[] = $data;
-        }
-
-        return $wishlist_data;
+        return $wishlist;
     }
 
     /**
      * @inheritdoc
      */
-    public function deleteById($id)
+    public function getByCustomerId($customerId): Wishlist
     {
-        $wishlist = $this->get($id);
+        if (empty($customerId)) {
+            throw new InputException(__('Argument "customerId" is required'));
+        }
+
+        $wishlist = $this->wishlistFactory->create();
+        $this->wishlistResource->load($wishlist, $customerId, self::CUSTOMER_ID_FIELD);
+        if (!$wishlist->getId()) {
+            throw new NoSuchEntityException(__('Wishlist with customer id "%1" does not exist.', $customerId));
+        }
+        return $wishlist;
+    }
+
+
+    /**
+     * @inheritdoc
+     */
+    public function deleteById($id): bool
+    {
+        $wishlist = $this->wishlistFactory->create();
+        $this->wishlistResource->load($wishlist, $id);
         try {
             $this->wishlistResource->delete($wishlist);
         } catch (\Exception $e) {
