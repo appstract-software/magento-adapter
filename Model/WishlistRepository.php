@@ -85,8 +85,7 @@ class WishlistRepository implements WishlistRepositoryInterface
             throw new InputException(__('Argument "customerId" is required'));
         }
 
-        $wishlist = $this->wishlistFactory->create();
-        $this->wishlistResource->load($wishlist, $customerId, self::CUSTOMER_ID_FIELD);
+        $wishlist = $this->wishlistFactory->create()->loadByCustomerId($customerId, true);
         if (!$wishlist->getId()) {
             throw new NoSuchEntityException(__('Wishlist with customer id "%1" does not exist.', $customerId));
         }
