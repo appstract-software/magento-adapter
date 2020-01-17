@@ -1,6 +1,8 @@
 <?php
 namespace Appstractsoftware\MagentoAdapter\Api;
  
+use Appstractsoftware\MagentoAdapter\Api\Data\WishlistDtoInterface;
+
 interface WishlistServiceInterface
 {
     /**
@@ -26,25 +28,25 @@ interface WishlistServiceInterface
      * Get Wishlist by id
      * 
      * @param int $id Wishlist id
-     * @return array
+     * @return Appstractsoftware\MagentoAdapter\Api\Data\WishlistDtoInterface
      */
-    public function getWishlistById($id): array;
+    public function getWishlistById($id): WishlistDtoInterface;
 
     /**
      * Get Wishlist by customer id
      * 
      * @param int $customerId
-     * @return array
+     * @return Appstractsoftware\MagentoAdapter\Api\Data\WishlistDtoInterface
      */
-    public function getWishlistByCustomerId($customerId): array;
+    public function getWishlistByCustomerId($customerId): WishlistDtoInterface;
 
     /**
      * Get Wishlist by sharing code
      * 
      * @param string $sharingCode
-     * @return array
+     * @return Appstractsoftware\MagentoAdapter\Api\Data\WishlistDtoInterface
      */
-    public function getWishlistBySharingCode($sharingCode): array;
+    public function getWishlistBySharingCode($sharingCode): WishlistDtoInterface;
 
 
     /**

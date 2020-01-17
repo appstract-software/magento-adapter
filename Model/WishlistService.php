@@ -2,52 +2,47 @@
 
 namespace Appstractsoftware\MagentoAdapter\Model;
 
-use \Appstractsoftware\MagentoAdapter\Api\WishlistServiceInterface;
-use \Appstractsoftware\MagentoAdapter\Api\WishlistRepositoryInterface;
+use Appstractsoftware\MagentoAdapter\Api\WishlistServiceInterface;
+use Appstractsoftware\MagentoAdapter\Api\WishlistRepositoryInterface;
+use Appstractsoftware\MagentoAdapter\Api\Data\WishlistDtoInterface;
+use Appstractsoftware\MagentoAdapter\Api\Data\WishlistDto;
 
-use \Magento\Catalog\Api\ProductRepositoryInterface;
-use \Magento\Catalog\Helper\ImageFactory as ProductImageHelper;
-use \Magento\Framework\Exception\InputException;
-use \Magento\Framework\Exception\NoSuchEntityException;
-use \Magento\Store\Model\App\Emulation as AppEmulation;
-use \Magento\Store\Model\StoreManagerInterface;
+use Magento\Catalog\Api\ProductRepositoryInterface;
+use Magento\Framework\Exception\InputException;
+use Magento\Framework\Exception\NoSuchEntityException;
+use Magento\Wishlist\Model\ResourceModel\Item as ItemResource;
 
 class WishlistService implements WishlistServiceInterface
 {
-    /** @var \Magento\Catalog\Helper\ImageFactory => ProductImageHelper */
-    protected $productImageHelper;
     /** @var \Magento\Catalog\Api\ProductRepositoryInterface */
     protected $productRepository;
-    
-    /** @var \Magento\Store\Model\App\Emulation => AppEmulation*/
-    protected $appEmulation;
-    /** @var \Magento\Store\Model\StoreManagerInterface */
-    protected $storemanagerinterface;
 
     /** @var \Appstractsoftware\MagentoAdapter\Api\WishlistRepositoryInterface */
     protected $wishlistApiRepository;
 
+    /** @var \Appstractsoftware\MagentoAdapter\Api\Data\WishlistDtoInterface */
+    protected $wishlistDto;
+
+    /** @var ItemResource */
+    protected $itemResource;
+
     /**
      * Constructor.
      *
-     * @param ProductImageHelper $productImageHelper
      * @param ProductRepositoryInterface $productRepository
-     * @param AppEmulation $appEmulation
-     * @param StoreManagerInterface $storemanagerinterface
      * @param WishlistRepositoryInterface $wishlistApiRepository
+     * @param ItemResource $itemResource
      */
     public function __construct(
-        ProductImageHelper $productImageHelper,
         ProductRepositoryInterface $productRepository,
-        AppEmulation $appEmulation,
-        StoreManagerInterface $storemanagerinterface,
-        WishlistRepositoryInterface $wishlistApiRepository
+        WishlistRepositoryInterface $wishlistApiRepository,
+        WishlistDtoInterface $wishlistDto,
+        ItemResource $itemResource
     ) {
-        $this->productImageHelper = $productImageHelper;
         $this->productRepository = $productRepository;
-        $this->appEmulation = $appEmulation;
-        $this->storemanagerinterface = $storemanagerinterface;
         $this->wishlistApiRepository = $wishlistApiRepository;
+        $this->wishlistDto = $wishlistDto;
+        $this->itemResource = $itemResource;
     }
 
     /**
@@ -55,8 +50,11 @@ class WishlistService implements WishlistServiceInterface
      */
     public function addProductToWishlistById($id, $productId): bool
     {
-        // TODO: Implement method.
-        return false;
+        $product = $this->productRepository->getById($productId);
+        $wishlist = $this->wishlistApiRepository->getById($customerId);
+        $wishlist->addNewItem($product);
+        $returnData = $wishlist->save();
+        return true;
     }
 
     /**
@@ -65,7 +63,7 @@ class WishlistService implements WishlistServiceInterface
     public function addProductToWishlistByCustomerId($customerId, $productId) : bool
     {
         $product = $this->productRepository->getById($productId);
-        $wishlist = $this->wishlistApiRepository->getById($customerId);
+        $wishlist = $this->wishlistApiRepository->getByCustomerId($customerId);
         $wishlist->addNewItem($product);
         $returnData = $wishlist->save();
         return true;
@@ -75,28 +73,28 @@ class WishlistService implements WishlistServiceInterface
     /**
      * @inheritdoc
      */
-    public function getWishlistById($id): array
+    public function getWishlistById($id): WishlistDtoInterface
     {
         $wishlist = $this->wishlistApiRepository->getById($id);
-        return $this->prepareWishlistDTO($wishlist);
+        return $this->wishlistDto->load($wishlist);
     }
 
     /**
      * @inheritdoc
      */
-    public function getWishlistByCustomerId($customerId): array
+    public function getWishlistByCustomerId($customerId): WishlistDtoInterface
     {
-        $wishlist = $this->wishlistApiRepository->getById($customerId);
-        return $this->prepareWishlistDTO($wishlist);
+        $wishlist = $this->wishlistApiRepository->getByCustomerId($customerId);
+        return $this->wishlistDto->load($wishlist);
     }
 
     /**
      * @inheritdoc
      */
-    public function getWishlistBySharingCode($sharingCode): array
+    public function getWishlistBySharingCode($sharingCode): WishlistDtoInterface
     {
         $wishlist = $this->wishlistApiRepository->get($sharingCode);
-        return $this->prepareWishlistDTO($wishlist);
+        return $this->wishlistDto->load($wishlist);
     }
 
 
@@ -105,8 +103,7 @@ class WishlistService implements WishlistServiceInterface
      */
     public function deleteWishlistById($id): bool
     {
-        // TODO: Implement method.
-        return false;
+        return $this->wishlistApiRepository->deleteById($id);
     }
 
     /**
@@ -114,8 +111,14 @@ class WishlistService implements WishlistServiceInterface
      */
     public function deleteItemByItemIdFromWishlistById($id, $itemId): bool
     {
-        // TODO: Implement method.
-        return false;
+        $wishlist = $this->wishlistApiRepository->getById($id);
+        $deleted = false;
+        $item = $wishlist->getItem($itemId);
+        if (!empty($item)) {
+            $deleted = true;
+            $this->itemResource->delete($item);
+        }
+        return $deleted;
     }
 
     /**
@@ -123,17 +126,16 @@ class WishlistService implements WishlistServiceInterface
      */
     public function deleteItemByProductIdFromWishlistById($id, $productId): bool
     {
-        // TODO: Implement method.
-        return false;
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function deleteItemByProductIdFromWishlistByCustomerId($customerId, $productId): bool
-    {
-        // TODO: Implement method.
-        return false;
+        $wishlist = $this->wishlistApiRepository->getById($id);
+        $deleted = false;
+        $items = $wishlist->getItemCollection();
+        foreach($items as $item) {
+            if ($item->getProductId() === $productId) {
+                $deleted = true;
+                $this->itemResource->delete($item);
+            }
+        }
+        return $deleted;
     }
 
     /**
@@ -141,76 +143,40 @@ class WishlistService implements WishlistServiceInterface
      */
     public function deleteItemByItemIdFromWishlistByCustomerId($customerId, $itemId): bool
     {
-        // TODO: Implement method.
-        return false;
-        return true;
-    }
-
-
-    /**
-     * Returns DTO of wishlist from model wishlist.
-     *
-     * @param Magento\Wishlist\Model\Wishlist $wishlist
-     * @return array
-     */
-    private function prepareWishlistDTO($wishlist): array
-    {
-        $items = [];
-        $baseurl = $this->storemanagerinterface->getStore()->getBaseUrl(\Magento\Framework\UrlInterface::URL_TYPE_MEDIA).'catalog/product';
-        $collection = $wishlist->getItemCollection();
-        foreach ($collection as $item) {
-            $productInfo = $item->getProduct()->toArray();
-            if ($productInfo['small_image'] == 'no_selection') {
-                $currentproduct = $this->productload->load($productInfo['entity_id']);
-                $imageURL = $this->getImageUrl($currentproduct, 'product_base_image');
-                $productInfo['small_image'] = $imageURL;
-                $productInfo['thumbnail'] = $imageURL;
-            } else {
-                $imageURL = $baseurl . $productInfo['small_image'];
-                $productInfo['small_image'] = $imageURL;
-                $productInfo['thumbnail'] = $imageURL;
-            }
-            $data = [
-                "id"               => $item->getWishlistItemId(),
-                "wishlist_item_id" => $item->getWishlistItemId(),
-                "wishlist_id"      => $item->getWishlistId(),
-                "product_id"       => $item->getProductId(),
-                "store_id"         => $item->getStoreId(),
-                "added_at"         => $item->getAddedAt(),
-                "description"      => $item->getDescription(),
-                "qty"              => round($item->getQty()),
-                "product"          => $productInfo
-            ];
-            $items[] = $data;
+        $wishlist = $this->wishlistApiRepository->getByCustomerId($customerId);
+        $deleted = false;
+        $item = $wishlist->getItem($itemId);
+        if (!empty($item)) {
+            $deleted = true;
+            $this->itemResource->delete($item);
         }
-
-        return [[
-            'id'                => $wishlist->getId(),
-            'wishlist_id'       => $wishlist->getId(),
-            'customer_id'       => $wishlist->getCustomerId(),
-            'sharing_code'      => $wishlist->getSharingCode(),
-            'shared'            => $wishlist->getShared(),
-            'name'              => $wishlist->getName(),
-            'updated_at'        => $wishlist->getUpdatedAt(),
-            'has_salable_items' => $wishlist->isSalable(),
-            'items_count'       => $wishlist->getItemsCount(),
-            'items'             => $items
-        ]];
+        return $deleted;
     }
 
     /**
-     * Return full image url
-     * 
-     * @param \Magento\Catalog\Model\Product
-     * @return string
+     * @inheritDoc
      */
-    private function getImageUrl($product, string $imageType = '')
+    public function deleteItemByProductIdFromWishlistByCustomerId($customerId, $productId): bool
     {
-        $storeId = $this->storemanagerinterface->getStore()->getId();
-        $this->appEmulation->startEnvironmentEmulation($storeId, \Magento\Framework\App\Area::AREA_FRONTEND, true);
-        $imageUrl = $this->productImageHelper->create()->init($product, $imageType)->getUrl();
-        $this->appEmulation->stopEnvironmentEmulation();
-
-        return $imageUrl;
+        $wishlist = $this->wishlistApiRepository->getByCustomerId($customerId);
+        $deleted = false;
+        $items = $wishlist->getItemCollection();
+        foreach($items as $item) {
+            if ($item->getProductId() === $productId) {
+                $deleted = true;
+                $this->itemResource->delete($item);
+            }
+        }
+        return $deleted;
     }
+
+
+    private function prepareWishlistDTO($wishlist)
+    {
+        foreach ($collection as $item) {
+            
+        }
+    }
+
+    
 }

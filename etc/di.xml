@@ -2,4 +2,6 @@
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
     <preference for="Appstractsoftware\MagentoAdapter\Api\WishlistServiceInterface" type="Appstractsoftware\MagentoAdapter\Model\WishlistService" />
     <preference for="Appstractsoftware\MagentoAdapter\Api\WishlistRepositoryInterface" type="Appstractsoftware\MagentoAdapter\Model\WishlistRepository" />
+    <preference for="Appstractsoftware\MagentoAdapter\Api\Data\WishlistDtoInterface" type="Appstractsoftware\MagentoAdapter\Model\Data\WishlistDto" />
+    <preference for="Appstractsoftware\MagentoAdapter\Api\Data\ItemDtoInterface" type="Appstractsoftware\MagentoAdapter\Model\Data\ItemDto" />
 </config>
