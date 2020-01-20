@@ -7,7 +7,7 @@ This module provides Magento 2 with missing features.
 ## Getting Started
 
 ```bash
-$ composer require "appstract-software/magento-adapter: 1.0.0" # NOT AVAILABLE YET
+$ composer require appstract-software/magento-adapter
 $ bin/magento module:enable Appstractsoftware_MagentoAdapter   # enable the module
 $ bin/magento setup:upgrade                                    # upgrade Magento database schemas
 ```

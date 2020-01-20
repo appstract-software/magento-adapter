@@ -72,7 +72,7 @@
         </resources>
     </route>
     <route url="/V1/wishlist/customer/:customerId/item/:itemId" method="DELETE">
-        <service class="Appstractsoftware\MagentoAdapter\Api\WishlistServiceInterface" method="deleteItemByProductIdFromWishlistByCustomerId"/>
+        <service class="Appstractsoftware\MagentoAdapter\Api\WishlistServiceInterface" method="deleteItemByItemIdFromWishlistByCustomerId"/>
         <resources>
             <resource ref="Appstractsoftware_MagentoAdapter::admin"/>
         </resources>
