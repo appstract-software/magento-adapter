@@ -1,0 +1,23 @@
+{
+  "name": "appstract-software/magento-adapter",
+  "description": "Module provides Magento 2 with missing features",
+  "license": "MIT",
+  "type": "magento2-module",
+  "homepage": "https://appstract.software/",
+  "keywords": [
+    "Magento",
+    "module",
+    "wishlist",
+    "appstract",
+    "software"
+  ],
+  "authors": [
+    {
+      "email": "mateusz.lesiak@appstract.software",
+      "name": "Mateusz Lesiak"
+    }
+  ],
+  "require": {
+    "php": "^7.2"
+  }
+}
