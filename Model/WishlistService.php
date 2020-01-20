@@ -18,10 +18,10 @@ class WishlistService implements WishlistServiceInterface
     /** @var \Magento\Catalog\Api\ProductRepositoryInterface */
     protected $productRepository;
 
-    /** @var \Appstractsoftware\MagentoAdapter\Api\WishlistRepositoryInterface */
+    /** @var Appstractsoftware\MagentoAdapter\Api\WishlistRepositoryInterface */
     protected $wishlistApiRepository;
 
-    /** @var \Appstractsoftware\MagentoAdapter\Api\Data\WishlistDtoInterface */
+    /** @var Appstractsoftware\MagentoAdapter\Api\Data\WishlistDtoInterface */
     protected $wishlistDto;
 
     /** @var ItemResource */

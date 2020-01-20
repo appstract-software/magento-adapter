@@ -19,5 +19,14 @@
   ],
   "require": {
     "php": "^7.2"
+  },
+  "minimum-stability": "stable",
+  "autoload": {
+    "files": [
+      "registration.php"
+    ],
+    "psr-4": {
+      "Appstractsoftware\\MagentoAdapter\\": "."
+    }
   }
 }
