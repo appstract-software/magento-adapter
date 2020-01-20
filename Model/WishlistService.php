@@ -11,6 +11,7 @@ use Magento\Catalog\Api\ProductRepositoryInterface;
 use Magento\Framework\Exception\InputException;
 use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Wishlist\Model\ResourceModel\Item as ItemResource;
+use Magento\Wishlist\Model\ItemFactory;
 
 class WishlistService implements WishlistServiceInterface
 {
@@ -26,6 +27,9 @@ class WishlistService implements WishlistServiceInterface
     /** @var ItemResource */
     protected $itemResource;
 
+    /** @var ItemFactory */
+    protected $itemFactory;
+
     /**
      * Constructor.
      *
@@ -37,11 +41,13 @@ class WishlistService implements WishlistServiceInterface
         ProductRepositoryInterface $productRepository,
         WishlistRepositoryInterface $wishlistApiRepository,
         WishlistDtoInterface $wishlistDto,
+        ItemFactory $itemFactory,
         ItemResource $itemResource
     ) {
         $this->productRepository = $productRepository;
         $this->wishlistApiRepository = $wishlistApiRepository;
         $this->wishlistDto = $wishlistDto;
+        $this->itemFactory = $itemFactory;
         $this->itemResource = $itemResource;
     }
 
@@ -112,30 +118,13 @@ class WishlistService implements WishlistServiceInterface
     public function deleteItemByItemIdFromWishlistById($id, $itemId): bool
     {
         $wishlist = $this->wishlistApiRepository->getById($id);
-        $deleted = false;
-        $item = $wishlist->getItem($itemId);
-        if (!empty($item)) {
-            $deleted = true;
-            $this->itemResource->delete($item);
-        }
-        return $deleted;
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function deleteItemByProductIdFromWishlistById($id, $productId): bool
-    {
-        $wishlist = $this->wishlistApiRepository->getById($id);
-        $deleted = false;
-        $items = $wishlist->getItemCollection();
-        foreach($items as $item) {
-            if ($item->getProductId() === $productId) {
-                $deleted = true;
+        $item = $this->itemFactory->create()->load($itemId);
+        if (!empty($item) && !empty($wishlist)) {
+            if ($item->getWishlistId() == $wishlist->getId()) {
                 $this->itemResource->delete($item);
             }
         }
-        return $deleted;
+        return true;
     }
 
     /**
@@ -144,39 +133,12 @@ class WishlistService implements WishlistServiceInterface
     public function deleteItemByItemIdFromWishlistByCustomerId($customerId, $itemId): bool
     {
         $wishlist = $this->wishlistApiRepository->getByCustomerId($customerId);
-        $deleted = false;
-        $item = $wishlist->getItem($itemId);
-        if (!empty($item)) {
-            $deleted = true;
-            $this->itemResource->delete($item);
-        }
-        return $deleted;
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function deleteItemByProductIdFromWishlistByCustomerId($customerId, $productId): bool
-    {
-        $wishlist = $this->wishlistApiRepository->getByCustomerId($customerId);
-        $deleted = false;
-        $items = $wishlist->getItemCollection();
-        foreach($items as $item) {
-            if ($item->getProductId() === $productId) {
-                $deleted = true;
+        $item = $this->itemFactory->create()->load($itemId);
+        if (!empty($item) && !empty($wishlist)) {
+            if ($item->getWishlistId() == $wishlist->getId()) {
                 $this->itemResource->delete($item);
             }
         }
-        return $deleted;
+        return true;
     }
-
-
-    private function prepareWishlistDTO($wishlist)
-    {
-        foreach ($collection as $item) {
-            
-        }
-    }
-
-    
 }

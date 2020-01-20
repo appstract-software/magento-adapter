@@ -67,24 +67,6 @@ interface WishlistServiceInterface
     public function deleteItemByItemIdFromWishlistById($id, $itemId): bool;
 
     /**
-     * Delete item by product id from wishlist by id
-     *
-     * @param int $id
-     * @param int $productId
-     * @return bool
-     */
-    public function deleteItemByProductIdFromWishlistById($id, $productId): bool;
-
-    /**
-     * Delete item by product id from wishlist by customer id
-     *
-     * @param int $customerId
-     * @param int $productId
-     * @return bool
-     */
-    public function deleteItemByProductIdFromWishlistByCustomerId($customerId, $productId): bool;
-
-    /**
      * Delete item by item id from wishlist by customer id
      *
      * @param int $customerId

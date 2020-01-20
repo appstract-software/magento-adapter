@@ -71,35 +71,14 @@
             <resource ref="Appstractsoftware_MagentoAdapter::admin"/>
         </resources>
     </route>
-    <route url="/V1/wishlist/:id/product/:productId" method="DELETE">
-        <service class="Appstractsoftware\MagentoAdapter\Api\WishlistServiceInterface" method="deleteItemByProductIdFromWishlistById"/>
-        <resources>
-            <resource ref="Appstractsoftware_MagentoAdapter::admin"/>
-        </resources>
-    </route>
     <route url="/V1/wishlist/customer/:customerId/item/:itemId" method="DELETE">
         <service class="Appstractsoftware\MagentoAdapter\Api\WishlistServiceInterface" method="deleteItemByProductIdFromWishlistByCustomerId"/>
         <resources>
             <resource ref="Appstractsoftware_MagentoAdapter::admin"/>
         </resources>
     </route>
-    <route url="/V1/wishlist/customer/:customerId/product/:productId" method="DELETE">
-        <service class="Appstractsoftware\MagentoAdapter\Api\WishlistServiceInterface" method="deleteItemByItemIdFromWishlistByCustomerId"/>
-        <resources>
-            <resource ref="Appstractsoftware_MagentoAdapter::admin"/>
-        </resources>
-    </route>
     <route url="/V1/wishlist/me/item/:itemId" method="DELETE">
         <service class="Appstractsoftware\MagentoAdapter\Api\WishlistServiceInterface" method="deleteItemByItemIdFromWishlistByCustomerId"/>
-        <resources>
-            <resource ref="self"/>
-        </resources>
-        <data>
-            <parameter name="customerId" force="true">%customer_id%</parameter>            <!-- Provided by resource self -->
-        </data>
-    </route>
-    <route url="/V1/wishlist/me/product/:productId" method="DELETE">
-        <service class="Appstractsoftware\MagentoAdapter\Api\WishlistServiceInterface" method="deleteItemByProductIdFromWishlistByCustomerId"/>
         <resources>
             <resource ref="self"/>
         </resources>
