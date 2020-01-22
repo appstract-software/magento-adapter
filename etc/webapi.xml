@@ -1,6 +1,15 @@
 <?xml version="1.0"?>
 <routes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Webapi:etc/webapi.xsd">
 
+    <!-- CATEGORY FILTERS API -->
+    <route url="/V1/categories/:categoryId/filters" method="GET">
+        <service class="Appstractsoftware\MagentoAdapter\Api\CategoryFiltersServiceInterface" method="getCategoryFilters"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
+
+    <!-- WISHLIST API -->
     <route url="/V1/wishlist/me/product" method="POST">
         <service class="Appstractsoftware\MagentoAdapter\Api\WishlistServiceInterface" method="addProductToWishlistByCustomerId"/>
         <resources>
@@ -14,7 +23,7 @@
     <route url="/V1/wishlist/:id/product" method="POST">
         <service class="Appstractsoftware\MagentoAdapter\Api\WishlistServiceInterface" method="addProductToWishlistById"/>
         <resources>
-            <resource ref="Appstractsoftware_MagentoAdapter::admin"/>
+            <resource ref="Appstractsoftware_MagentoAdapter::wishlist_admin"/>
         </resources>
         <data>
             <parameter name="product.id" force="true">%product_id%</parameter>
@@ -23,7 +32,7 @@
     <route url="/V1/wishlist/customer/:customerId/product" method="POST">
         <service class="Appstractsoftware\MagentoAdapter\Api\WishlistServiceInterface" method="addProductToWishlistByCustomerId"/>
         <resources>
-            <resource ref="Appstractsoftware_MagentoAdapter::admin"/>
+            <resource ref="Appstractsoftware_MagentoAdapter::wishlist_admin"/>
         </resources>
         <data>
             <parameter name="product.id" force="true">%product_id%</parameter>
@@ -42,19 +51,19 @@
     <route url="/V1/wishlist/:id" method="GET">
         <service class="Appstractsoftware\MagentoAdapter\Api\WishlistServiceInterface" method="getWishlistById"/>
         <resources>
-            <resource ref="Appstractsoftware_MagentoAdapter::admin"/>
+            <resource ref="Appstractsoftware_MagentoAdapter::wishlist_admin"/>
         </resources>
     </route>
     <route url="/V1/wishlist/customer/:customerId" method="GET">
         <service class="Appstractsoftware\MagentoAdapter\Api\WishlistServiceInterface" method="getWishlistByCustomerId"/>
         <resources>
-            <resource ref="Appstractsoftware_MagentoAdapter::admin"/>
+            <resource ref="Appstractsoftware_MagentoAdapter::wishlist_admin"/>
         </resources>
     </route>
     <route url="/V1/wishlist/sharing/:sharingCode" method="GET">
         <service class="Appstractsoftware\MagentoAdapter\Api\WishlistServiceInterface" method="getWishlistBySharingCode"/>
         <resources>
-            <resource ref="Appstractsoftware_MagentoAdapter::admin"/>
+            <resource ref="Appstractsoftware_MagentoAdapter::wishlist_admin"/>
         </resources>
     </route>
 
@@ -62,19 +71,19 @@
     <route url="/V1/wishlist/:id" method="DELETE">
         <service class="Appstractsoftware\MagentoAdapter\Api\WishlistServiceInterface" method="deleteWishlistById"/>
         <resources>
-            <resource ref="Appstractsoftware_MagentoAdapter::admin"/>
+            <resource ref="Appstractsoftware_MagentoAdapter::wishlist_admin"/>
         </resources>
     </route>
     <route url="/V1/wishlist/:id/item/:itemId" method="DELETE">
         <service class="Appstractsoftware\MagentoAdapter\Api\WishlistServiceInterface" method="deleteItemByItemIdFromWishlistById"/>
         <resources>
-            <resource ref="Appstractsoftware_MagentoAdapter::admin"/>
+            <resource ref="Appstractsoftware_MagentoAdapter::wishlist_admin"/>
         </resources>
     </route>
     <route url="/V1/wishlist/customer/:customerId/item/:itemId" method="DELETE">
         <service class="Appstractsoftware\MagentoAdapter\Api\WishlistServiceInterface" method="deleteItemByItemIdFromWishlistByCustomerId"/>
         <resources>
-            <resource ref="Appstractsoftware_MagentoAdapter::admin"/>
+            <resource ref="Appstractsoftware_MagentoAdapter::wishlist_admin"/>
         </resources>
     </route>
     <route url="/V1/wishlist/me/item/:itemId" method="DELETE">

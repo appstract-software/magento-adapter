@@ -3,7 +3,9 @@
     <acl>
         <resources>
             <resource id="Magento_Backend::admin">
-                <resource id="Appstractsoftware_MagentoAdapter::admin" title="Wishlist Admin" sortOrder="110" />
+                <resource id="Appstractsoftware_MagentoAdapter::config" title="Magento adapter" sortOrder="110">
+                    <resource id="Appstractsoftware_MagentoAdapter::wishlist_admin" title="Wishlist admin"/>
+                </resource>
             </resource>
         </resources>
     </acl>

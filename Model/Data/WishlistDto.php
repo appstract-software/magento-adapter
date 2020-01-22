@@ -55,7 +55,7 @@ class WishlistDto implements WishlistDtoInterface
     /**
      * @inheritDoc
      */
-    public function load($wishlist): WishlistDtoInterface
+    public function load($wishlist)
     {
         $this->id                = $wishlist->getId();
         $this->customer_id       = $wishlist->getCustomerId();
@@ -140,7 +140,7 @@ class WishlistDto implements WishlistDtoInterface
     {
         $items = [];
         foreach ($this->collection as $itembase) {
-            $items[] = $this->itemLoader->load($itembase);
+            $items[] = clone $this->itemLoader->load($itembase);
         }
         return $items;
     }

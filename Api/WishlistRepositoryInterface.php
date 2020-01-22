@@ -12,7 +12,7 @@ interface WishlistRepositoryInterface
      * @param string $sharingCode
      * @return Magento\Wishlist\Model\Wishlist
      */
-    public function get($sharingCode): Wishlist;
+    public function get($sharingCode);
 
     /**
      * Get Wishlist by id
@@ -20,7 +20,7 @@ interface WishlistRepositoryInterface
      * @param int $id
      * @return Magento\Wishlist\Model\Wishlist
      */
-    public function getById($id): Wishlist;
+    public function getById($id);
 
     /**
      * Get Wishlist by customer id
@@ -28,7 +28,7 @@ interface WishlistRepositoryInterface
      * @param int $customerId
      * @return Magento\Wishlist\Model\Wishlist
      */
-    public function getByCustomerId($customerId): Wishlist;
+    public function getByCustomerId($customerId);
 
     /**
      * Delete wishlist by id

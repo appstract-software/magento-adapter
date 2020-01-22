@@ -30,7 +30,7 @@ interface WishlistServiceInterface
      * @param int $id Wishlist id
      * @return Appstractsoftware\MagentoAdapter\Api\Data\WishlistDtoInterface
      */
-    public function getWishlistById($id): WishlistDtoInterface;
+    public function getWishlistById($id);
 
     /**
      * Get Wishlist by customer id
@@ -38,7 +38,7 @@ interface WishlistServiceInterface
      * @param int $customerId
      * @return Appstractsoftware\MagentoAdapter\Api\Data\WishlistDtoInterface
      */
-    public function getWishlistByCustomerId($customerId): WishlistDtoInterface;
+    public function getWishlistByCustomerId($customerId);
 
     /**
      * Get Wishlist by sharing code
@@ -46,7 +46,7 @@ interface WishlistServiceInterface
      * @param string $sharingCode
      * @return Appstractsoftware\MagentoAdapter\Api\Data\WishlistDtoInterface
      */
-    public function getWishlistBySharingCode($sharingCode): WishlistDtoInterface;
+    public function getWishlistBySharingCode($sharingCode);
 
 
     /**

@@ -53,7 +53,7 @@ class WishlistRepository implements WishlistRepositoryInterface
     /**
      * @inheritdoc
      */
-    public function get($sharingCode): Wishlist
+    public function get($sharingCode)
     {
         $wishlist = $this->wishlistFactory->create();
         $this->wishlistResource->load($wishlist, $sharingCode, self::SHARING_CODE_FIELD);
@@ -66,7 +66,7 @@ class WishlistRepository implements WishlistRepositoryInterface
     /**
      * @inheritdoc
      */
-    public function getById($id): Wishlist
+    public function getById($id)
     {
         $wishlist = $this->wishlistFactory->create();
         $this->wishlistResource->load($wishlist, $id);
@@ -79,7 +79,7 @@ class WishlistRepository implements WishlistRepositoryInterface
     /**
      * @inheritdoc
      */
-    public function getByCustomerId($customerId): Wishlist
+    public function getByCustomerId($customerId)
     {
         if (empty($customerId)) {
             throw new InputException(__('Argument "customerId" is required'));

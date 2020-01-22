@@ -13,7 +13,7 @@ interface WishlistDtoInterface
      *
      * @return Appstractsoftware\MagentoAdapter\Api\Data\WishlistDtoInterface
      */
-    public function load($wishlist): WishlistDtoInterface;
+    public function load($wishlist);
 
     /**
      * Get id

@@ -12,7 +12,7 @@ interface ItemDtoInterface
      *
      * @return Appstractsoftware\MagentoAdapter\Api\Data\ItemDtoInterface
      */
-    public function load($item): ItemDtoInterface;
+    public function load($item);
 
     /**
      * Get id
