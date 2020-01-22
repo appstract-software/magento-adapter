@@ -14,6 +14,12 @@ $ bin/magento setup:upgrade                                    # upgrade Magento
 
 ## Features
 
+### Category filters REST API
+
+| Role      | Method    | URL                                       | Description          |
+| --------- | --------- | ----------------------------------------- | -------------------- |
+| Anonymous | **`GET`** | `/rest/V1/categories/:categoryId/filters` | Get category filters |
+
 ### Wishlist REST API
 
 | Role     | Method       | URL                                                   | Description                                         |

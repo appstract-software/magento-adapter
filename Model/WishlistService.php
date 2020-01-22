@@ -13,6 +13,12 @@ use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Wishlist\Model\ResourceModel\Item as ItemResource;
 use Magento\Wishlist\Model\ItemFactory;
 
+/**
+ * WishlistService
+ * 
+ * @author Mateusz Lesiak <mateusz.lesiak@appstract.software>
+ * @copyright 2020 Appstract Software
+ */
 class WishlistService implements WishlistServiceInterface
 {
     /** @var \Magento\Catalog\Api\ProductRepositoryInterface */
@@ -79,7 +85,7 @@ class WishlistService implements WishlistServiceInterface
     /**
      * @inheritdoc
      */
-    public function getWishlistById($id): WishlistDtoInterface
+    public function getWishlistById($id)
     {
         $wishlist = $this->wishlistApiRepository->getById($id);
         return $this->wishlistDto->load($wishlist);
@@ -88,7 +94,7 @@ class WishlistService implements WishlistServiceInterface
     /**
      * @inheritdoc
      */
-    public function getWishlistByCustomerId($customerId): WishlistDtoInterface
+    public function getWishlistByCustomerId($customerId)
     {
         $wishlist = $this->wishlistApiRepository->getByCustomerId($customerId);
         return $this->wishlistDto->load($wishlist);
@@ -97,7 +103,7 @@ class WishlistService implements WishlistServiceInterface
     /**
      * @inheritdoc
      */
-    public function getWishlistBySharingCode($sharingCode): WishlistDtoInterface
+    public function getWishlistBySharingCode($sharingCode)
     {
         $wishlist = $this->wishlistApiRepository->get($sharingCode);
         return $this->wishlistDto->load($wishlist);

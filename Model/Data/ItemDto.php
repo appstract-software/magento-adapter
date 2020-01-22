@@ -38,7 +38,7 @@ class ItemDto implements ItemDtoInterface
     /**
      * @inheritDoc
      */
-    public function load($item): ItemDtoInterface
+    public function load($item)
     {
         $this->id          = $item->getWishlistItemId();
         $this->wishlist_id = $item->getWishlistId();
