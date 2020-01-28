@@ -63,7 +63,7 @@ class WishlistService implements WishlistServiceInterface
     public function addProductToWishlistById($id, $productId): bool
     {
         $product = $this->productRepository->getById($productId);
-        $wishlist = $this->wishlistApiRepository->getById($customerId);
+        $wishlist = $this->wishlistApiRepository->getById($id);
         $wishlist->addNewItem($product);
         $returnData = $wishlist->save();
         return true;
