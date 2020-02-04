@@ -9,7 +9,14 @@ interface CategoryFiltersDtoInterface
      *
      * @return Appstractsoftware\MagentoAdapter\Api\Data\CategoryFiltersDtoInterface
      */
-    public function load($item);
+    public function load($item, $layer);
+
+    /**
+     * Get additional info.
+     *
+     * @return Appstractsoftware\MagentoAdapter\Api\Data\CategoryFiltersAdditionalInfoPriceDtoInterface
+     */
+    public function getAdditionalInfo();
 
     /**
      * Get field name.

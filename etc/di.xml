@@ -9,4 +9,5 @@
     <preference for="Appstractsoftware\MagentoAdapter\Api\CategoryFiltersServiceInterface" type="Appstractsoftware\MagentoAdapter\Model\CategoryFiltersService" />
     <preference for="Appstractsoftware\MagentoAdapter\Api\Data\CategoryFiltersDtoInterface" type="Appstractsoftware\MagentoAdapter\Model\Data\CategoryFiltersDto" />
     <preference for="Appstractsoftware\MagentoAdapter\Api\Data\CategoryFiltersItemDtoInterface" type="Appstractsoftware\MagentoAdapter\Model\Data\CategoryFiltersItemDto" />
+    <preference for="Appstractsoftware\MagentoAdapter\Api\Data\CategoryFiltersAdditionalInfoPriceDtoInterface" type="Appstractsoftware\MagentoAdapter\Model\Data\CategoryFiltersAdditionalInfoPriceDto" />
 </config>

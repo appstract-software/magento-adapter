@@ -59,7 +59,7 @@ class CategoryFiltersService implements CategoryFiltersServiceInterface
         $categoryFilters = [];
         foreach ($filters as $filter) {
             if ($filter->getItemsCount() > 0) {
-                $categoryFilters[] = clone $this->categoryFiltersDto->load($filter);
+                $categoryFilters[] = clone $this->categoryFiltersDto->load($filter, $layer);
             }
         }
         return $categoryFilters;
