@@ -5,9 +5,17 @@
     <preference for="Appstractsoftware\MagentoAdapter\Api\WishlistRepositoryInterface" type="Appstractsoftware\MagentoAdapter\Model\WishlistRepository" />
     <preference for="Appstractsoftware\MagentoAdapter\Api\Data\WishlistDtoInterface" type="Appstractsoftware\MagentoAdapter\Model\Data\WishlistDto" />
     <preference for="Appstractsoftware\MagentoAdapter\Api\Data\ItemDtoInterface" type="Appstractsoftware\MagentoAdapter\Model\Data\ItemDto" />
+
     <!-- Category filters -->
     <preference for="Appstractsoftware\MagentoAdapter\Api\CategoryFiltersServiceInterface" type="Appstractsoftware\MagentoAdapter\Model\CategoryFiltersService" />
     <preference for="Appstractsoftware\MagentoAdapter\Api\Data\CategoryFiltersDtoInterface" type="Appstractsoftware\MagentoAdapter\Model\Data\CategoryFiltersDto" />
     <preference for="Appstractsoftware\MagentoAdapter\Api\Data\CategoryFiltersItemDtoInterface" type="Appstractsoftware\MagentoAdapter\Model\Data\CategoryFiltersItemDto" />
     <preference for="Appstractsoftware\MagentoAdapter\Api\Data\CategoryFiltersAdditionalInfoPriceDtoInterface" type="Appstractsoftware\MagentoAdapter\Model\Data\CategoryFiltersAdditionalInfoPriceDto" />
+
+    <!-- Product Extension -->
+    <preference for="Appstractsoftware\MagentoAdapter\Api\Data\ProductOptionInterface" type="Appstractsoftware\MagentoAdapter\Model\Data\ProductOption" />
+    <preference for="Appstractsoftware\MagentoAdapter\Api\Data\ProductOptionValueInterface" type="Appstractsoftware\MagentoAdapter\Model\Data\ProductOptionValue" />
+    <type name="Magento\Catalog\Api\ProductRepositoryInterface">
+        <plugin name="get_appstract_product_options" type="Appstractsoftware\MagentoAdapter\Plugin\ProductRepository" />
+    </type>
 </config>
