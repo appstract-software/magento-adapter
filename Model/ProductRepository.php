@@ -65,9 +65,7 @@ class ProductRepository
       ->addMinimalPrice()
       ->addFinalPrice()
       ->addTaxPercents()
-      //            ->addAttributeToSelect($this->catalogConfig->getProductAttributes())
       ->setStoreId($storeId)
-      //            ->addStoreFilter();
       ->addStoreFilter($storeId);
     return $collection;
   }

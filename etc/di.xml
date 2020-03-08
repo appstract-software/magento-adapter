@@ -18,5 +18,8 @@
     <type name="Magento\Catalog\Api\ProductRepositoryInterface">
         <plugin name="get_appstract_product_options" type="Appstractsoftware\MagentoAdapter\Plugin\ProductRepository" />
     </type>
+    <preference for="Appstractsoftware\MagentoAdapter\Api\BestSellerRepositoryInterface" type="Appstractsoftware\MagentoAdapter\Model\BestSellerRepository"></preference>
+    <preference for="Appstractsoftware\MagentoAdapter\Api\MostViewedRepositoryInterface" type="Appstractsoftware\MagentoAdapter\Model\MostViewedRepository"></preference>
     <preference for="Appstractsoftware\MagentoAdapter\Api\NewProductsRepositoryInterface" type="Appstractsoftware\MagentoAdapter\Model\NewProductsRepository"></preference>
+    <preference for="Appstractsoftware\MagentoAdapter\Api\TopRatedRepositoryInterface" type="Appstractsoftware\MagentoAdapter\Model\TopRatedRepository"></preference>
 </config>

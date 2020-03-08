@@ -17,6 +17,30 @@
         </resources>
     </route>
 
+    <!-- BESTSELLER PRODUCTS API -->
+    <route url="/V1/products/best-seller/:limit" method="GET">
+        <service class="Appstractsoftware\MagentoAdapter\Api\BestSellerRepositoryInterface" method="getList"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
+
+    <!-- MOST VIEWED PRODUCTS API -->
+    <route url="/V1/products/most-viewed/:limit" method="GET">
+        <service class="Appstractsoftware\MagentoAdapter\Api\MostViewedRepositoryInterface" method="getList"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
+
+    <!-- TOP RATED PRODUCTS API -->
+    <route url="/V1/products/top-rated/:limit" method="GET">
+        <service class="Appstractsoftware\MagentoAdapter\Api\TopRatedRepositoryInterface" method="getList"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
+
     <!-- WISHLIST API -->
     <route url="/V1/wishlist/me/product" method="POST">
         <service class="Appstractsoftware\MagentoAdapter\Api\WishlistServiceInterface" method="addProductToWishlistByCustomerId"/>
