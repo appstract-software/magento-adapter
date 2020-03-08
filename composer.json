@@ -22,7 +22,7 @@
     }
   ],
   "require": {
-    "magento/framework": "102.*",
+    "magento/framework": "^102.0",
     "magento/module-wishlist": "101.*",
     "php": ">=7.2"
   },
@@ -34,5 +34,11 @@
     "psr-4": {
       "Appstractsoftware\\MagentoAdapter\\": "."
     }
-  }
+  },
+  "repositories": [
+    {
+      "type": "composer",
+      "url": "https://repo.magento.com/"
+    }
+  ]
 }
