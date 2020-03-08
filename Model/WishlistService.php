@@ -5,11 +5,8 @@ namespace Appstractsoftware\MagentoAdapter\Model;
 use Appstractsoftware\MagentoAdapter\Api\WishlistServiceInterface;
 use Appstractsoftware\MagentoAdapter\Api\WishlistRepositoryInterface;
 use Appstractsoftware\MagentoAdapter\Api\Data\WishlistDtoInterface;
-use Appstractsoftware\MagentoAdapter\Api\Data\WishlistDto;
 
 use Magento\Catalog\Api\ProductRepositoryInterface;
-use Magento\Framework\Exception\InputException;
-use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Wishlist\Model\ResourceModel\Item as ItemResource;
 use Magento\Wishlist\Model\ItemFactory;
 

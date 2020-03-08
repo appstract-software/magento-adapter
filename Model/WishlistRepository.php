@@ -4,12 +4,9 @@ namespace Appstractsoftware\MagentoAdapter\Model;
 
 use Appstractsoftware\MagentoAdapter\Api\WishlistRepositoryInterface;
 
-use Magento\Framework\Api\ExtensibleDataObjectConverter;
-use Magento\Framework\Api\SearchCriteria\CollectionProcessorInterface;
 use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Framework\Exception\StateException;
 use Magento\Wishlist\Model\ResourceModel\Wishlist as WishlistResource;
-use Magento\Wishlist\Model\Wishlist;
 use Magento\Wishlist\Model\WishlistFactory;
 
 /**
@@ -62,7 +59,7 @@ class WishlistRepository implements WishlistRepositoryInterface
         }
         return $wishlist;
     }
- 
+
     /**
      * @inheritdoc
      */
@@ -108,4 +105,3 @@ class WishlistRepository implements WishlistRepositoryInterface
         return true;
     }
 }
-

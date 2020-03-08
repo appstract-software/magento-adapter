@@ -9,6 +9,14 @@
         </resources>
     </route>
 
+    <!-- NEW PRODUCTS API -->
+    <route url="/V1/products/new/:limit" method="GET">
+        <service class="Appstractsoftware\MagentoAdapter\Api\NewProductsRepositoryInterface" method="getList"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
+
     <!-- WISHLIST API -->
     <route url="/V1/wishlist/me/product" method="POST">
         <service class="Appstractsoftware\MagentoAdapter\Api\WishlistServiceInterface" method="addProductToWishlistByCustomerId"/>
@@ -67,7 +75,6 @@
         </resources>
     </route>
 
-
     <route url="/V1/wishlist/:id" method="DELETE">
         <service class="Appstractsoftware\MagentoAdapter\Api\WishlistServiceInterface" method="deleteWishlistById"/>
         <resources>
@@ -95,5 +102,4 @@
             <parameter name="customerId" force="true">%customer_id%</parameter>            <!-- Provided by resource self -->
         </data>
     </route>
-
 </routes>

@@ -18,4 +18,5 @@
     <type name="Magento\Catalog\Api\ProductRepositoryInterface">
         <plugin name="get_appstract_product_options" type="Appstractsoftware\MagentoAdapter\Plugin\ProductRepository" />
     </type>
+    <preference for="Appstractsoftware\MagentoAdapter\Api\NewProductsRepositoryInterface" type="Appstractsoftware\MagentoAdapter\Model\NewProductsRepository"></preference>
 </config>
