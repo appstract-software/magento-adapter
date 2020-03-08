@@ -15,6 +15,10 @@
     {
       "email": "mateusz.lesiak@appstract.software",
       "name": "Mateusz Lesiak"
+    },
+    {
+      "email": "piotr.szuttenbach@appstract.software",
+      "name": "Piotr Szuttenbach"
     }
   ],
   "require": {
