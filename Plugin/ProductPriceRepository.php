@@ -2,25 +2,25 @@
 
 namespace Appstractsoftware\MagentoAdapter\Plugin;
 
-use Appstractsoftware\MagentoAdapter\Api\Data\ProductOptionInterface;
+use Appstractsoftware\MagentoAdapter\Api\Data\ProductPriceInterface;
 
 use Magento\Catalog\Api\Data\ProductInterface;
 use Magento\Catalog\Api\ProductRepositoryInterface;
 use \Magento\Framework\Api\SearchResults;
 
-class ProductRepository
+class ProductPriceRepository
 {
-    /** @var \Appstractsoftware\MagentoAdapter\Api\Data\ProductOptionInterface */
-    private $productOptionLoader;
+    /** @var \Appstractsoftware\MagentoAdapter\Api\Data\ProductPriceInterface */
+    private $productPriceLoader;
     
     /**
      * ProductRepository constructor.
     * 
-    * @param ProductOptionInterface $productOptionLoader
+    * @param ProductPriceInterface $productPriceLoader
     */
-    public function __construct(ProductOptionInterface $productOptionLoader)
+    public function __construct(ProductPriceInterface $productPriceLoader)
     {
-        $this->productOptionLoader = $productOptionLoader;
+        $this->productPriceLoader = $productPriceLoader;
     }
 
     /**
@@ -32,8 +32,7 @@ class ProductRepository
      */
     public function afterGetById(ProductRepositoryInterface $subject, ProductInterface $product)
     {
-        $product = $this->loadData($product);
-        return $product;
+        return $this->loadData($product);
     }
     
     /**
@@ -45,8 +44,7 @@ class ProductRepository
      */
     public function afterGet(ProductRepositoryInterface $subject, ProductInterface $product)
     {
-        $product = $this->loadData($product);
-        return $product;
+        return $this->loadData($product);
     }
     
     /**
@@ -73,15 +71,11 @@ class ProductRepository
      * @return ProductInterface
      */
     private function loadData($product) {
-        $productOptions = [];
         $typeInstance = $product->getTypeInstance(true);
-        if (!empty($typeInstance) && method_exists($typeInstance, 'getConfigurableAttributesAsArray')) {
-            $productAttributeOptions = $typeInstance->getConfigurableAttributesAsArray($product);
-            foreach ($productAttributeOptions as $productAttribute) {
-                $productOptions[] = clone $this->productOptionLoader->load($product, $productAttribute);
-            }
+        if (!empty($typeInstance)) {
+            $productPrice = clone $this->productPriceLoader->load($product);
             $extensionAttributes = $product->getExtensionAttributes();
-            $extensionAttributes->setProductOptions($productOptions);
+            $extensionAttributes->setProductPrice($productPrice);
             $product->setExtensionAttributes($extensionAttributes);
         }
 
