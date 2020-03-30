@@ -42,9 +42,13 @@ class ProductPrice implements ProductPriceInterface
      */
     public function load($product)
     {
-        $this->price                = $product->getPrice();
+        $price = $product->getPrice();
+        if (empty($price) || $product->getTypeId() != "simple") {
+            $price = $product->getFinalPrice();
+        }
+        $this->price                = $price;
         $this->specialPrice         = $product->getSpecialPrice();
-        $this->currencyPrice        = $this->formatPrice($product->getPrice());
+        $this->currencyPrice        = $this->formatPrice($price);
         $this->currencySpecialPrice = $this->specialPrice ? $this->formatPrice($this->specialPrice) : null;
         $this->currencySymbol       = $this->currencyHelper->getCurrencySymbol();
 
