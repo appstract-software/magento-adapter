@@ -14,6 +14,18 @@ $ bin/magento setup:upgrade                                    # upgrade Magento
 
 ## Features
 
+### Product REST API
+
+| Role      | Method    | URL                                    | Description                                     |
+| --------- | --------- | -------------------------------------- | ----------------------------------------------- |
+| Anonymous | **`GET`** | `/rest/V1/products/:sku/links`         | Get all product links as object                 |
+| Anonymous | **`GET`** | `/rest/V1/product-links/:sku`          | Get all product links as object                 |
+| Anonymous | **`GET`** | `/rest/V1/product-links/:sku/:type`    | Get product links by type                       |
+| Anonymous | **`GET`** | `/rest/V1/products/new/:limit`         | Get new products `default: [limit: 10]`         |
+| Anonymous | **`GET`** | `/rest/V1/products/best-seller/:limit` | Get bestseller products `default: [limit: 10]`  |
+| Anonymous | **`GET`** | `/rest/V1/products/most-viewed/:limit` | Get most viewed products `default: [limit: 10]` |
+| Anonymous | **`GET`** | `/rest/V1/products/top-rated/:limit`   | Get top rated products `default: [limit: 10]`   |
+
 ### Category filters REST API
 
 | Role      | Method    | URL                                       | Description          |
