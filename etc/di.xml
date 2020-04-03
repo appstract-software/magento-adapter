@@ -30,4 +30,5 @@
     <preference for="Appstractsoftware\MagentoAdapter\Api\Data\ProductLinksInterface" type="Appstractsoftware\MagentoAdapter\Model\Data\ProductLinks"></preference>
     <preference for="Appstractsoftware\MagentoAdapter\Api\Data\ProductLinkInterface" type="Appstractsoftware\MagentoAdapter\Model\Data\ProductLink"></preference>
     <preference for="Appstractsoftware\MagentoAdapter\Api\Data\ProductImagesInterface" type="Appstractsoftware\MagentoAdapter\Model\Data\ProductImages"></preference>
+    <preference for="Appstractsoftware\MagentoAdapter\Api\Data\ProductOptionValueProductsInterface" type="Appstractsoftware\MagentoAdapter\Model\Data\ProductOptionValueProducts"></preference>
 </config>

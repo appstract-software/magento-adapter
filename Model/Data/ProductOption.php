@@ -53,11 +53,11 @@ class ProductOption implements ProductOptionInterface
     /**
      * @inheritDoc
      */
-    public function load($product, $productAttribute)
+    public function load($product, $productAttribute, $options, $data)
     {
         $this->values = [];
         foreach ($productAttribute['values'] as $attribute) {
-            $this->values[] = clone $this->productOptionValueLoader->load($attribute);
+            $this->values[] = clone $this->productOptionValueLoader->load($attribute, $productAttribute['attribute_code'], $options, $data);
         }
 
         $this->id             = $productAttribute['id'];
