@@ -2,15 +2,18 @@
 
 namespace Appstractsoftware\MagentoAdapter\Api\Data;
 
+use \Appstractsoftware\MagentoAdapter\Api\Data\ProductOptionValueProductsInterface;
+
 interface ProductOptionValueInterface extends \Magento\Framework\Api\ExtensibleDataInterface
 {
     /**
      * Load data for dto.
      *
-     * @param Magento\Catalog\Api\Data\ProductInterface $product
+     * @param mixed $attribute
+     * @param string $attribute_code
      * @return Appstractsoftware\MagentoAdapter\Api\Data\ProductOptionValue
      */
-    public function load($attribute);
+    public function load($attribute, $attribute_code, $options, $data);
 
     /**
      * @return int|null
@@ -21,4 +24,9 @@ interface ProductOptionValueInterface extends \Magento\Framework\Api\ExtensibleD
      * @return string|null
      */
     public function getStoreLabel();
+
+    /**
+     * @return \Appstractsoftware\MagentoAdapter\Api\Data\ProductOptionValueProductsInterface[]|null
+     */
+    public function getProducts();
 }

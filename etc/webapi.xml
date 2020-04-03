@@ -1,9 +1,30 @@
 <?xml version="1.0"?>
 <routes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Webapi:etc/webapi.xsd">
-
     <!-- CATEGORY FILTERS API -->
     <route url="/V1/categories/:categoryId/filters" method="GET">
         <service class="Appstractsoftware\MagentoAdapter\Api\CategoryFiltersServiceInterface" method="getCategoryFilters"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
+
+    <!-- PRODUCT LINKS API -->
+    <route url="/V1/products/:sku/links" method="GET">
+        <service class="Appstractsoftware\MagentoAdapter\Api\ProductLinksServiceInterface" method="getLinks"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
+
+    <route url="/V1/product-links/:sku" method="GET">
+        <service class="Appstractsoftware\MagentoAdapter\Api\ProductLinksServiceInterface" method="getLinks"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
+
+    <route url="/V1/product-links/:sku/:type" method="GET">
+        <service class="Appstractsoftware\MagentoAdapter\Api\ProductLinksServiceInterface" method="getLinksByType"/>
         <resources>
             <resource ref="anonymous"/>
         </resources>

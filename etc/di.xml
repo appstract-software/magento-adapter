@@ -24,4 +24,11 @@
     <preference for="Appstractsoftware\MagentoAdapter\Api\MostViewedRepositoryInterface" type="Appstractsoftware\MagentoAdapter\Model\MostViewedRepository"></preference>
     <preference for="Appstractsoftware\MagentoAdapter\Api\NewProductsRepositoryInterface" type="Appstractsoftware\MagentoAdapter\Model\NewProductsRepository"></preference>
     <preference for="Appstractsoftware\MagentoAdapter\Api\TopRatedRepositoryInterface" type="Appstractsoftware\MagentoAdapter\Model\TopRatedRepository"></preference>
+
+    <!-- Product links: related/crosssell/upsell -->
+    <preference for="Appstractsoftware\MagentoAdapter\Api\ProductLinksServiceInterface" type="Appstractsoftware\MagentoAdapter\Model\ProductLinksService"></preference>
+    <preference for="Appstractsoftware\MagentoAdapter\Api\Data\ProductLinksInterface" type="Appstractsoftware\MagentoAdapter\Model\Data\ProductLinks"></preference>
+    <preference for="Appstractsoftware\MagentoAdapter\Api\Data\ProductLinkInterface" type="Appstractsoftware\MagentoAdapter\Model\Data\ProductLink"></preference>
+    <preference for="Appstractsoftware\MagentoAdapter\Api\Data\ProductImagesInterface" type="Appstractsoftware\MagentoAdapter\Model\Data\ProductImages"></preference>
+    <preference for="Appstractsoftware\MagentoAdapter\Api\Data\ProductOptionValueProductsInterface" type="Appstractsoftware\MagentoAdapter\Model\Data\ProductOptionValueProducts"></preference>
 </config>
