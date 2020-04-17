@@ -4,4 +4,7 @@
         <attribute code="product_price" type="Appstractsoftware\MagentoAdapter\Api\Data\ProductPriceInterface"/>
         <attribute code="product_options" type="Appstractsoftware\MagentoAdapter\Api\Data\ProductOptionInterface[]"/>
     </extension_attributes>
+    <extension_attributes for="Magento\Quote\Api\Data\CartItemInterface">
+        <attribute code="links" type="Appstractsoftware\MagentoAdapter\Api\Data\CartItemLinksInterface"/>
+    </extension_attributes>
 </config>

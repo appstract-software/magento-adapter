@@ -64,7 +64,7 @@ class ProductImages implements ProductImagesInterface
     /**
      * @inheritDoc
      */
-    public function getLabel(): string
+    public function getLabel()
     {
         return $this->label;
     }

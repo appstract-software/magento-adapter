@@ -28,9 +28,9 @@ interface ProductImagesInterface
     /**
      * Get Label
      *
-     * @return string
+     * @return string|null
      */
-    public function getLabel(): string;
+    public function getLabel();
 
     /**
      * Get Position
