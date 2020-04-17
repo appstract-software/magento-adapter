@@ -31,4 +31,13 @@
     <preference for="Appstractsoftware\MagentoAdapter\Api\Data\ProductLinkInterface" type="Appstractsoftware\MagentoAdapter\Model\Data\ProductLink"></preference>
     <preference for="Appstractsoftware\MagentoAdapter\Api\Data\ProductImagesInterface" type="Appstractsoftware\MagentoAdapter\Model\Data\ProductImages"></preference>
     <preference for="Appstractsoftware\MagentoAdapter\Api\Data\ProductOptionValueProductsInterface" type="Appstractsoftware\MagentoAdapter\Model\Data\ProductOptionValueProducts"></preference>
+
+    <!-- Cart -->
+    <preference for="Appstractsoftware\MagentoAdapter\Api\Data\CartItemLinksInterface" type="Appstractsoftware\MagentoAdapter\Model\Data\CartItemLinks"></preference>
+    <type name="Magento\Quote\Api\GuestCartItemRepositoryInterface">
+        <plugin name="get_appstract_links_in_item" type="Appstractsoftware\MagentoAdapter\Plugin\GuestCartItemRepository" />
+    </type>
+    <type name="Magento\Quote\Api\GuestCartRepositoryInterface">
+        <plugin name="get_appstract_links" type="Appstractsoftware\MagentoAdapter\Plugin\GuestCartRepository" />
+    </type>
 </config>
