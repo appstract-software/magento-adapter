@@ -11,22 +11,22 @@ class ProductImages implements ProductImagesInterface
     /** @var int $id */
     private $id;
 
-    /** @var string $media_type */
+    /** @var string|null $media_type */
     private $mediaType;
 
-    /** @var string $label */
+    /** @var string|null $label */
     private $label;
 
-    /** @var string $position */
+    /** @var string|null $position */
     private $position;
 
     /** @var string[]|null $types */
     private $types;
 
-    /** @var string $file */
+    /** @var string|null $file */
     private $file;
 
-    /** @var string $url */
+    /** @var string|null $url */
     private $url;
 
     /**
@@ -56,7 +56,7 @@ class ProductImages implements ProductImagesInterface
     /**
      * @inheritDoc
      */
-    public function getMediaType(): string
+    public function getMediaType()
     {
         return $this->mediaType;
     }
@@ -72,7 +72,7 @@ class ProductImages implements ProductImagesInterface
     /**
      * @inheritDoc
      */
-    public function getPosition(): string
+    public function getPosition()
     {
         return $this->position;
     }
@@ -88,7 +88,7 @@ class ProductImages implements ProductImagesInterface
     /**
      * @inheritDoc
      */
-    public function getFile(): string
+    public function getFile()
     {
         return $this->file;
     }
@@ -96,7 +96,7 @@ class ProductImages implements ProductImagesInterface
     /**
      * @inheritDoc
      */
-    public function getUrl(): string
+    public function getUrl()
     {
         return $this->url;
     }

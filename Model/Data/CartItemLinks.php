@@ -44,16 +44,10 @@ class CartItemLinks implements CartItemLinksInterface
     /**
      * @inheritDoc
      */
-    public function load($cartItem)
+    public function load($product)
     {
         try {
-            if (is_array($cartItem)) {
-                $this->sku = $cartItem['sku'];
-            } else {
-                $this->sku = $cartItem->getSku();
-            }
-
-            $product = $this->productRepository->get($this->sku);
+            $this->sku = $product->getSku();
             if ($product->getTypeId() == "simple") {
                 $this->simpleUrlKey = $product->getUrlKey();
                 $parentIds = $this->configurableProduct->getParentIdsByChild($product->getId());

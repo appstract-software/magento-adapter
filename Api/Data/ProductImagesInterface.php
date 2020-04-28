@@ -21,9 +21,9 @@ interface ProductImagesInterface
     /**
      * Get MediaType
      *
-     * @return string
+     * @return string|null
      */
-    public function getMediaType(): string;
+    public function getMediaType();
 
     /**
      * Get Label
@@ -35,9 +35,9 @@ interface ProductImagesInterface
     /**
      * Get Position
      *
-     * @return string
+     * @return string|null
      */
-    public function getPosition(): string;
+    public function getPosition();
 
     /**
      * Get Types
@@ -49,14 +49,14 @@ interface ProductImagesInterface
     /**
      * Get File
      *
-     * @return string
+     * @return string|null
      */
-    public function getFile(): string;
+    public function getFile();
 
     /**
      * Get Url
      *
-     * @return string
+     * @return string|null
      */
-    public function getUrl(): string;
+    public function getUrl();
 }

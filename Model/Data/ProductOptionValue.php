@@ -37,7 +37,7 @@ class ProductOptionValue implements ProductOptionValueInterface
         $this->value_index = $attribute['value_index'];
         $this->store_label = $attribute['store_label'];
 
-        if ($attribute_code === 'color') {
+        if (!empty($options) && !empty($data) && $attribute_code === 'color') {
             $this->products = [];
             foreach($data as $attributes){
                 foreach($attributes as $prod){
