@@ -2,6 +2,7 @@
 
 namespace Appstractsoftware\MagentoAdapter\Plugin;
 
+use Appstractsoftware\MagentoAdapter\Plugin\GuestCartItemRepository;
 use \Appstractsoftware\MagentoAdapter\Api\Data\CartItemLinksInterface;
 
 use Magento\Quote\Api\Data\CartItemInterface;
@@ -11,25 +12,18 @@ use \Magento\Framework\Api\SearchResults;
 
 class GuestCartRepository
 {
-    /** @var \Appstractsoftware\MagentoAdapter\Api\Data\CartItemLinksInterface */
-    private $cartItemLinks;
+    /** @var \Appstractsoftware\MagentoAdapter\Plugin\GuestCartItemRepository */
+    private $guestCartItemRepository;
     
-    /**
-     * @var \Magento\Quote\Api\GuestCartRepositoryInterface
-     */
-    protected $cartItemRepository;
 
     /**
      * CartItemRepository constructor.
     * 
-    * @param CartItemLinksInterface $cartItemLinks
+    * @param GuestCartItemRepository $guestCartItemRepository
     */
-    public function __construct(
-        CartItemLinksInterface $cartItemLinks,
-        \Magento\Quote\Api\GuestCartRepositoryInterface $cartItemRepository
-     ) {
-        $this->cartItemLinks = $cartItemLinks;
-        $this->cartItemRepository = $cartItemRepository;
+    public function __construct(GuestCartItemRepository $guestCartItemRepository)
+    {
+        $this->guestCartItemRepository = $guestCartItemRepository;
     }
 
 
@@ -51,13 +45,10 @@ class GuestCartRepository
      * @param \Magento\Quote\Api\Data\CartInterface $cart
      * @return \Magento\Quote\Api\Data\CartInterface
      */
-    private function loadData($cart) {
-
-        foreach ($cart->getItems() as $cartItem) {
-            $cartItemLinks = clone $this->cartItemLinks->load($cartItem);
-            $cartItemExtensionAttributes = $cartItem->getExtensionAttributes();
-            $cartItemExtensionAttributes->setLinks($cartItemLinks);
-            $cartItem->setExtensionAttributes($cartItemExtensionAttributes);
+    private function loadData($cart)
+    {
+        foreach ($cart->getItems() as &$cartItem) {
+            $cartItem = $this->guestCartItemRepository->loadData($cartItem);
         }
 
         return $cart;

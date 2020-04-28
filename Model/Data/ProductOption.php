@@ -53,22 +53,42 @@ class ProductOption implements ProductOptionInterface
     /**
      * @inheritDoc
      */
-    public function load($product, $productAttribute, $options, $data)
+    public function load($product, $productAttribute, $options = null, $data = null)
     {
         $this->values = [];
-        foreach ($productAttribute['values'] as $attribute) {
-            $this->values[] = clone $this->productOptionValueLoader->load($attribute, $productAttribute['attribute_code'], $options, $data);
-        }
 
-        $this->id             = $productAttribute['id'];
-        $this->attributeId    = $productAttribute['attribute_id'];
-        $this->attributeCode  = $productAttribute['attribute_code'];
-        $this->position       = $productAttribute['position'];
-        $this->isUseDefault   = $productAttribute['use_default'];
-        $this->label          = $productAttribute['label'];
-        $this->frontendLabel  = $productAttribute['frontend_label'];
-        $this->storeLabel     = $productAttribute['store_label'];
+        $attributes = is_array($productAttribute) ? $productAttribute['values'] : $productAttribute->getValues();
+        foreach ($attributes as $attribute) {
+            $this->values[] = clone $this->productOptionValueLoader->load(
+                $attribute,
+                is_array($productAttribute)
+                    ? $productAttribute['attribute_code']
+                    : $productAttribute->getAttributeCode(),
+                $options,
+                $data
+            );
+        }
+        
         $this->productId      = $product->getId();
+        if (is_array($productAttribute)) {
+            $this->id             = $productAttribute['id'];
+            $this->attributeId    = $productAttribute['attribute_id'];
+            $this->attributeCode  = $productAttribute['attribute_code'];
+            $this->position       = $productAttribute['position'];
+            $this->isUseDefault   = $productAttribute['use_default'];
+            $this->label          = $productAttribute['label'];
+            $this->frontendLabel  = $productAttribute['frontend_label'];
+            $this->storeLabel     = $productAttribute['store_label'];
+        } else {
+            $this->id             = $productAttribute->getId();
+            $this->attributeId    = $productAttribute->getAttributeId();
+            $this->attributeCode  = $productAttribute->getAttributeCode();
+            $this->position       = $productAttribute->getPosition();
+            $this->isUseDefault   = $productAttribute->getUseDefault();
+            $this->label          = $productAttribute->getLabel();
+            $this->frontendLabel  = $productAttribute->getFrontendLabel();
+            $this->storeLabel     = $productAttribute->getStoreLabel();
+        }
 
         return $this;
     }
