@@ -5,6 +5,7 @@ namespace Appstractsoftware\MagentoAdapter\Model\Data;
 use Appstractsoftware\MagentoAdapter\Api\Data\ProductLinkInterface;
 use Appstractsoftware\MagentoAdapter\Api\Data\ProductPriceInterface;
 use Appstractsoftware\MagentoAdapter\Api\Data\ProductImagesInterface;
+use Appstractsoftware\MagentoAdapter\Api\Data\CartItemLinksInterface;
 
 use \Magento\Framework\Data\Collection;
 
@@ -28,6 +29,9 @@ class ProductLink implements ProductLinkInterface
     /** @var \Appstractsoftware\MagentoAdapter\Api\Data\ProductPriceInterface $price */
     private $price;
 
+    /** @var \Appstractsoftware\MagentoAdapter\Api\Data\CartItemLinksInterface $links */
+    private $links;
+
 
     /**
      * @var \Magento\Catalog\Api\ProductRepositoryInterface
@@ -45,6 +49,11 @@ class ProductLink implements ProductLinkInterface
     protected $productImagesLoader;
 
     /**
+     * @var Appstractsoftware\MagentoAdapter\Api\Data\CartItemLinksInterface
+     */
+    protected $cartItemLinksLoader;
+
+    /**
      * @param \Magento\Catalog\Api\ProductRepositoryInterface $productRepository
      * @param Appstractsoftware\MagentoAdapter\Api\Data\ProductPriceInterface $productPriceLoader
      * @param Appstractsoftware\MagentoAdapter\Api\Data\ProductImagesInterface $productImagesLoader
@@ -52,11 +61,13 @@ class ProductLink implements ProductLinkInterface
     public function __construct(
         \Magento\Catalog\Api\ProductRepositoryInterface $productRepository,
         \Appstractsoftware\MagentoAdapter\Api\Data\ProductPriceInterface $productPriceLoader,
-        \Appstractsoftware\MagentoAdapter\Api\Data\ProductImagesInterface $productImagesLoader
+        \Appstractsoftware\MagentoAdapter\Api\Data\ProductImagesInterface $productImagesLoader,
+        \Appstractsoftware\MagentoAdapter\Api\Data\CartItemLinksInterface $cartItemLinksLoader
     ) {
         $this->productRepository = $productRepository;
         $this->productPriceLoader = $productPriceLoader;
         $this->productImagesLoader = $productImagesLoader;
+        $this->cartItemLinksLoader = $cartItemLinksLoader;
     }
 
     /**
@@ -71,6 +82,7 @@ class ProductLink implements ProductLinkInterface
         $this->type   = $product->getTypeId();
         $this->name   = "" . $product->getName();
         $this->price  = clone $this->productPriceLoader->load($product);
+        $this->links = clone $this->cartItemLinksLoader->load($product);
         $this->images = [];
         foreach ($product->getMediaGalleryImages() as $image) {
             $this->images[] = clone $this->productImagesLoader->load($image);
@@ -125,5 +137,13 @@ class ProductLink implements ProductLinkInterface
     public function getPrice()
     {
         return $this->price;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getLinks()
+    {
+        return $this->links;
     }
 }

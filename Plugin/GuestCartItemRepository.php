@@ -96,7 +96,7 @@ class GuestCartItemRepository
         $product = $this->productRepository->get($sku);
         $extensionAttributes = $cartItem->getExtensionAttributes();
 
-        $extensionAttributes->setLinks($this->cartItemLinks->load($product));
+        $this->loadLinks($extensionAttributes, $product);
 
         $this->loadQuantity($extensionAttributes, $cartItem, $product);
         
@@ -110,6 +110,18 @@ class GuestCartItemRepository
     }
 
     /**
+     * Returns product links.
+     *
+     * @param ProductInterface $product
+     * @return void
+     */
+    private function loadLinks($extensionAttributes, $product) {
+        try {
+            $extensionAttributes->setLinks(clone $this->cartItemLinks->load($product));
+        } catch (\Throwable $th) {}
+    }
+
+    /**
      * Returns product options.
      *
      * @param mixed $cartItem
@@ -118,7 +130,7 @@ class GuestCartItemRepository
      */
     private function loadQuantity($extensionAttributes, $cartItem, $product) {
         try {
-            $extensionAttributes->setQuantity($this->cartItemQuantity->load($cartItem, $product));
+            $extensionAttributes->setQuantity(clone $this->cartItemQuantity->load($cartItem, $product));
         } catch (\Throwable $th) {}
     }
     
