@@ -57,4 +57,11 @@ interface ProductLinkInterface
      * @return \Appstractsoftware\MagentoAdapter\Api\Data\ProductPriceInterface
      */
     public function getPrice();
+
+    /**
+     * Get links
+     *
+     * @return \Appstractsoftware\MagentoAdapter\Api\Data\CartItemLinksInterface|null
+     */
+    public function getLinks();
 }
