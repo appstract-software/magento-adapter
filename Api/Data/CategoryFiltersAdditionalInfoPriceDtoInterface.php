@@ -24,4 +24,18 @@ interface CategoryFiltersAdditionalInfoPriceDtoInterface
      * @return int
      */
     public function getMaxPrice();
+
+    /**
+     * Set min price
+     * 
+     * @return int
+     */
+    public function setMinPrice($min_price);
+
+    /**
+     * Set max price
+     * 
+     * @return int
+     */
+    public function setMaxPrice($max_price);
 }

@@ -66,6 +66,14 @@ class CartItemLinks implements CartItemLinksInterface
     /**
      * @inheritDoc
      */
+    public function setSku($sku)
+    {
+        $this->sku = $sku;
+    }
+
+    /**
+     * @inheritDoc
+     */
     public function getSku()
     {
         return $this->sku;
@@ -74,9 +82,25 @@ class CartItemLinks implements CartItemLinksInterface
     /**
      * @inheritDoc
      */
+    public function setUrlKey($urlKey)
+    {
+        $this->urlKey = $urlKey;
+    }
+
+    /**
+     * @inheritDoc
+     */
     public function getUrlKey()
     {
         return $this->urlKey;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function setSimpleUrlKey($simpleUrlKey)
+    {
+        $this->simpleUrlKey = $simpleUrlKey;
     }
 
     /**

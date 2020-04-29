@@ -39,7 +39,6 @@ class CategoryFiltersAdditionalInfoPriceDto implements CategoryFiltersAdditional
         return $this->minPrice;
     }
 
-
     /**
      * @inheritDoc
      */
@@ -47,4 +46,21 @@ class CategoryFiltersAdditionalInfoPriceDto implements CategoryFiltersAdditional
     {
         return $this->maxPrice;
     }
+
+    /**
+     * @inheritDoc
+     */
+    public function setMinPrice($min_price)
+    {
+        $this->$minPrice = $min_price;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function setMaxPrice($max_price)
+    {
+        $this->$maxPrice = $max_price;
+    }
+
 }

@@ -12,6 +12,9 @@
     <preference for="Appstractsoftware\MagentoAdapter\Api\Data\CategoryFiltersItemDtoInterface" type="Appstractsoftware\MagentoAdapter\Model\Data\CategoryFiltersItemDto" />
     <preference for="Appstractsoftware\MagentoAdapter\Api\Data\CategoryFiltersAdditionalInfoPriceDtoInterface" type="Appstractsoftware\MagentoAdapter\Model\Data\CategoryFiltersAdditionalInfoPriceDto" />
 
+    <!-- Configurable products -->
+    <preference for="Appstractsoftware\MagentoAdapter\Api\ConfigurableProductsServiceInterface" type="Appstractsoftware\MagentoAdapter\Model\ConfigurableProductsService" />
+
     <!-- Product Extension -->
     <preference for="Appstractsoftware\MagentoAdapter\Api\Data\ProductOptionInterface" type="Appstractsoftware\MagentoAdapter\Model\Data\ProductOption" />
     <preference for="Appstractsoftware\MagentoAdapter\Api\Data\ProductOptionValueInterface" type="Appstractsoftware\MagentoAdapter\Model\Data\ProductOptionValue" />
