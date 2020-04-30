@@ -25,4 +25,38 @@ class ConfigurableProductsSearchResults implements ConfigurableProductsSearchRes
     {
         $this->items = $items;
     }
+
+    /**
+     * @inheritDoc
+     */
+    public function getSearchCriteria()
+    {
+        return $this->searchCriteria;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function setSearchCriteria(\Magento\Framework\Api\SearchCriteriaInterface $searchCriteria)
+    {
+        $this->searchCriteria = $searchCriteria;
+        return $this;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getTotalCount()
+    {
+        return $this->totalCount;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function setTotalCount($totalCount)
+    {
+        $this->totalCount = $totalCount;
+        return $this;
+    }
 }
