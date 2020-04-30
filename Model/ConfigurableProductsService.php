@@ -2,7 +2,8 @@
 
 namespace Appstractsoftware\MagentoAdapter\Model;
 
-use Appstractsoftware\MagentoAdapter\Api\ConfigurableProductsServiceInterface;
+use \Appstractsoftware\MagentoAdapter\Api\ConfigurableProductsServiceInterface;
+use \Appstractsoftware\MagentoAdapter\Api\Data\ConfigurableProductSearchInterface;
 
 use \Magento\Framework\Api\SearchCriteria\CollectionProcessorInterface;
 use \Magento\Catalog\Model\ResourceModel\Product\CollectionFactory;
@@ -42,6 +43,9 @@ class ConfigurableProductsService implements ConfigurableProductsServiceInterfac
     /** @var \Magento\Framework\EntityManager\Operation\Read\ReadExtensions $productRepository */
     private $productRepository;
 
+    /** @var \Appstractsoftware\MagentoAdapter\Api\Data\ConfigurableProductSearchInterface $configurableProductSearchLoader */
+    private $configurableProductSearchLoader;
+
     /**
      * Constructor
      */
@@ -52,7 +56,8 @@ class ConfigurableProductsService implements ConfigurableProductsServiceInterfac
         \Magento\Framework\Api\SearchCriteria\CollectionProcessorInterface $collectionProcessor = null,
         \Magento\Framework\EntityManager\Operation\Read\ReadExtensions $readExtensions = null,
         \Magento\ConfigurableProduct\Model\Product\Type\Configurable $configurableProduct,
-        \Magento\Catalog\Api\ProductRepositoryInterface $productRepository
+        \Magento\Catalog\Api\ProductRepositoryInterface $productRepository,
+        \Appstractsoftware\MagentoAdapter\Api\Data\ConfigurableProductSearchInterface $configurableProductSearchLoader
     ) {
         $this->collectionFactory = $collectionFactory;
         $this->extensionAttributesJoinProcessor = $extensionAttributesJoinProcessor;
@@ -61,6 +66,7 @@ class ConfigurableProductsService implements ConfigurableProductsServiceInterfac
         $this->readExtensions = $readExtensions ?: \Magento\Framework\App\ObjectManager::getInstance()->get(ReadExtensions::class);
         $this->configurableProduct = $configurableProduct;
         $this->productRepository = $productRepository;
+        $this->configurableProductSearchLoader = $configurableProductSearchLoader;
     }
 
     /**
@@ -89,24 +95,25 @@ class ConfigurableProductsService implements ConfigurableProductsServiceInterfac
         $searchCriteria->setCurrentPage($oldCurrentPage);
 
         $collection->load();
-        $collection->addCategoryIds();
-        $this->addExtensionAttributes($collection);
 
         $products = $collection->getItems();
         $size = $collection->getSize();
 
+        /** @var \Appstractsoftware\MagentoAdapter\Api\Data\ConfigurableProductSearchInterface[] $items */
         $items = [];
         $skus = [];
         foreach ($products as $product) {
-            if ($product->getTypeId() == "simple") {
-                $parentIds = $this->configurableProduct->getParentIdsByChild($product->getId());
-                $parentId = array_shift($parentIds);
-                $parent = $this->productRepository->getById($parentId);
-                if (!in_array($parent->getSku(), $skus)) {
-                    $items[] = $parent;
-                    $skus[] = $parent->getSku();
+            try {
+                if ($product->getTypeId() == "simple") {
+                    $parentIds = $this->configurableProduct->getParentIdsByChild($product->getId());
+                    $parentId = array_shift($parentIds);
+                    $parent = $this->productRepository->getById($parentId);
+                    if (!in_array($parent->getSku(), $skus)) {
+                        $items[] = clone $this->configurableProductSearchLoader->load($parent);
+                        $skus[] = $parent->getSku();
+                    }
                 }
-            }
+            } catch (\Throwable $th) {}
         }
         $total = count($items);
 

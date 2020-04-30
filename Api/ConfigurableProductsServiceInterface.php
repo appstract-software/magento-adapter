@@ -2,6 +2,8 @@
 
 namespace Appstractsoftware\MagentoAdapter\Api;
 
+use \Appstractsoftware\MagentoAdapter\Api\Data\ConfigurableProductsSearchResultsInterface;
+
 use \Magento\Framework\Api\SearchCriteriaInterface;
 
 interface ConfigurableProductsServiceInterface
@@ -10,7 +12,7 @@ interface ConfigurableProductsServiceInterface
      * Get configurable product list
      *
      * @param \Magento\Framework\Api\SearchCriteriaInterface $searchCriteria
-     * @return \Magento\Catalog\Api\Data\ProductSearchResultsInterface
+     * @return \Appstractsoftware\MagentoAdapter\Api\Data\ConfigurableProductsSearchResultsInterface
      */
     public function getConfigurableProducts(\Magento\Framework\Api\SearchCriteriaInterface $searchCriteria);
 }
