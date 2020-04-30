@@ -12,6 +12,13 @@ interface CartItemLinksInterface
     public function load($product);
 
     /**
+     * Set sku
+     *
+     * @return void
+     */
+    public function setSku($sku);
+
+    /**
      * Get sku
      *
      * @return string|null
@@ -19,11 +26,25 @@ interface CartItemLinksInterface
     public function getSku();
 
     /**
+     * Set url_key
+     *
+     * @return void
+     */
+    public function setUrlKey($urlKey);
+
+    /**
      * Get url_key
      *
      * @return string|null
      */
     public function getUrlKey();
+
+    /**
+     * Set simple url_key
+     *
+     * @return void
+     */
+    public function setSimpleUrlKey($simpleUrlKey);
 
     /**
      * Get simple url_key

@@ -31,4 +31,25 @@ interface CartItemQuantityInterface
      * @return int|null
      */
     public function getQtyAvailable();
+
+    /**
+     * Set sku
+     *
+     * @return void
+     */
+    public function setSku($sku);
+
+    /**
+     * Set quantity
+     *
+     * @return void
+     */
+    public function setQty($qty);
+
+    /**
+     * Set quantity available
+     *
+     * @return void
+     */
+    public function setQtyAvailable($qtyAvailable);
 }

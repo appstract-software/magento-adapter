@@ -64,4 +64,37 @@ class ProductSimpleOption implements ProductSimpleOptionInterface
     {
         return $this->is_size_color;
     }
+
+
+    /**
+     * @inheritDoc
+     */
+    public function setAttributeCode($attribute_code)
+    {
+        $this->attribute_code = $attribute_code;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function setAttributeId($attribute_id)
+    {
+        $this->attribute_id = $attribute_id;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function setValue($value)
+    {
+        $this->value = $value;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function setIsSizeColor($is_size_color)
+    {
+        $this->is_size_color = $is_size_color;
+    }
 }

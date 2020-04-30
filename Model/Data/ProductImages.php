@@ -102,4 +102,59 @@ class ProductImages implements ProductImagesInterface
     }
 
 
+    /**
+     * @inheritDoc
+     */
+    public function setId($id)
+    {
+        $this->$id = $id;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function setMediaType($media_type)
+    {
+        $this->$media_type = $media_type;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function setLabel($label)
+    {
+        $this->$label = $label;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function setPosition($position)
+    {
+        $this->$position = $position;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function setTypes($types)
+    {
+        $this->$types = $types;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function setFile($file)
+    {
+        $this->$file = $file;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function setUrl($url)
+    {
+        $this->$url = $url;
+    }
 }

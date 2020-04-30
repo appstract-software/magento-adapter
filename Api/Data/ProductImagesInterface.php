@@ -59,4 +59,54 @@ interface ProductImagesInterface
      * @return string|null
      */
     public function getUrl();
+
+
+    /**
+     * Set Id
+     *
+     * @return void
+     */
+    public function setId($id);
+
+    /**
+     * Set MediaType
+     *
+     * @return void
+     */
+    public function setMediaType($media_type);
+
+    /**
+     * Set Label
+     *
+     * @return void
+     */
+    public function setLabel($label);
+
+    /**
+     * Set Position
+     *
+     * @return void
+     */
+    public function setPosition($position);
+
+    /**
+     * Set Types
+     *
+     * @return void
+     */
+    public function setTypes($types);
+
+    /**
+     * Set File
+     *
+     * @return void
+     */
+    public function setFile($file);
+
+    /**
+     * Set Url
+     *
+     * @return void
+     */
+    public function setUrl($url);
 }

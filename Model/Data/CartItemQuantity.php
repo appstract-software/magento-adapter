@@ -62,4 +62,28 @@ class CartItemQuantity implements CartItemQuantityInterface
     {
         return $this->qty_available;
     }
+
+    /**
+     * @inheritDoc
+     */
+    public function setSku($sku)
+    {
+        $this->sku = $sku;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function setQty($qty)
+    {
+        $this->qty = $qty;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function setQtyAvailable($qty_available)
+    {
+        $this->qty_available = $qty_available;
+    }
 }

@@ -33,4 +33,24 @@ interface ProductSimpleOptionInterface extends \Magento\Framework\Api\Extensible
      * @return bool|null
      */
     public function getIsSizeColor();
+
+    /**
+     * @return void
+     */
+    public function setAttributeCode($attribute_code);
+
+    /**
+     * @return void
+     */
+    public function setAttributeId($attribute_id);
+
+    /**
+     * @return void
+     */
+    public function setValue($value);
+
+    /**
+     * @return void
+     */
+    public function setIsSizeColor($is_size_color);
 }
