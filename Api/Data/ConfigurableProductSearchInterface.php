@@ -29,6 +29,20 @@ interface ConfigurableProductSearchInterface
     public function setSku($sku);
 
     /**
+     * Get id
+     *
+     * @return int|null
+     */
+    public function getId();
+
+    /**
+     * Set id
+     *
+     * @return void
+     */
+    public function setId($id);
+
+    /**
      * Get sku
      *
      * @return string|null

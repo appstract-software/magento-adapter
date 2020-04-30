@@ -9,6 +9,9 @@ class ConfigurableProductSearch implements ConfigurableProductSearchInterface
     /** @var string $sku */
     private $sku;
 
+    /** @var int $id */
+    private $id;
+
     /** @var string $name */
     private $name;
 
@@ -59,6 +62,7 @@ class ConfigurableProductSearch implements ConfigurableProductSearchInterface
     public function load($product)
     {
         $this->sku      = $product->getSku();
+        $this->id       = $product->getId();
         $this->name     = $product->getName();
         $this->price    = clone $this->productPriceLoader->load($product);
         $this->links    = clone $this->cartItemLinksLoader->load($product);
@@ -83,6 +87,22 @@ class ConfigurableProductSearch implements ConfigurableProductSearchInterface
     public function setSku($sku)
     {
         $this->sku = $sku;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
     }
 
     /**
