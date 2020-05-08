@@ -9,6 +9,7 @@ use Appstractsoftware\MagentoAdapter\Api\Data\WishlistDtoInterface;
 use Magento\Catalog\Api\ProductRepositoryInterface;
 use Magento\Wishlist\Model\ResourceModel\Item as ItemResource;
 use Magento\Wishlist\Model\ItemFactory;
+use \Magento\ConfigurableProduct\Model\Product\Type\Configurable;
 
 /**
  * WishlistService
@@ -33,6 +34,9 @@ class WishlistService implements WishlistServiceInterface
     /** @var ItemFactory */
     protected $itemFactory;
 
+    /** @var Configurable */
+    protected $configurableProduct;
+
     /**
      * Constructor.
      *
@@ -45,37 +49,70 @@ class WishlistService implements WishlistServiceInterface
         WishlistRepositoryInterface $wishlistApiRepository,
         WishlistDtoInterface $wishlistDto,
         ItemFactory $itemFactory,
-        ItemResource $itemResource
+        ItemResource $itemResource,
+        Configurable $configurableProduct
     ) {
         $this->productRepository = $productRepository;
         $this->wishlistApiRepository = $wishlistApiRepository;
         $this->wishlistDto = $wishlistDto;
         $this->itemFactory = $itemFactory;
         $this->itemResource = $itemResource;
+        $this->configurableProduct = $configurableProduct;
     }
 
     /**
      * @inheritDoc
      */
-    public function addProductToWishlistById($id, $productId): bool
+    public function addProductToWishlistById($id, $productId = null, $sku = null): bool
     {
-        $product = $this->productRepository->getById($productId);
+        $product = $this->getProduct($productId, $sku);
         $wishlist = $this->wishlistApiRepository->getById($id);
         $wishlist->addNewItem($product);
-        $returnData = $wishlist->save();
-        return true;
+        try {
+            $wishlist->save();
+            return true;
+        } catch (\Throwable $th) {
+            return false;
+        }
     }
 
     /**
      * @inheritdoc
      */
-    public function addProductToWishlistByCustomerId($customerId, $productId) : bool
+    public function addProductToWishlistByCustomerId($customerId, $productId  = null, $sku= null): bool
     {
-        $product = $this->productRepository->getById($productId);
+        $product = $this->getProduct($productId, $sku);
         $wishlist = $this->wishlistApiRepository->getByCustomerId($customerId);
         $wishlist->addNewItem($product);
-        $returnData = $wishlist->save();
-        return true;
+        try {
+            $wishlist->save();
+            return true;
+        } catch (\Throwable $th) {
+            return false;
+        }
+    }
+
+    private function getProduct($productId, $sku)
+    {
+        if (empty($productId) && empty($sku)) {
+            throw new \Magento\Framework\Webapi\Exception(__("Field 'product_id' and 'sku' cannot be empty together"));
+        }
+        $product = null;
+        if(empty($productId)) {
+            $product = $this->productRepository->get($sku);
+        } else {
+            $product = $this->productRepository->getById($productId);
+        }
+        if ($product->getTypeId() == "simple") {
+            try {
+                $parentIds = $this->configurableProduct->getParentIdsByChild($product->getId());
+                $parentId = array_shift($parentIds);
+                return $this->productRepository->getById($parentId);
+            } catch (\Throwable $th) {
+                throw new \Magento\Framework\Webapi\Exception(__("Cannot find configurable product connected with this simple product productId: '${productId}', sku: '${sku}'"));
+            }
+        }
+        return $product;
     }
 
 

@@ -94,8 +94,6 @@ class ProductOptionRepository
         $productOptions = [];
         $typeInstance = $product->getTypeInstance(true);
         if (!empty($typeInstance) && method_exists($typeInstance, 'getConfigurableAttributesAsArray')) {
-            $productAttributeOptions = $typeInstance->getConfigurableAttributesAsArray($product);
-
             $data = $product->getTypeInstance()->getConfigurableOptions($product);
             $options = [];
             foreach($data as $attributes) {
@@ -118,6 +116,7 @@ class ProductOptionRepository
                 }
             }
 
+            $productAttributeOptions = $typeInstance->getConfigurableAttributesAsArray($product);
             foreach ($productAttributeOptions as $productAttribute) {
                 $productOptions[] = clone $this->productOptionLoader->load($product, $productAttribute, $options, $data);
             }

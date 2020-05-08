@@ -8,8 +8,14 @@ use \Magento\Framework\Data\Collection;
 
 class ProductImages implements ProductImagesInterface
 {
-    /** @var int $id */
+    /** @var int|null $id */
     private $id;
+
+    /** @var string|null $width */
+    private $width;
+
+    /** @var string|null $height */
+    private $height;
 
     /** @var string|null $media_type */
     private $mediaType;
@@ -34,13 +40,16 @@ class ProductImages implements ProductImagesInterface
      */
     public function load($image)
     {
-        $this->id = $image['id'];
-        $this->mediaType = $image['media_type'];
-        $this->label = $image['label'];
-        $this->position = $image['position'];
-        $this->types = $image['types'];
-        $this->file = $image['file'];
-        $this->url = $image['url'];
+        $this->id        = !empty($image['id']) ? $image['id'] : null;
+        $this->mediaType = !empty($image['media_type']) ? $image['media_type'] : null;
+        $this->label     = !empty($image['label']) ? $image['label'] : null;
+        $this->position  = !empty($image['position']) ? $image['position'] : null;
+        $this->types     = !empty($image['types']) ? $image['types'] : null;
+        $this->file      = !empty($image['file']) ? $image['file'] : null;
+        $this->url       = !empty($image['url']) ? $image['url'] : null;
+        $this->url       = !empty($image['url']) ? $image['url'] : null;
+        $this->width     = !empty($image['width']) ? $image['width'] : 'auto';
+        $this->height    = !empty($image['height']) ? $image['height'] : 'auto';
 
         return $this;
     }
@@ -48,9 +57,25 @@ class ProductImages implements ProductImagesInterface
     /**
      * @inheritDoc
      */
-    public function getId(): int
+    public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getWidth()
+    {
+        return $this->width;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getHeight()
+    {
+        return $this->height;
     }
 
     /**
@@ -108,6 +133,22 @@ class ProductImages implements ProductImagesInterface
     public function setId($id)
     {
         $this->$id = $id;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function setWidth($width)
+    {
+        $this->$width = $width;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function setHeight($height)
+    {
+        $this->$height = $height;
     }
 
     /**

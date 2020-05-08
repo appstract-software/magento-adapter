@@ -59,16 +59,16 @@ interface ConfigurableProductSearchInterface
     /**
      * Get Images
      *
-     * @return \Appstractsoftware\MagentoAdapter\Api\Data\ProductImagesInterface[]|null
+     * @return \Appstractsoftware\MagentoAdapter\Api\Data\ProductImagesInterface|null
      */
-    public function getImages();
+    public function getThumbnail();
 
     /**
      * Set images
      *
      * @return void
      */
-    public function setImages($images);
+    public function setThumbnail($thumbnail);
 
     /**
      * Get Price

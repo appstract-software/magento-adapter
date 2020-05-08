@@ -78,7 +78,8 @@
         </resources>
         <data>
             <parameter name="customerId" force="true">%customer_id%</parameter>            <!-- Provided by resource self -->
-            <parameter name="product.id" force="true">%product_id%</parameter>
+            <parameter name="product.id" force="false">%product_id%</parameter>
+            <parameter name="product.sku" force="false">%sku%</parameter>
         </data>
     </route>
     <route url="/V1/wishlist/:id/product" method="POST">
@@ -87,7 +88,8 @@
             <resource ref="Appstractsoftware_MagentoAdapter::wishlist_admin"/>
         </resources>
         <data>
-            <parameter name="product.id" force="true">%product_id%</parameter>
+            <parameter name="product.id" force="false">%product_id%</parameter>
+            <parameter name="product.sku" force="false">%sku%</parameter>
         </data>
     </route>
     <route url="/V1/wishlist/customer/:customerId/product" method="POST">
@@ -96,7 +98,8 @@
             <resource ref="Appstractsoftware_MagentoAdapter::wishlist_admin"/>
         </resources>
         <data>
-            <parameter name="product.id" force="true">%product_id%</parameter>
+            <parameter name="product.id" force="false">%product_id%</parameter>
+            <parameter name="product.sku" force="false">%sku%</parameter>
         </data>
     </route>
 
