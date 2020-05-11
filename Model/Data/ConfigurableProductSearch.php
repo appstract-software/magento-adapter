@@ -4,6 +4,8 @@ namespace Appstractsoftware\MagentoAdapter\Model\Data;
 
 use Appstractsoftware\MagentoAdapter\Api\Data\ConfigurableProductSearchInterface;
 
+use \Magento\Catalog\Helper\Image;
+
 class ConfigurableProductSearch implements ConfigurableProductSearchInterface
 {
     /** @var string $sku */
@@ -15,8 +17,8 @@ class ConfigurableProductSearch implements ConfigurableProductSearchInterface
     /** @var string $name */
     private $name;
 
-    /** @var \Appstractsoftware\MagentoAdapter\Api\Data\ProductImagesInterface[] $images */
-    private $images;
+    /** @var \Appstractsoftware\MagentoAdapter\Api\Data\ProductImagesInterface $images */
+    private $thumbnail;
 
     /** @var \Appstractsoftware\MagentoAdapter\Api\Data\ProductPriceInterface $price */
     private $price;
@@ -40,6 +42,15 @@ class ConfigurableProductSearch implements ConfigurableProductSearchInterface
     protected $cartItemLinksLoader;
 
     /**
+     * @var \Magento\Catalog\Helper\Image
+     */
+    protected $imageHelper;
+
+    const THUMBNAIL_WIDTH = '336';
+    const THUMBNAIL_HEIGHT = '417';
+
+
+    /**
      * @param \Magento\Catalog\Api\ProductRepositoryInterface $productRepository
      * @param Appstractsoftware\MagentoAdapter\Api\Data\ProductPriceInterface $productPriceLoader
      * @param Appstractsoftware\MagentoAdapter\Api\Data\ProductImagesInterface $productImagesLoader
@@ -48,12 +59,14 @@ class ConfigurableProductSearch implements ConfigurableProductSearchInterface
         \Magento\Catalog\Api\ProductRepositoryInterface $productRepository,
         \Appstractsoftware\MagentoAdapter\Api\Data\ProductPriceInterface $productPriceLoader,
         \Appstractsoftware\MagentoAdapter\Api\Data\ProductImagesInterface $productImagesLoader,
-        \Appstractsoftware\MagentoAdapter\Api\Data\CartItemLinksInterface $cartItemLinksLoader
+        \Appstractsoftware\MagentoAdapter\Api\Data\CartItemLinksInterface $cartItemLinksLoader,
+        \Magento\Catalog\Helper\Image $imageHelper
     ) {
         $this->productRepository = $productRepository;
         $this->productPriceLoader = $productPriceLoader;
         $this->productImagesLoader = $productImagesLoader;
         $this->cartItemLinksLoader = $cartItemLinksLoader;
+        $this->imageHelper = $imageHelper;
     }
 
     /**
@@ -66,10 +79,24 @@ class ConfigurableProductSearch implements ConfigurableProductSearchInterface
         $this->name     = $product->getName();
         $this->price    = clone $this->productPriceLoader->load($product);
         $this->links    = clone $this->cartItemLinksLoader->load($product);
-        $this->images   = [];
-        foreach ($product->getMediaGalleryImages() as $image) {
-            $this->images[] = clone $this->productImagesLoader->load($image);
+        $this->thumbnail = null;
+
+        if ($product->getThumbnail()) {
+            try {
+                $url = $this->imageHelper
+                    ->init($product, 'thumbnail', ['type'=>'thumbnail'])
+                    ->keepAspectRatio(true)
+                    ->resize(self::THUMBNAIL_WIDTH, self::THUMBNAIL_HEIGHT)
+                    ->getUrl();
+                $this->thumbnail = clone $this->productImagesLoader
+                    ->load([
+                        'url' => $url,
+                        'width' => self::THUMBNAIL_WIDTH,
+                        'height' => self::THUMBNAIL_HEIGHT,
+                    ]);
+            } catch (\Throwable $th) {}
         }
+
         return $this;
     }
 
@@ -124,17 +151,17 @@ class ConfigurableProductSearch implements ConfigurableProductSearchInterface
     /**
      * @inheritDoc
      */
-    public function getImages()
+    public function getThumbnail()
     {
-        return $this->images;
+        return $this->thumbnail;
     }
 
     /**
      * @inheritDoc
      */
-    public function setImages($images)
+    public function setThumbnail($thumbnail)
     {
-        $this->images = $images;
+        $this->thumbnail = $thumbnail;
     }
 
     /**

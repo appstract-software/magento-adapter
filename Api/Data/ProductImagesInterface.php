@@ -14,9 +14,23 @@ interface ProductImagesInterface
     /**
      * Get Id
      *
-     * @return int
+     * @return int|null
      */
-    public function getId(): int;
+    public function getId();
+
+    /**
+     * Get width
+     *
+     * @return string|null
+     */
+    public function getWidth();
+
+    /**
+     * Get height
+     *
+     * @return string|null
+     */
+    public function getHeight();
 
     /**
      * Get MediaType
@@ -67,6 +81,20 @@ interface ProductImagesInterface
      * @return void
      */
     public function setId($id);
+
+    /**
+     * Set width
+     *
+     * @return void
+     */
+    public function setWidth($width);
+
+    /**
+     * Set height
+     *
+     * @return void
+     */
+    public function setHeight($height);
 
     /**
      * Set MediaType

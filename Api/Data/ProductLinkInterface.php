@@ -45,16 +45,23 @@ interface ProductLinkInterface
     public function getName(): string;
 
     /**
-     * Get Images
+     * Get Thumbnail
      *
-     * @return \Appstractsoftware\MagentoAdapter\Api\Data\ProductImagesInterface[]
+     * @return \Appstractsoftware\MagentoAdapter\Api\Data\ProductImagesInterface|null
      */
-    public function getImages();
+    public function getThumbnail();
+
+    /**
+     * Get Thumbnail
+     *
+     * @return void
+     */
+    public function setThumbnail($thumbnail);
 
     /**
      * Get Price
      *
-     * @return \Appstractsoftware\MagentoAdapter\Api\Data\ProductPriceInterface
+     * @return \Appstractsoftware\MagentoAdapter\Api\Data\ProductPriceInterface|null
      */
     public function getPrice();
 

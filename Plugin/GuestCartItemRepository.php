@@ -12,6 +12,7 @@ use \Magento\Quote\Api\GuestCartItemRepositoryInterface;
 use \Magento\Quote\Model\GuestCart\GuestCartItemRepository\Interceptor;
 use \Magento\Framework\Api\SearchResults;
 use \Magento\Catalog\Api\ProductRepositoryInterface;
+use \Magento\Catalog\Helper\Image;
 
 class GuestCartItemRepository
 {
@@ -52,7 +53,8 @@ class GuestCartItemRepository
         \Magento\Quote\Api\GuestCartItemRepositoryInterface $cartItemRepository,
         \Magento\Catalog\Api\ProductRepositoryInterface $productRepository,
         \Appstractsoftware\MagentoAdapter\Api\Data\ProductImagesInterface $productImagesLoader,
-        \Appstractsoftware\MagentoAdapter\Api\Data\ProductSimpleOptionInterface $productSimpleOptionLoader
+        \Appstractsoftware\MagentoAdapter\Api\Data\ProductSimpleOptionInterface $productSimpleOptionLoader,
+        \Magento\Catalog\Helper\Image $imageHelper
      ) {
         $this->cartItemLinks = $cartItemLinks;
         $this->cartItemQuantity = $cartItemQuantity;
@@ -60,6 +62,7 @@ class GuestCartItemRepository
         $this->productRepository = $productRepository;
         $this->productImagesLoader = $productImagesLoader;
         $this->productSimpleOptionLoader = $productSimpleOptionLoader;
+        $this->imageHelper = $imageHelper;
     }
 
     /**
@@ -156,6 +159,9 @@ class GuestCartItemRepository
         } catch (\Throwable $th) {}
     }
     
+    const THUMBNAIL_WIDTH = '184';
+    const THUMBNAIL_HEIGHT = '224';
+
     /**
      * Returns product images.
      *
@@ -164,11 +170,21 @@ class GuestCartItemRepository
      */
     private function loadImages($extensionAttributes, $product) {
         try {
-            $images = [];
-            foreach ($product->getMediaGalleryImages() as $image) {
-                $images[] = clone $this->productImagesLoader->load($image);
+            if ($product->getThumbnail()) {
+                $url = $this->imageHelper
+                    ->init($product, 'thumbnail', ['type'=>'thumbnail'])
+                    ->keepAspectRatio(true)
+                    ->resize(self::THUMBNAIL_WIDTH, self::THUMBNAIL_HEIGHT)
+                    ->getUrl();
+                $thumbnail = clone $this->productImagesLoader
+                    ->load([
+                        'url' => $url,
+                        'width' => self::THUMBNAIL_WIDTH,
+                        'height' => self::THUMBNAIL_HEIGHT,
+                    ]);
+
+                $extensionAttributes->setThumbnail($thumbnail);
             }
-            $extensionAttributes->setImages($images);
         } catch (\Throwable $th) {}
     }
 }

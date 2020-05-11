@@ -10,18 +10,20 @@ interface WishlistServiceInterface
      *
      * @param int $id Wishlist id
      * @param int $productId Product id
+     * @param string $sku Product sku
      * @return bool
      */
-    public function addProductToWishlistById($id, $productId): bool;
+    public function addProductToWishlistById($id, $productId = null, $sku = null): bool;
 
     /**
      * Add product to wishlist by customer id.
      *
      * @param int $customerId
      * @param int $productId
-     * @return boolean
+     * @param string $sku
+     * @return bool
      */
-    public function addProductToWishlistByCustomerId($customerId, $productId): bool;
+    public function addProductToWishlistByCustomerId($customerId, $productId = null, $sku = null): bool;
 
 
     /**
