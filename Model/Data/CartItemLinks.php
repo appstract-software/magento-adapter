@@ -48,14 +48,13 @@ class CartItemLinks implements CartItemLinksInterface
     {
         try {
             $this->sku = $product->getSku();
+            $this->urlKey = $product->getUrlKey();
+            $this->simpleUrlKey = $product->getUrlKey();
             if ($product->getTypeId() == "simple") {
-                $this->simpleUrlKey = $product->getUrlKey();
                 $parentIds = $this->configurableProduct->getParentIdsByChild($product->getId());
                 $parentId = array_shift($parentIds);
                 $productParent = $this->productRepository->getById($parentId);
                 $this->urlKey = $productParent->getUrlKey();
-            } else {
-                $this->urlKey = $product->getUrlKey();
             }
         } catch (\Throwable $th) {
         }

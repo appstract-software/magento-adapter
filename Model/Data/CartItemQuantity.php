@@ -15,6 +15,9 @@ class CartItemQuantity implements CartItemQuantityInterface
 
     /** @var int|null $qty */
     private $qty;
+    
+    /** @var int|null $productId */
+    private $product_id;
 
     /** @var int|null $qty_available */
     private $qty_available;
@@ -33,6 +36,7 @@ class CartItemQuantity implements CartItemQuantityInterface
                 $this->qty = $cartItem->getQty();
             }
             $this->qty_available = $product->getExtensionAttributes()->getStockItem()->getQty();
+            $this->product_id = $product->getId();
         } catch (\Throwable $th) {
         }
 
@@ -45,6 +49,14 @@ class CartItemQuantity implements CartItemQuantityInterface
     public function getSku()
     {
         return $this->sku;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getProductId()
+    {
+        return $this->product_id;
     }
 
     /**
@@ -69,6 +81,14 @@ class CartItemQuantity implements CartItemQuantityInterface
     public function setSku($sku)
     {
         $this->sku = $sku;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function setProductId($product_id)
+    {
+        $this->product_id = $product_id;
     }
 
     /**
