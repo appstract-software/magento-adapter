@@ -19,6 +19,13 @@ interface CartItemQuantityInterface
     public function getSku();
 
     /**
+     * Get product id
+     *
+     * @return int|null
+     */
+    public function getProductId();
+
+    /**
      * Get quantity
      *
      * @return int|null
@@ -38,6 +45,13 @@ interface CartItemQuantityInterface
      * @return void
      */
     public function setSku($sku);
+
+    /**
+     * Set id
+     *
+     * @return void
+     */
+    public function setProductId($id);
 
     /**
      * Set quantity

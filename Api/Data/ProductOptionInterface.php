@@ -8,7 +8,7 @@ interface ProductOptionInterface extends \Magento\Framework\Api\ExtensibleDataIn
      * Load data for dto.
      *
      * @param Magento\Catalog\Api\Data\ProductInterface $product
-     * @return Appstractsoftware\MagentoAdapter\Api\Data\ProductOptionInterface
+     * @return $this
      */
     public function load($product, $productAttribute, $options, $data);
 

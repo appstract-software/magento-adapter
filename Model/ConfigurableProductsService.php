@@ -88,34 +88,55 @@ class ConfigurableProductsService implements ConfigurableProductsServiceInterfac
         $searchCriteria->setPageSize(null);
         $oldCurrentPage = $searchCriteria->getCurrentPage() ?: 1;
         $searchCriteria->setCurrentPage(null);
+
         if (!empty($this->collectionProcessor)) {
             $this->collectionProcessor->process($searchCriteria, $collection);
         }
+
         $searchCriteria->setPageSize($oldPageSize);
         $searchCriteria->setCurrentPage($oldCurrentPage);
 
         $collection->load();
 
-        $products = $collection->getItems();
-        $size = $collection->getSize();
-
         /** @var \Appstractsoftware\MagentoAdapter\Api\Data\ConfigurableProductSearchInterface[] $items */
         $items = [];
         $skus = [];
-        foreach ($products as $product) {
+        $configurableSkus = [];
+        foreach ($collection->getItems() as $product) {
             try {
+                $productSku = $product->getSku();
+
+                if ($product->getVisibility() != 1) {
+                    if (!in_array($productSku, $skus)) {
+                        $items[] = clone $this->configurableProductSearchLoader->load($product);
+                        $skus[] = $productSku;
+                        continue;
+                    }
+                }
+                if ((in_array($productSku, $skus) || in_array($productSku, $configurableSkus))) {
+                    // Don't want duplicates.
+                    continue;
+                }
                 if ($product->getTypeId() == "simple") {
                     $parentIds = $this->configurableProduct->getParentIdsByChild($product->getId());
-                    $parentId = array_shift($parentIds);
-                    $parent = $this->productRepository->getById($parentId);
-                    if (!in_array($parent->getSku(), $skus)) {
-                        $items[] = clone $this->configurableProductSearchLoader->load($parent);
-                        $skus[] = $parent->getSku();
+                    if (!empty($parentIds)) {
+                        $parentId = array_shift($parentIds);
+                        $parent = $this->productRepository->getById($parentId);
+                        // Add all children skus so we dont need to parse them again and fetch for parent.
+                        foreach ($parent->getTypeInstance()->getUsedProducts($parent) as $productSimple) {
+                            if ($productSimple->getVisibility() == 1 && !in_array($productSimple->getSku(), $configurableSkus)) {
+                                $configurableSkus[] = $productSimple->getSku();
+                            }
+                        }
+
+                        if (!in_array($parent->getSku(), $skus)) {
+                            $items[] = clone $this->configurableProductSearchLoader->load($parent);
+                            $skus[] = $parent->getSku();
+                        }
                     }
                 }
             } catch (\Throwable $th) {}
         }
-        $total = count($items);
 
         $itemsPage = $items;
         if (!empty($oldPageSize)) {
@@ -125,7 +146,7 @@ class ConfigurableProductsService implements ConfigurableProductsServiceInterfac
         $searchResult = $this->searchResultsFactory->create();
         $searchResult->setSearchCriteria($searchCriteria);
         $searchResult->setItems($itemsPage);
-        $searchResult->setTotalCount($total);
+        $searchResult->setTotalCount(count($items));
 
         // TODO: Add cache - look ProductRepositoryInterface cacheProduct method.
 
@@ -140,8 +161,8 @@ class ConfigurableProductsService implements ConfigurableProductsServiceInterfac
             foreach ($filterGroups as &$filterGroup) {
                 foreach ($filterGroup->getFilters() as &$filter) {
                     if ($filter->getField() === 'visibility') {
-                        $filter->setValue(1);
-                        $filter->setConditionType('eq');
+                        $filter->setValue('1,2,3,4');
+                        $filter->setConditionType('in');
                     }
                 }
             }
