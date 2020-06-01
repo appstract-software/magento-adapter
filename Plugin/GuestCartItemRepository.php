@@ -76,9 +76,8 @@ class GuestCartItemRepository
         \Magento\Quote\Model\GuestCart\GuestCartItemRepository\Interceptor $subject,
         $items
      ) {
-        $cartItems = [];
         foreach ($items as &$cartItem) {
-            $cartItems = $this->loadData($cartItem);
+            $this->loadData($cartItem);
         }
         return $items;
     }
