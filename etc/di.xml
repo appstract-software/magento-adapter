@@ -46,9 +46,15 @@
     <preference for="Appstractsoftware\MagentoAdapter\Api\Data\CartItemQuantityInterface" type="Appstractsoftware\MagentoAdapter\Model\Data\CartItemQuantity"></preference>
     <preference for="Appstractsoftware\MagentoAdapter\Api\Data\ProductSimpleOptionInterface" type="Appstractsoftware\MagentoAdapter\Model\Data\ProductSimpleOption"></preference>
     <type name="Magento\Quote\Api\GuestCartItemRepositoryInterface">
-        <plugin name="get_appstract_links_in_item" type="Appstractsoftware\MagentoAdapter\Plugin\GuestCartItemRepository" />
+        <plugin name="get_appstract_guest_cart_item" type="Appstractsoftware\MagentoAdapter\Plugin\GuestCartItemRepository" />
     </type>
     <type name="Magento\Quote\Api\GuestCartRepositoryInterface">
-        <plugin name="get_appstract_links" type="Appstractsoftware\MagentoAdapter\Plugin\GuestCartRepository" />
+        <plugin name="get_appstract_guest_cart" type="Appstractsoftware\MagentoAdapter\Plugin\GuestCartRepository" />
+    </type>
+    <type name="Magento\Quote\Api\CartItemRepositoryInterface">
+        <plugin name="get_appstract_mine_cart_item" type="Appstractsoftware\MagentoAdapter\Plugin\CartItemRepository" />
+    </type>
+    <type name="Magento\Quote\Api\CartManagementInterface">
+        <plugin name="get_appstract_mine_cart" type="Appstractsoftware\MagentoAdapter\Plugin\CartRepository" />
     </type>
 </config>

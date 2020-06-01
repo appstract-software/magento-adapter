@@ -6,20 +6,20 @@ use Appstractsoftware\MagentoAdapter\Plugin\GuestCartItemRepository;
 use \Appstractsoftware\MagentoAdapter\Api\Data\CartItemLinksInterface;
 
 use Magento\Quote\Api\Data\CartItemInterface;
-use Magento\Quote\Api\GuestCartRepositoryInterface;
-use Magento\Quote\Model\GuestCart\GuestCartRepository\Interceptor;
+use Magento\Quote\Api\CartRepositoryInterface;
+use Magento\Quote\Model\Cart\CartRepository\Interceptor;
 use \Magento\Framework\Api\SearchResults;
 
-class GuestCartRepository
+class CartRepository
 {
     /** @var \Appstractsoftware\MagentoAdapter\Plugin\GuestCartItemRepository */
-    private $guestCartItemRepository;
+    private $guestGuestCartItemRepository;
     
 
     /**
-     * CartItemRepository constructor.
+     * CartRepository constructor.
     * 
-    * @param GuestCartItemRepository $guestCartItemRepository
+    * @param GuestCartItemRepository $guestGuestCartItemRepository
     */
     public function __construct(GuestCartItemRepository $guestCartItemRepository)
     {
@@ -29,15 +29,17 @@ class GuestCartRepository
     /**
      * Add cart options to extension attributes.
      * 
-     * @param GuestCartRepositoryInterface $subject
+     * @param CartRepositoryInterface $subject
      * @param \Magento\Quote\Api\Data\CartInterface $cart
      * @return \Magento\Quote\Api\Data\CartInterface
      */
-    public function afterGet(GuestCartRepositoryInterface $subject, \Magento\Quote\Api\Data\CartInterface $cart)
+    public function afterGetCartForCustomer(\Magento\Quote\Api\CartManagementInterface $subject, $cart)
     {
-        foreach ($cart->getItems() as &$cartItem) {
-            $cartItem = $this->guestCartItemRepository->loadData($cartItem);
+        $cartItems = $cart->getItems();
+        foreach ($cart->getItems() as &$item) {
+            $cartItems[] = $this->guestCartItemRepository->loadData($item);
         }
+        $cart->setItems($cartItems);
 
         return $cart;
     }
