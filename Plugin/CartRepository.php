@@ -35,11 +35,9 @@ class CartRepository
      */
     public function afterGetCartForCustomer(\Magento\Quote\Api\CartManagementInterface $subject, $cart)
     {
-        $cartItems = $cart->getItems();
         foreach ($cart->getItems() as &$item) {
-            $cartItems[] = $this->guestCartItemRepository->loadData($item);
+            $this->guestCartItemRepository->loadData($item);
         }
-        $cart->setItems($cartItems);
 
         return $cart;
     }
