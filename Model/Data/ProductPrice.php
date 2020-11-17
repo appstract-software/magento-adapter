@@ -4,8 +4,10 @@ namespace Appstractsoftware\MagentoAdapter\Model\Data;
 
 use Appstractsoftware\MagentoAdapter\Api\Data\ProductPriceInterface;
 use Appstractsoftware\MagentoAdapter\Api\Data\ProductPriceValueInterface;
+use \Magento\Store\Model\StoreManagerInterface;
+use \Magento\Store\Model\ScopeInterface;
 
-use Magento\Directory\Model\Currency as CurrencyHelper;
+use Magento\Framework\Pricing\Helper\Data as CurrencyHelper;
 
 class ProductPrice implements ProductPriceInterface
 {
@@ -28,13 +30,17 @@ class ProductPrice implements ProductPriceInterface
     /** @var CurrencyHelper */
     private $currencyHelper;
 
+    /** @var StoreManagerInterface */
+    private $storeManager;
+
     /**
      * Constructor.
      *
      * @param CurrencyHelper $currencyHelper
      */
-    public function __construct(CurrencyHelper $currencyHelper) {
+    public function __construct(CurrencyHelper $currencyHelper, StoreManagerInterface $storeManager) {
         $this->currencyHelper = $currencyHelper;
+        $this->storeManager = $storeManager;
     }
 
     /**
@@ -50,7 +56,7 @@ class ProductPrice implements ProductPriceInterface
         $this->specialPrice         = $product->getSpecialPrice();
         $this->currencyPrice        = $this->formatPrice($price);
         $this->currencySpecialPrice = $this->specialPrice ? $this->formatPrice($this->specialPrice) : null;
-        $this->currencySymbol       = $this->currencyHelper->getCurrencySymbol();
+        $this->currencySymbol       = $this->storeManager->getStore()->getBaseCurrency()->getCurrencySymbol();
 
         return $this;
     }
@@ -63,7 +69,7 @@ class ProductPrice implements ProductPriceInterface
      */
     private function formatPrice($price)
     {
-        return $this->currencyHelper->format($price, [], false);
+        return $this->currencyHelper->currency($price, true, false);
     }
 
     /**
