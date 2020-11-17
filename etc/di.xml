@@ -20,8 +20,10 @@
     <!-- Product Extension -->
     <preference for="Appstractsoftware\MagentoAdapter\Api\Data\ProductOptionValueInterface" type="Appstractsoftware\MagentoAdapter\Model\Data\ProductOptionValue" />
     <preference for="Appstractsoftware\MagentoAdapter\Api\Data\ProductPriceInterface" type="Appstractsoftware\MagentoAdapter\Model\Data\ProductPrice" />
+    <preference for="Appstractsoftware\MagentoAdapter\Api\Data\ProductUnitsInterface" type="Appstractsoftware\MagentoAdapter\Model\Data\ProductUnits" />
     <type name="Magento\Catalog\Api\ProductRepositoryInterface">
-        <plugin name="get_appstract_product_price" type="Appstractsoftware\MagentoAdapter\Plugin\ProductPriceRepository" />
+        <plugin name="get_appstract_product_price" type="Appstractsoftware\MagentoAdapter\Plugin\ProductItemRepository" />
+        <plugin name="get_appstract_units" type="Appstractsoftware\MagentoAdapter\Plugin\ProductItemRepository" />
     </type>
     <preference for="Appstractsoftware\MagentoAdapter\Api\BestSellerRepositoryInterface" type="Appstractsoftware\MagentoAdapter\Model\BestSellerRepository"></preference>
     <preference for="Appstractsoftware\MagentoAdapter\Api\MostViewedRepositoryInterface" type="Appstractsoftware\MagentoAdapter\Model\MostViewedRepository"></preference>

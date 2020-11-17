@@ -2,6 +2,7 @@
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Api/etc/extension_attributes.xsd">
     <extension_attributes for="Magento\Catalog\Api\Data\ProductInterface">
         <attribute code="product_price" type="Appstractsoftware\MagentoAdapter\Api\Data\ProductPriceInterface"/>
+        <attribute code="units" type="Appstractsoftware\MagentoAdapter\Api\Data\ProductUnitsInterface"/>
     </extension_attributes>
     <extension_attributes for="Magento\Quote\Api\Data\CartItemInterface">
         <attribute code="links" type="Appstractsoftware\MagentoAdapter\Api\Data\CartItemLinksInterface"/>
