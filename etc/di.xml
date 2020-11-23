@@ -47,6 +47,7 @@
     <preference for="Appstractsoftware\MagentoAdapter\Api\Data\CartItemLinksInterface" type="Appstractsoftware\MagentoAdapter\Model\Data\CartItemLinks"></preference>
     <preference for="Appstractsoftware\MagentoAdapter\Api\Data\CartItemQuantityInterface" type="Appstractsoftware\MagentoAdapter\Model\Data\CartItemQuantity"></preference>
     <preference for="Appstractsoftware\MagentoAdapter\Api\Data\ProductSimpleOptionInterface" type="Appstractsoftware\MagentoAdapter\Model\Data\ProductSimpleOption"></preference>
+    <preference for="Appstractsoftware\MagentoAdapter\Api\Data\CartItemInformationInterface" type="Appstractsoftware\MagentoAdapter\Model\Data\CartItemInformation"></preference>
     <type name="Magento\Quote\Api\GuestCartItemRepositoryInterface">
         <plugin name="get_appstract_guest_cart_item" type="Appstractsoftware\MagentoAdapter\Plugin\GuestCartItemRepository" />
     </type>

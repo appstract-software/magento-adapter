@@ -18,7 +18,10 @@ class ProductImages implements ProductImagesInterface
     private $height;
 
     /** @var string|null $media_type */
-    private $mediaType;
+    private $media_type;
+
+    /** @var string|null $mime */
+    private $mime;
 
     /** @var string|null $label */
     private $label;
@@ -41,12 +44,12 @@ class ProductImages implements ProductImagesInterface
     public function load($image)
     {
         $this->id        = !empty($image['id']) ? $image['id'] : null;
-        $this->mediaType = !empty($image['media_type']) ? $image['media_type'] : null;
+        $this->media_type = !empty($image['media_type']) ? $image['media_type'] : null;
+        $this->mime      = !empty($image['mime']) ? $image['mime'] : null;
         $this->label     = !empty($image['label']) ? $image['label'] : null;
         $this->position  = !empty($image['position']) ? $image['position'] : null;
         $this->types     = !empty($image['types']) ? $image['types'] : null;
         $this->file      = !empty($image['file']) ? $image['file'] : null;
-        $this->url       = !empty($image['url']) ? $image['url'] : null;
         $this->url       = !empty($image['url']) ? $image['url'] : null;
         $this->width     = !empty($image['width']) ? $image['width'] : 'auto';
         $this->height    = !empty($image['height']) ? $image['height'] : 'auto';
@@ -83,7 +86,15 @@ class ProductImages implements ProductImagesInterface
      */
     public function getMediaType()
     {
-        return $this->mediaType;
+        return $this->media_type;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getMime()
+    {
+        return $this->mime;
     }
 
     /**
@@ -157,6 +168,14 @@ class ProductImages implements ProductImagesInterface
     public function setMediaType($media_type)
     {
         $this->$media_type = $media_type;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function setMime($mime)
+    {
+        $this->$mime = $mime;
     }
 
     /**

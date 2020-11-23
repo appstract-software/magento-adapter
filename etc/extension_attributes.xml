@@ -9,5 +9,6 @@
         <attribute code="quantity" type="Appstractsoftware\MagentoAdapter\Api\Data\CartItemQuantityInterface"/>
         <attribute code="thumbnail" type="Appstractsoftware\MagentoAdapter\Api\Data\ProductImagesInterface"/>
         <attribute code="product_options" type="Appstractsoftware\MagentoAdapter\Api\Data\ProductSimpleOptionInterface[]"/>
+        <attribute code="informations" type="Appstractsoftware\MagentoAdapter\Api\Data\CartItemInformationInterface"/>
     </extension_attributes>
 </config>

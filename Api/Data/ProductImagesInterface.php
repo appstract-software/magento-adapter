@@ -2,7 +2,7 @@
 
 namespace Appstractsoftware\MagentoAdapter\Api\Data;
 
-interface ProductImagesInterface 
+interface ProductImagesInterface
 {
     /**
      * Load data for dto.
@@ -38,6 +38,13 @@ interface ProductImagesInterface
      * @return string|null
      */
     public function getMediaType();
+
+    /**
+     * Get Mime
+     *
+     * @return string|null
+     */
+    public function getMime();
 
     /**
      * Get Label
@@ -102,6 +109,13 @@ interface ProductImagesInterface
      * @return void
      */
     public function setMediaType($media_type);
+
+    /**
+     * Set Mime
+     *
+     * @return void
+     */
+    public function setMime($mime);
 
     /**
      * Set Label
