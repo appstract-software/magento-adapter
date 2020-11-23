@@ -54,8 +54,9 @@ class ProductPrice implements ProductPriceInterface
         }
         $this->price                = $price;
         $this->specialPrice         = $product->getSpecialPrice();
-        $this->currencyPrice        = $this->formatPrice($price);
-        $this->currencySpecialPrice = $this->specialPrice ? $this->formatPrice($this->specialPrice) : null;
+        $store_id = $this->storeManager->getStore()->getId();
+        $this->currencyPrice        = $this->formatPrice($price, $store_id);
+        $this->currencySpecialPrice = $this->specialPrice ? $this->formatPrice($this->specialPrice, $store_id) : null;
         $this->currencySymbol       = $this->storeManager->getStore()->getBaseCurrency()->getCurrencySymbol();
 
         return $this;
@@ -67,9 +68,9 @@ class ProductPrice implements ProductPriceInterface
      * @param float $price
      * @return string
      */
-    private function formatPrice($price)
+    private function formatPrice($price, $store_id)
     {
-        return $this->currencyHelper->currency($price, true, false);
+        return $this->currencyHelper->currencyByStore($price, $store_id, true, false);
     }
 
     /**

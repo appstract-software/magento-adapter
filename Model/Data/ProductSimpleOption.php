@@ -17,18 +17,38 @@ class ProductSimpleOption implements ProductSimpleOptionInterface
     /** @var string|null */
     private $value;
 
+    /** @var number|null */
+    private $value_id;
+
     /** @var bool|null */
     private $is_size_color;
+
+    /** @var string|null */
+    private $attribute_label;
+
+    /** @var string|null */
+    private $attribute_frontend_label;
+
+    /** @var string|null */
+    private $attribute_store_label;
 
     /**
      * @inheritDoc
      */
-    public function load($attribute, $product)
+    public function load($attribute, $product, $valueId)
     {
-        $this->attribute_code   = $attribute->getAttributeCode();
-        $this->attribute_id     = $attribute->getAttributeId();
-        $this->value            = $attribute->getFrontend()->getValue($product);
-        $this->is_size_color    = in_array($attribute->getAttributeCode(), ['size', 'color']);
+        $store_id = $product->getStoreId();
+        $attribute->setStoreId($store_id);
+
+        $labels = $attribute->getStoreLabels();
+        $this->attribute_code           = $attribute->getAttributeCode();
+        $this->attribute_id             = $attribute->getAttributeId();
+        $this->attribute_label          = $attribute->getLabel();
+        $this->attribute_frontend_label = $attribute->getFrontendLabel();
+        $this->attribute_store_label    = empty($labels[$store_id]) ? $attribute->getStoreLabel() : $labels[$store_id];
+        $this->value                    = $attribute->getFrontend()->getValue($product);
+        $this->value_id                 = $valueId;
+        $this->is_size_color            = in_array($attribute->getAttributeCode(), ['size', 'color']);
 
         return $this;
     }
@@ -60,11 +80,43 @@ class ProductSimpleOption implements ProductSimpleOptionInterface
     /**
      * @inheritDoc
      */
+    public function getValueId()
+    {
+        return $this->value_id;
+    }
+
+    /**
+     * @inheritDoc
+     */
     public function getIsSizeColor()
     {
         return $this->is_size_color;
     }
 
+
+    /**
+     * @inheritDoc
+     */
+    public function getAttributeLabel()
+    {
+        return $this->attribute_label;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getAttributeFrontendLabel()
+    {
+        return $this->attribute_frontend_label;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getAttributeStoreLabel()
+    {
+        return $this->attribute_store_label;
+    }
 
     /**
      * @inheritDoc
@@ -93,8 +145,40 @@ class ProductSimpleOption implements ProductSimpleOptionInterface
     /**
      * @inheritDoc
      */
+    public function setValueId($value_id)
+    {
+        $this->value_id = $value_id;
+    }
+
+    /**
+     * @inheritDoc
+     */
     public function setIsSizeColor($is_size_color)
     {
         $this->is_size_color = $is_size_color;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function setAttributeLabel($attribute_label)
+    {
+        $this->attribute_label = $attribute_label;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function setAttributeFrontendLabel($attribute_frontend_label)
+    {
+        $this->attribute_frontend_label = $attribute_frontend_label;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function setAttributeStoreLabel($attribute_store_label)
+    {
+        $this->attribute_store_label = $attribute_store_label;
     }
 }

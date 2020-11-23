@@ -2,7 +2,7 @@
 
 namespace Appstractsoftware\MagentoAdapter\Api\Data;
 
-interface CartItemLinksInterface 
+interface CartItemLinksInterface
 {
     /**
      * Load data for dto.
