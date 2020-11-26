@@ -1,0 +1,10 @@
+<?php
+
+namespace Appstractsoftware\MagentoAdapter\Model\Quote;
+
+use Appstractsoftware\MagentoAdapter\Api\Quote\GuestShippingAddressManagementServiceInterface;
+use \Magento\Quote\Model\GuestCart\GuestShippingAddressManagement as GuestShippingAddressManagement;
+
+class GuestShippingAddressManagementService extends GuestShippingAddressManagement implements GuestShippingAddressManagementServiceInterface
+{
+}

@@ -44,6 +44,8 @@
     <preference for="Appstractsoftware\MagentoAdapter\Api\Data\ProductOptionValueProductsInterface" type="Appstractsoftware\MagentoAdapter\Model\Data\ProductOptionValueProducts"></preference>
 
     <!-- Cart -->
+    <preference for="Appstractsoftware\MagentoAdapter\Api\Quote\ShippingAddressManagementServiceInterface" type="Appstractsoftware\MagentoAdapter\Model\Quote\ShippingAddressManagementService"></preference>
+    <preference for="Appstractsoftware\MagentoAdapter\Api\Quote\GuestShippingAddressManagementServiceInterface" type="Appstractsoftware\MagentoAdapter\Model\Quote\GuestShippingAddressManagementService"></preference>
     <preference for="Appstractsoftware\MagentoAdapter\Api\Data\CartItemLinksInterface" type="Appstractsoftware\MagentoAdapter\Model\Data\CartItemLinks"></preference>
     <preference for="Appstractsoftware\MagentoAdapter\Api\Data\CartItemQuantityInterface" type="Appstractsoftware\MagentoAdapter\Model\Data\CartItemQuantity"></preference>
     <preference for="Appstractsoftware\MagentoAdapter\Api\Data\ProductSimpleOptionInterface" type="Appstractsoftware\MagentoAdapter\Model\Data\ProductSimpleOption"></preference>

@@ -30,7 +30,7 @@ interface ProductSimpleOptionInterface extends \Magento\Framework\Api\Extensible
     public function getValue();
 
     /**
-     * @return number|null
+     * @return int|null
      */
     public function getValueId();
 

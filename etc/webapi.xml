@@ -52,6 +52,38 @@
         </resources>
     </route>
 
+    <!-- CART SHIPPING ADDRESS -->
+    <route url="/V1/carts/mine/shipping-address" method="GET">
+        <service class="Appstractsoftware\MagentoAdapter\Api\Quote\ShippingAddressManagementServiceInterface" method="get"/>
+        <resources>
+            <resource ref="self" />
+        </resources>
+        <data>
+            <parameter name="cartId" force="true">%cart_id%</parameter>
+        </data>
+    </route>
+    <route url="/V1/carts/mine/shipping-address" method="POST">
+        <service class="Appstractsoftware\MagentoAdapter\Api\Quote\ShippingAddressManagementServiceInterface" method="assign"/>
+        <resources>
+            <resource ref="self" />
+        </resources>
+        <data>
+            <parameter name="cartId" force="true">%cart_id%</parameter>
+        </data>
+    </route>
+    <route url="/V1/guest-carts/:cartId/shipping-address" method="GET">
+        <service class="Appstractsoftware\MagentoAdapter\Api\Quote\GuestShippingAddressManagementServiceInterface" method="get"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
+    <route url="/V1/guest-carts/:cartId/shipping-address" method="POST">
+        <service class="Appstractsoftware\MagentoAdapter\Api\Quote\GuestShippingAddressManagementServiceInterface" method="assign"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
+
     <!-- NEW PRODUCTS API -->
     <route url="/V1/products/new/:limit" method="GET">
         <service class="Appstractsoftware\MagentoAdapter\Api\NewProductsRepositoryInterface" method="getList"/>
