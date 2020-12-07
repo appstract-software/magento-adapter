@@ -17,7 +17,7 @@ class ProductSimpleOption implements ProductSimpleOptionInterface
     /** @var string|null */
     private $value;
 
-    /** @var number|null */
+    /** @var int|null */
     private $value_id;
 
     /** @var bool|null */
