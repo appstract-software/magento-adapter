@@ -30,6 +30,11 @@
     <preference for="Appstractsoftware\MagentoAdapter\Api\NewProductsRepositoryInterface" type="Appstractsoftware\MagentoAdapter\Model\NewProductsRepository"></preference>
     <preference for="Appstractsoftware\MagentoAdapter\Api\TopRatedRepositoryInterface" type="Appstractsoftware\MagentoAdapter\Model\TopRatedRepository"></preference>
 
+    <!-- Product images -->
+    <preference for="Appstractsoftware\MagentoAdapter\Api\ProductImage\ProductImagesServiceInterface" type="Appstractsoftware\MagentoAdapter\Model\ProductImage\ProductImagesService" />
+    <preference for="Appstractsoftware\MagentoAdapter\Api\ProductImage\ProductImagesSearchInterface" type="Appstractsoftware\MagentoAdapter\Model\ProductImage\ProductImagesSearch" />
+    <preference for="Appstractsoftware\MagentoAdapter\Api\ProductImage\ProductImagesSearchResultsInterface" type="Appstractsoftware\MagentoAdapter\Model\ProductImage\ProductImagesSearchResults" />
+
     <!-- Product options -->
     <preference for="Appstractsoftware\MagentoAdapter\Api\Data\ProductOptionInterface" type="Appstractsoftware\MagentoAdapter\Model\Data\ProductOption" />
     <preference for="Appstractsoftware\MagentoAdapter\Api\ProductOptionsServiceInterface" type="Appstractsoftware\MagentoAdapter\Model\ProductOptionsService"></preference>

@@ -84,6 +84,14 @@
         </resources>
     </route>
 
+    <!-- PRODUCT IMAGE BY QUERY -->
+    <route url="/V1/products/images" method="GET">
+        <service class="Appstractsoftware\MagentoAdapter\Api\ProductImage\ProductImagesServiceInterface" method="getList"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
+
     <!-- NEW PRODUCTS API -->
     <route url="/V1/products/new/:limit" method="GET">
         <service class="Appstractsoftware\MagentoAdapter\Api\NewProductsRepositoryInterface" method="getList"/>
