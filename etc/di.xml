@@ -6,6 +6,9 @@
     <preference for="Appstractsoftware\MagentoAdapter\Api\Data\WishlistDtoInterface" type="Appstractsoftware\MagentoAdapter\Model\Data\WishlistDto" />
     <preference for="Appstractsoftware\MagentoAdapter\Api\Data\ItemDtoInterface" type="Appstractsoftware\MagentoAdapter\Model\Data\ItemDto" />
 
+    <!-- Newsletter -->
+    <preference for="Appstractsoftware\MagentoAdapter\Api\Newsletter\NewsletterManagementInterface" type="Appstractsoftware\MagentoAdapter\Model\Newsletter\NewsletterManagement"/>
+
     <!-- Category filters -->
     <preference for="Appstractsoftware\MagentoAdapter\Api\CategoryFiltersServiceInterface" type="Appstractsoftware\MagentoAdapter\Model\CategoryFiltersService" />
     <preference for="Appstractsoftware\MagentoAdapter\Api\Data\CategoryFiltersDtoInterface" type="Appstractsoftware\MagentoAdapter\Model\Data\CategoryFiltersDto" />
