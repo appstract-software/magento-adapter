@@ -29,6 +29,7 @@
         <plugin name="get_appstract_units" type="Appstractsoftware\MagentoAdapter\Plugin\ProductItemRepository" />
     </type>
     <preference for="Appstractsoftware\MagentoAdapter\Api\BestSellerRepositoryInterface" type="Appstractsoftware\MagentoAdapter\Model\BestSellerRepository"></preference>
+    <preference for="Appstractsoftware\MagentoAdapter\Api\CustomerGroupInterface" type="Appstractsoftware\MagentoAdapter\Model\CustomerGroup"></preference>
     <preference for="Appstractsoftware\MagentoAdapter\Api\MostViewedRepositoryInterface" type="Appstractsoftware\MagentoAdapter\Model\MostViewedRepository"></preference>
     <preference for="Appstractsoftware\MagentoAdapter\Api\NewProductsRepositoryInterface" type="Appstractsoftware\MagentoAdapter\Model\NewProductsRepository"></preference>
     <preference for="Appstractsoftware\MagentoAdapter\Api\TopRatedRepositoryInterface" type="Appstractsoftware\MagentoAdapter\Model\TopRatedRepository"></preference>
