@@ -8,6 +8,14 @@
         </resources>
     </route>
 
+    <!-- SET CUSTOMER TAX CLASS ID -->
+    <route url="/V1/customer-group" method="POST">
+        <service class="Appstractsoftware\MagentoAdapter\Api\CustomerGroupInterface" method="setCustomerGroup"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
+
     <!-- NEWSLETTER API -->
     <route url="/V1/newsletter/subscribe" method="POST">
         <service class="Appstractsoftware\MagentoAdapter\Api\Newsletter\NewsletterManagementInterface" method="subscribe"/>
