@@ -22,9 +22,9 @@
     }
   ],
   "require": {
-    "magento/framework": "^102.0",
-    "magento/module-wishlist": "101.*",
-    "php": ">=7.2"
+    "magento/framework": "*",
+    "magento/module-wishlist": "*",
+    "php": ">7.3"
   },
   "minimum-stability": "stable",
   "autoload": {
