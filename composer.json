@@ -21,6 +21,11 @@
       "name": "Piotr Szuttenbach"
     }
   ],
+  "require": {
+    "magento/framework": "102.0",
+    "magento/module-wishlist": "101.*",
+    "php": ">=7.4"
+  },
   "minimum-stability": "stable",
   "autoload": {
     "files": [
