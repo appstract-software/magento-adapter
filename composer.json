@@ -19,10 +19,14 @@
     {
       "email": "piotr.szuttenbach@appstract.software",
       "name": "Piotr Szuttenbach"
+    },
+    {
+      "email": "bartosz.szafarek@appstract.software",
+      "name": "Bartosz Szafarek"
     }
   ],
   "require": {
-    "magento/framework": "102.0",
+    "magento/framework": "^102.0",
     "magento/module-wishlist": "101.*",
     "php": ">=7.4"
   },
