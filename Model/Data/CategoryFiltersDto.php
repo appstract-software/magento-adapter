@@ -59,7 +59,7 @@ class CategoryFiltersDto implements CategoryFiltersDtoInterface
         $this->storeId    = $filter->getStoreId();
         $this->itemsCount = $filter->getItemsCount();
         
-        if ($this->fieldName === 'price') {
+        if ($filter->getAttributeModel()->getFrontendInput() === 'price') {
             $maxPrice = $layer->getProductCollection()->getMaxPrice();
             $minPrice = $layer->getProductCollection()->getMinPrice();
             $this->additionalInfo = $this->additionalInfoPrice->load($minPrice, $maxPrice);
