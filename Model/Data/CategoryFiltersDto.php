@@ -65,7 +65,7 @@ class CategoryFiltersDto implements CategoryFiltersDtoInterface
             $minPrice = $layer->getProductCollection()->getMinPrice();
             $this->additionalInfo = $this->additionalInfoPrice->load($minPrice, $maxPrice);
         } else {
-            $this->additionalInfo = [];
+            $this->additionalInfo = null;
         }
 
         $items = [];
