@@ -18,15 +18,20 @@ class CategoryFiltersItemDto implements CategoryFiltersItemDtoInterface
     /** @var int $count  */
     private $count;
 
+    /** @var string $swatchValue  */
+    private $swatchValue;
+
     /**
      * @inheritDoc
      */
-    public function load($item)
+    public function load($item, $swatchValue)
     {
         $this->label = strip_tags($item->getLabel());
         $this->value = $item->getValueString();
         $this->name  = $item->getName();
         $this->count = $item->getCount();
+        $this->swatchValue = $swatchValue;
+        
         return $this;
     }
 
@@ -60,5 +65,13 @@ class CategoryFiltersItemDto implements CategoryFiltersItemDtoInterface
     public function getCount(): int
     {
         return $this->count;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getSwatchValue(): string
+    {
+        return $this->swatchValue;
     }
 }
