@@ -9,7 +9,7 @@ interface CategoryFiltersItemDtoInterface
      *
      * @return Appstractsoftware\MagentoAdapter\Api\Data\CategoryFiltersItemDtoInterface
      */
-    public function load($item);
+    public function load($item, $swatchValue);
 
     /**
      * Get field name.
@@ -38,4 +38,11 @@ interface CategoryFiltersItemDtoInterface
      * @return int
      */
     public function getCount(): int;
+
+    /**
+     * Get swatch value
+     *
+     * @return string
+     */
+    public function getSwatchValue(): string;
 }

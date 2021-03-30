@@ -12,6 +12,13 @@ interface CategoryFiltersDtoInterface
     public function load($item, $layer);
 
     /**
+     * Get swatch value.
+     *
+     * @return string
+     */
+    public function getSwatchValue($id);
+
+    /**
      * Get additional info.
      *
      * @return Appstractsoftware\MagentoAdapter\Api\Data\CategoryFiltersAdditionalInfoPriceDtoInterface
@@ -59,4 +66,11 @@ interface CategoryFiltersDtoInterface
      * @return Appstractsoftware\MagentoAdapter\Api\Data\CategoryFiltersItemDtoInterface[]
      */
     public function getItems();
+
+    /**
+     * Get type.
+     *
+     * @return string
+     */
+    public function getType(): string;
 }

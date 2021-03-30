@@ -23,6 +23,9 @@ class CategoryFiltersDto implements CategoryFiltersDtoInterface
     /** @var int $itemsCount */
     private $itemsCount;
 
+    /** @var string $type */
+    private $type;
+
     /** @var Appstractsoftware\MagentoAdapter\Api\Data\CategoryFiltersAdditionalInfoPriceDtoInterface $additionalInfo */
     private $additionalInfo;
 
@@ -35,6 +38,12 @@ class CategoryFiltersDto implements CategoryFiltersDtoInterface
     /** @var Appstractsoftware\MagentoAdapter\Api\Data\CategoryFiltersAdditionalInfoPriceDtoInterface additionalInfoPrice */
     private $additionalInfoPrice;
 
+    /** @var Magento\Swatches\Helper\Data swatchHelper */
+    private $swatchHelper;
+
+    /** @var \Magento\Eav\Model\Config eavConfig */
+    private $eavConfig;
+
     /**
      * Constructor.
      *
@@ -42,10 +51,24 @@ class CategoryFiltersDto implements CategoryFiltersDtoInterface
      */
     public function __construct(
         CategoryFiltersItemDtoInterface $itemLoader,
-        CategoryFiltersAdditionalInfoPriceDtoInterface $additionalInfoPrice
+        CategoryFiltersAdditionalInfoPriceDtoInterface $additionalInfoPrice,
+        \Magento\Swatches\Helper\Data $swatchHelper,
+        \Magento\Eav\Model\Config $eavConfig
     ) {
         $this->itemLoader = $itemLoader;
         $this->additionalInfoPrice = $additionalInfoPrice;
+        $this->swatchHelper = $swatchHelper;
+        $this->eavConfig = $eavConfig;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getSwatchValue($id)
+    {
+        $hashcodeData = $this->swatchHelper->getSwatchesByOptionsId([$id]);
+
+        return $hashcodeData[$id]['value'];
     }
 
     /**
@@ -60,17 +83,43 @@ class CategoryFiltersDto implements CategoryFiltersDtoInterface
         $this->itemsCount = $filter->getItemsCount();
         $attribute = $filter->getData('attribute_model');
 
-        if (!is_null($attribute) && $attribute->getFrontendInput() === 'price') {
+        $this->type = !is_null($attribute) ? $attribute->getFrontendInput() : '';
+
+        if ($this->type == 'price') {
             $maxPrice = $layer->getProductCollection()->getMaxPrice();
             $minPrice = $layer->getProductCollection()->getMinPrice();
             $this->additionalInfo = $this->additionalInfoPrice->load($minPrice, $maxPrice);
         } else {
-            $this->additionalInfo = null;
+            $this->additionalInfo = [];
+        }
+
+        $isSwatch = false;
+
+        if ($this->type == 'select') {
+            $eavAttribute = $this->eavConfig->getAttribute('catalog_product', $attribute->getAttributeCode());
+
+            $isVisualSwatch = $this->swatchHelper->isVisualSwatch($eavAttribute);
+            $isTextSwatch = $this->swatchHelper->isTextSwatch($eavAttribute);
+
+            if ($isVisualSwatch) {
+                $this->type = 'swatch_visual';
+                $isSwatch = true;
+            }
+
+            if ($isTextSwatch) {
+                $this->type = 'swatch_text';
+                $isSwatch = true;
+            }
         }
 
         $items = [];
         foreach ($filter->getItems() as $item) {
-            $items[] = clone $this->itemLoader->load($item);
+            if ($isSwatch) {
+                $swatchValue = $this->getSwatchValue($item->getValueString());
+                $items[] = clone $this->itemLoader->load($item, $swatchValue);
+            } else {
+                $items[] = clone $this->itemLoader->load($item, '');
+            }
         }
         $this->items = $items;
 
@@ -131,5 +180,13 @@ class CategoryFiltersDto implements CategoryFiltersDtoInterface
     public function getItems()
     {
         return $this->items;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getType(): string
+    {
+        return $this->type;
     }
 }
