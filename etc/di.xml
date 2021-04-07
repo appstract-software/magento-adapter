@@ -9,6 +9,9 @@
     <!-- Newsletter -->
     <preference for="Appstractsoftware\MagentoAdapter\Api\Newsletter\NewsletterManagementInterface" type="Appstractsoftware\MagentoAdapter\Model\Newsletter\NewsletterManagement"/>
 
+    <!-- Mailing -->
+    <preference for="Appstractsoftware\MagentoAdapter\Api\MailingServiceInterface" type="Appstractsoftware\MagentoAdapter\Model\MailingService"/>
+
     <!-- Category filters -->
     <preference for="Appstractsoftware\MagentoAdapter\Api\CategoryFiltersServiceInterface" type="Appstractsoftware\MagentoAdapter\Model\CategoryFiltersService" />
     <preference for="Appstractsoftware\MagentoAdapter\Api\Data\CategoryFiltersDtoInterface" type="Appstractsoftware\MagentoAdapter\Model\Data\CategoryFiltersDto" />
