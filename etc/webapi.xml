@@ -108,6 +108,14 @@
         </resources>
     </route>
 
+    <!-- Mailing -->
+    <route url="/V1/send-mail" method="POST">
+        <service class="Appstractsoftware\MagentoAdapter\Api\MailingServiceInterface" method="sendMail"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
+
     <!-- NEW PRODUCTS API -->
     <route url="/V1/products/new/:limit" method="GET">
         <service class="Appstractsoftware\MagentoAdapter\Api\NewProductsRepositoryInterface" method="getList"/>
