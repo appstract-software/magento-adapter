@@ -14,9 +14,10 @@ interface MailingServiceInterface
      * @param string $mail
      * @param string $name
      * @param string $templateId
+     * @param string $message
      * @return \Appstractsoftware\MagentoAdapter\Api\MailingServiceInterface
      */
-    public function sendMail($mail, $name, $templateId);
+    public function sendMail($mail, $name, $templateId, $message);
 }
 
 

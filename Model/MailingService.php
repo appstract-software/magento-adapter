@@ -34,7 +34,7 @@ class MailingService extends AbstractHelper implements MailingServiceInterface
       parent::__construct($context);
   }
 
-  public function sendMail($mail, $name, $templateId)
+  public function sendMail($mail, $name, $templateId, $message)
   {
       // Getting mail from Magento Store Settings
       $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
@@ -45,6 +45,7 @@ class MailingService extends AbstractHelper implements MailingServiceInterface
           // template variables pass here
           $templateVars = [
               'mail' => $mail,
+              'message' => $message,
           ];
 
           $store = $this->storeManager->getStore();
