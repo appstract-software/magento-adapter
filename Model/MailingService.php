@@ -40,6 +40,7 @@ class MailingService extends AbstractHelper implements MailingServiceInterface
       $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
       $scopeConfig = $objectManager->create('\Magento\Framework\App\Config\ScopeConfigInterface');
       $email = $scopeConfig->getValue('trans_email/ident_general/email',\Magento\Store\Model\ScopeInterface::SCOPE_STORE); 
+      $name = $scopeConfig->getValue('trans_email/ident_general/name',\Magento\Store\Model\ScopeInterface::SCOPE_STORE); 
 
       try {
           $store = $this->storeManager->getStore();
