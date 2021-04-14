@@ -34,23 +34,18 @@ class MailingService extends AbstractHelper implements MailingServiceInterface
       parent::__construct($context);
   }
 
-  public function sendMail($mail, $name, $templateId, $message)
+  public function sendMail($mail, $templateId, $variables)
   {
       // Getting mail from Magento Store Settings
       $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
       $scopeConfig = $objectManager->create('\Magento\Framework\App\Config\ScopeConfigInterface');
       $email = $scopeConfig->getValue('trans_email/ident_general/email',\Magento\Store\Model\ScopeInterface::SCOPE_STORE); 
+      $name = $scopeConfig->getValue('trans_email/ident_general/name',\Magento\Store\Model\ScopeInterface::SCOPE_STORE); 
 
       try {
-          // template variables pass here
-          $templateVars = [
-              'mail' => $mail,
-              'message' => $message,
-          ];
-
           $store = $this->storeManager->getStore();
           $storeId = $store->getId();
-          $from = ['email' => $mail, 'name' => $name];
+          $from = ['email' => $email, 'name' => $name];
           $this->inlineTranslation->suspend();
 
           $storeScope = \Magento\Store\Model\ScopeInterface::SCOPE_STORE;
@@ -60,9 +55,9 @@ class MailingService extends AbstractHelper implements MailingServiceInterface
           ];
           $transport = $this->transportBuilder->setTemplateIdentifier($templateId, $storeScope)
               ->setTemplateOptions($templateOptions)
-              ->setTemplateVars($templateVars)
+              ->setTemplateVars($variables)
               ->setFrom($from)
-              ->addTo($email)
+              ->addTo($mail)
               ->getTransport();
           $transport->sendMessage();
           $this->inlineTranslation->resume();
