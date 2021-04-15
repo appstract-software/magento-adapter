@@ -30,7 +30,7 @@
     }
   ],
   "require": {
-    "magento/framework": "^103.0",
+    "magento/framework": "^102.0",
     "magento/module-wishlist": "101.*",
     "php": ">=7.4"
   },
