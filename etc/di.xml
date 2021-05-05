@@ -30,6 +30,9 @@
     <type name="Magento\Catalog\Api\ProductRepositoryInterface">
         <plugin name="get_appstract_product_price" type="Appstractsoftware\MagentoAdapter\Plugin\ProductItemRepository" />
         <plugin name="get_appstract_units" type="Appstractsoftware\MagentoAdapter\Plugin\ProductItemRepository" />
+        <plugin name="get_appstract_sources" type="Appstractsoftware\MagentoAdapter\Plugin\ProductItemRepository" />
+        <plugin name="get_appstract_source_items" type="Appstractsoftware\MagentoAdapter\Plugin\ProductItemRepository" />
+        <plugin name="get_appstract_stock_items" type="Appstractsoftware\MagentoAdapter\Plugin\ProductItemRepository" />
     </type>
     <preference for="Appstractsoftware\MagentoAdapter\Api\BestSellerRepositoryInterface" type="Appstractsoftware\MagentoAdapter\Model\BestSellerRepository"></preference>
     <preference for="Appstractsoftware\MagentoAdapter\Api\CustomerGroupInterface" type="Appstractsoftware\MagentoAdapter\Model\CustomerGroup"></preference>
