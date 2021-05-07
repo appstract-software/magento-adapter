@@ -4,6 +4,7 @@ namespace Appstractsoftware\MagentoAdapter\Plugin;
 
 use Appstractsoftware\MagentoAdapter\Api\Data\ProductPriceInterface;
 use Appstractsoftware\MagentoAdapter\Api\Data\ProductUnitsInterface;
+use Appstractsoftware\MagentoAdapter\Api\Data\ProductConfigurationsInterface;
 
 use Magento\Catalog\Api\Data\ProductInterface;
 use Magento\Catalog\Api\ProductRepositoryInterface;
@@ -28,6 +29,7 @@ class ProductItemRepository
     public function __construct(
         ProductPriceInterface $productPriceLoader,
         ProductUnitsInterface $productUnitsLoader,
+        ProductConfigurationsInterface $productConfigurations,
         \Magento\CatalogInventory\Model\Spi\StockRegistryProviderInterface $stockRegistry,
         \Magento\Store\Model\StoreManagerInterface $storeManager,
         \Magento\InventorySalesApi\Api\GetProductSalableQtyInterface $getProductSalableQty,
@@ -45,6 +47,7 @@ class ProductItemRepository
         $this->isProductSalable = $isProductSalable;
         $this->sourceItemsBySku = $sourceItemsBySku;
         $this->sourceRepository = $sourceRepository;
+        $this->productConfigurations = $productConfigurations;
     }
 
     /**
@@ -129,12 +132,12 @@ class ProductItemRepository
             }
 
             $stockItem->setStockId($stockId);
-
             $productType = $product->getTypeId();
 
             if ($productType == 'configurable') {
                 $stockItems = array();
                 $sourceItems = array();
+                $configurations = array();
 
                 $configurableProductStockStatus = false;
                 $configurableProductStockQty = 0;
@@ -143,6 +146,8 @@ class ProductItemRepository
 
                 foreach ($configurableProductsLinks as $link) {
                     $configurableProduct = $subject->getById($link);
+                    $configurations[] = $this->productConfigurations->load($configurableProduct);
+
                     $configurableProductStockItem = $configurableProduct->getExtensionAttributes()->getStockItem();
                     $configurableProductSourceItems = $this->getSourceItems($configurableProduct->getSku());
                     $sourceItems = array_merge($sourceItems, $configurableProductSourceItems);
@@ -170,6 +175,7 @@ class ProductItemRepository
 
                 $extensionAttributes->setStockItems($stockItems);
                 $extensionAttributes->setSourceItems($sourceItems);
+                $extensionAttributes->setConfigurations($configurations);
             } else if ($productType == 'simple') {
                 $stockData = $this->getStockData($product->getSku(), $stockId);
                 $stockItem->setIsInStock($stockData['status']);
