@@ -7,6 +7,7 @@
         <attribute code="stock_items" type="Magento\CatalogInventory\Api\Data\StockItemInterface[]"/>
         <attribute code="sources" type="Magento\InventoryApi\Api\Data\SourceInterface[]"/>
         <attribute code="configurations" type="Appstractsoftware\MagentoAdapter\Api\Data\ProductConfigurationsInterface[]"/>
+        <attribute code="rating_summary" type="string"/>
     </extension_attributes>
     <extension_attributes for="Magento\Quote\Api\Data\CartItemInterface">
         <attribute code="links" type="Appstractsoftware\MagentoAdapter\Api\Data\CartItemLinksInterface"/>

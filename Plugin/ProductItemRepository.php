@@ -36,7 +36,8 @@ class ProductItemRepository
         \Magento\InventorySalesApi\Api\IsProductSalableInterface $isProductSalable,
         \Magento\InventorySalesApi\Api\StockResolverInterface $stockResolver,
         \Magento\InventoryApi\Api\GetSourceItemsBySkuInterface $sourceItemsBySku,
-        \Magento\InventoryApi\Api\SourceRepositoryInterface $sourceRepository
+        \Magento\InventoryApi\Api\SourceRepositoryInterface $sourceRepository,
+        \Magento\Review\Model\ReviewFactory $reviewFactory
     ) {
         $this->productPriceLoader = $productPriceLoader;
         $this->productUnitsLoader = $productUnitsLoader;
@@ -48,6 +49,7 @@ class ProductItemRepository
         $this->sourceItemsBySku = $sourceItemsBySku;
         $this->sourceRepository = $sourceRepository;
         $this->productConfigurations = $productConfigurations;
+        $this->reviewFactory = $reviewFactory;
     }
 
     /**
@@ -194,6 +196,11 @@ class ProductItemRepository
             $extensionAttributes->setStockItem($stockItem);
             $extensionAttributes->setSources(array_unique($sources, SORT_REGULAR));
 
+            $this->reviewFactory->create()->getEntitySummary($product, $this->getStoreId());
+            $ratingSummary = $product->getRatingSummary()->getRatingSummary();
+
+            $extensionAttributes->setRatingSummary($ratingSummary);
+
             $product->setExtensionAttributes($extensionAttributes);
         }
 
@@ -219,6 +226,16 @@ class ProductItemRepository
         $websiteCode = $this->storeManager->getWebsite($websiteId)->getCode();
 
         return $this->stockResolver->execute(SalesChannelInterface::TYPE_WEBSITE, $websiteCode)->getStockId();
+    }
+
+    /**
+     * Get stock id
+     *
+     * @return int
+     */
+    private function getStoreId()
+    {
+        return $this->storeManager->getStore()->getId();
     }
 
     /**
