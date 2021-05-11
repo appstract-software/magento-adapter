@@ -8,6 +8,14 @@
         </resources>
     </route>
 
+    <!-- ORDERS API -->
+    <route url="/V1/orders/status/:id" method="GET">
+        <service class="Magento\Sales\Api\OrderManagementInterface" method="getStatus"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
+
     <!-- SET CUSTOMER TAX CLASS ID -->
     <route url="/V1/customer-group" method="POST">
         <service class="Appstractsoftware\MagentoAdapter\Api\CustomerGroupInterface" method="setCustomerGroup"/>
