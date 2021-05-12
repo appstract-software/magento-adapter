@@ -55,6 +55,18 @@ $ bin/magento setup:upgrade                                    # upgrade Magento
 | Admin    | **`DELETE`** | `/rest/V1/wishlist/customer/:customerId/item/:itemId` | Delete item by item id from wishlist by customer id |
 | Customer | **`DELETE`** | `/rest/V1/wishlist/me/item/:itemId`                   | Delete item by item id from my wishlist             |
 
+#### Orders REST API
+
+| Role      | Method    | URL                                       | Description          |
+| --------- | --------- | ----------------------------------------- | -------------------- |
+| Anonymous | **`GET`** | `/rest/V1/orders/status/:id`              | Get order status     |
+
+#### Payments REST API
+
+| Role                      | Method     | URL                                      | Description                                     |
+| ------------------------- | ---------- | ---------------------------------------- | ----------------------------------------------- |
+| Anonymous                 | **`POST`** | `/rest/V1/payu/create-order`             | Create PayU order                               |
+
 ---
 
 ### Extension Attributes
