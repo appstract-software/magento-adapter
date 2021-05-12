@@ -16,6 +16,14 @@
         </resources>
     </route>
 
+    <!-- PAYMENTS -->
+    <route url="/V1/payu/create-order" method="POST">
+        <service class="Appstractsoftware\MagentoAdapter\Api\PayUOrderInterface" method="createOrder"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
+
     <!-- SET CUSTOMER TAX CLASS ID -->
     <route url="/V1/customer-group" method="POST">
         <service class="Appstractsoftware\MagentoAdapter\Api\CustomerGroupInterface" method="setCustomerGroup"/>
