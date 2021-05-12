@@ -42,6 +42,10 @@
     <preference for="Appstractsoftware\MagentoAdapter\Api\NewProductsRepositoryInterface" type="Appstractsoftware\MagentoAdapter\Model\NewProductsRepository"></preference>
     <preference for="Appstractsoftware\MagentoAdapter\Api\TopRatedRepositoryInterface" type="Appstractsoftware\MagentoAdapter\Model\TopRatedRepository"></preference>
 
+    <!-- Payments -->
+    <preference for="Appstractsoftware\MagentoAdapter\Api\PayUOrderInterface" type="Appstractsoftware\MagentoAdapter\Model\PayUOrder"></preference>
+    <preference for="Appstractsoftware\MagentoAdapter\Api\Data\PayUOrderCreateResponseInterface" type="Appstractsoftware\MagentoAdapter\Model\Data\PayUOrderCreateResponse"></preference>
+
     <!-- Product images -->
     <preference for="Appstractsoftware\MagentoAdapter\Api\ProductImage\ProductImagesServiceInterface" type="Appstractsoftware\MagentoAdapter\Model\ProductImage\ProductImagesService" />
     <preference for="Appstractsoftware\MagentoAdapter\Api\ProductImage\ProductImagesSearchInterface" type="Appstractsoftware\MagentoAdapter\Model\ProductImage\ProductImagesSearch" />
