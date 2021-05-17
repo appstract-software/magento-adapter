@@ -8,7 +8,7 @@ interface OrdersManagmentInterface
    * Get product links
    *
    * @param int $customerId
-   * @return Appstractsoftware\MagentoAdapter\Api\OrdersManagmentInterface
+   * @return \Magento\Sales\Api\Data\OrderSearchResultInterface
    */
   public function getListForCustomer($customerId);
 }
