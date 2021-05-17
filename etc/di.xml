@@ -12,6 +12,9 @@
     <!-- Mailing -->
     <preference for="Appstractsoftware\MagentoAdapter\Api\MailingServiceInterface" type="Appstractsoftware\MagentoAdapter\Model\MailingService"/>
 
+    <!-- Orders -->
+    <preference for="Appstractsoftware\MagentoAdapter\Api\OrdersManagmentInterface" type="Appstractsoftware\MagentoAdapter\Model\OrdersManagment"/>
+
     <!-- Category filters -->
     <preference for="Appstractsoftware\MagentoAdapter\Api\CategoryFiltersServiceInterface" type="Appstractsoftware\MagentoAdapter\Model\CategoryFiltersService" />
     <preference for="Appstractsoftware\MagentoAdapter\Api\Data\CategoryFiltersDtoInterface" type="Appstractsoftware\MagentoAdapter\Model\Data\CategoryFiltersDto" />
