@@ -26,13 +26,6 @@
         </data>
     </route>
 
-    <route url="/V1/orders/custom" method="GET">
-        <service class="Magento\Sales\Api\OrderRepositoryInterface" method="getList"/>
-        <resources>
-            <resource ref="self" />
-        </resources>
-    </route>
-
     <!-- PAYMENTS -->
     <route url="/V1/payu/create-order" method="POST">
         <service class="Appstractsoftware\MagentoAdapter\Api\PayUOrderInterface" method="createOrder"/>
