@@ -5,7 +5,7 @@ namespace Appstractsoftware\MagentoAdapter\Api;
 interface OrdersManagmentInterface
 {
   /**
-   * Get product links
+   * Get orders for customer
    *
    * @param int $customerId
    * @return \Magento\Sales\Api\Data\OrderSearchResultInterface

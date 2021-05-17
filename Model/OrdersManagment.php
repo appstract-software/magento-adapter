@@ -46,7 +46,7 @@ class OrdersManagment implements OrdersManagmentInterface
   public function getListForCustomer($customerId)
   {
     $filters = [
-      $this->_filterBuilder->setField('customer_id')->setValue(strval($customerId))->create()
+      $this->_filterBuilder->setField('customer_id')->setValue($customerId)->create()
     ];
 
     $searchCriteria = $this->_searchCriteriaBuilder->addFilters($filters)->create();
