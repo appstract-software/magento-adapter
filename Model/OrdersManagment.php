@@ -22,21 +22,14 @@ class OrdersManagment implements OrdersManagmentInterface
    */
   public $_filterBuilder;
 
-  /**
-   * @var \Magento\Framework\Webapi\Rest\Request
-   */
-  public $_request;
-
   public function __construct(
     \Magento\Sales\Api\OrderRepositoryInterface $orderRepository,
     \Magento\Framework\Api\SearchCriteriaBuilder $searchCriteriaBuilder,
-    \Magento\Framework\Api\FilterBuilder $filterBuilder,
-    \Magento\Framework\Webapi\Rest\Request $request
+    \Magento\Framework\Api\FilterBuilder $filterBuilder
   ) {
     $this->_orderRepository = $orderRepository;
     $this->_searchCriteriaBuilder = $searchCriteriaBuilder;
     $this->_filterBuilder = $filterBuilder;
-    $this->_request = $request;
   }
 
   /**
