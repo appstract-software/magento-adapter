@@ -34,7 +34,7 @@ class OrdersManagment implements OrdersManagmentInterface
 
   /**
    * @param int $customerId
-   * @return \Magento\Sales\Api\Data\OrderSearchResultInterface
+   * @return \Magento\Sales\Api\Data\OrderInterface[]
    */
   public function getListForCustomer($customerId)
   {
@@ -44,6 +44,6 @@ class OrdersManagment implements OrdersManagmentInterface
 
     $searchCriteria = $this->_searchCriteriaBuilder->addFilters($filters)->create();
 
-    return $this->_orderRepository->getList($searchCriteria);
+    return $this->_orderRepository->getList($searchCriteria)->getItems();
   }
 }
