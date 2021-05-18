@@ -15,5 +15,12 @@ interface PayUOrderInterface
      * @return \Appstractsoftware\MagentoAdapter\Api\Data\PayUOrderCreateResponseInterface
      */
     public function createOrder($orderId, $continueUrl);
-    
+
+    /**
+     * Get PayU order status
+     *
+     * @param string $id
+     * @return string
+     */
+    public function getOrderStatus($id);
 }
