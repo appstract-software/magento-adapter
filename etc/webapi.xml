@@ -33,6 +33,12 @@
             <resource ref="anonymous"/>
         </resources>
     </route>
+    <route url="/V1/payu/order-status/:id" method="GET">
+        <service class="Appstractsoftware\MagentoAdapter\Api\PayUOrderInterface" method="getOrderStatus"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
 
     <!-- SET CUSTOMER TAX CLASS ID -->
     <route url="/V1/customer-group" method="POST">
