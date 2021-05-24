@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <routes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Webapi:etc/webapi.xsd">
-    <!-- CONFIGURABLE PRODUCTS API -->
-    <route url="/V1/configurable-products" method="GET">
-        <service class="Appstractsoftware\MagentoAdapter\Api\ConfigurableProductsServiceInterface" method="getConfigurableProducts"/>
+    <!-- PRODUCTS SEARCH API -->
+    <route url="/V1/products/search" method="GET">
+        <service class="Appstractsoftware\MagentoAdapter\Api\ProductsSearchServiceInterface" method="searchProducts"/>
         <resources>
             <resource ref="Magento_Catalog::products"/>
         </resources>

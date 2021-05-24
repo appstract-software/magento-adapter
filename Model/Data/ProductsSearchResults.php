@@ -2,14 +2,10 @@
 
 namespace Appstractsoftware\MagentoAdapter\Model\Data;
 
-use Appstractsoftware\MagentoAdapter\Api\Data\ConfigurableProductsSearchResultsInterface;
-use Appstractsoftware\MagentoAdapter\Api\Data\ConfigurableProductSearchInterface;
+use Appstractsoftware\MagentoAdapter\Api\Data\ProductsSearchResultsInterface;
 
-class ConfigurableProductsSearchResults implements ConfigurableProductsSearchResultsInterface
+class ProductsSearchResults implements ProductsSearchResultsInterface
 {
-    /** @var \Appstractsoftware\MagentoAdapter\Api\Data\ConfigurableProductSearchInterface[] $items */
-    private $items = [];
-
     /**
      * @inheritDoc
      */
