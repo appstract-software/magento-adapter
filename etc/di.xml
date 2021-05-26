@@ -21,10 +21,9 @@
     <preference for="Appstractsoftware\MagentoAdapter\Api\Data\CategoryFiltersItemDtoInterface" type="Appstractsoftware\MagentoAdapter\Model\Data\CategoryFiltersItemDto" />
     <preference for="Appstractsoftware\MagentoAdapter\Api\Data\CategoryFiltersAdditionalInfoPriceDtoInterface" type="Appstractsoftware\MagentoAdapter\Model\Data\CategoryFiltersAdditionalInfoPriceDto" />
 
-    <!-- Configurable products -->
-    <preference for="Appstractsoftware\MagentoAdapter\Api\ConfigurableProductsServiceInterface" type="Appstractsoftware\MagentoAdapter\Model\ConfigurableProductsService" />
-    <preference for="Appstractsoftware\MagentoAdapter\Api\Data\ConfigurableProductsSearchResultsInterface" type="Appstractsoftware\MagentoAdapter\Model\Data\ConfigurableProductsSearchResults" />
-    <preference for="Appstractsoftware\MagentoAdapter\Api\Data\ConfigurableProductSearchInterface" type="Appstractsoftware\MagentoAdapter\Model\Data\ConfigurableProductSearch" />
+    <!-- Products search -->
+    <preference for="Appstractsoftware\MagentoAdapter\Api\ProductsSearchServiceInterface" type="Appstractsoftware\MagentoAdapter\Model\ProductsSearchService" />
+    <preference for="Appstractsoftware\MagentoAdapter\Api\Data\ProductsSearchResultsInterface" type="Appstractsoftware\MagentoAdapter\Model\Data\ProductsSearchResults" />
 
     <!-- Product Extension -->
     <preference for="Appstractsoftware\MagentoAdapter\Api\Data\ProductOptionValueInterface" type="Appstractsoftware\MagentoAdapter\Model\Data\ProductOptionValue" />

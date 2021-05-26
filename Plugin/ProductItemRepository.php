@@ -95,12 +95,7 @@ class ProductItemRepository
         foreach ($searchCriteria->getItems() as $product) {
             $products[] = $this->loadData($subject, $product, $stockId);
         }
-        // if (!empty($products[0]) && $searchCriteria->getTotalCount() === 1) {
-        //     $stockItem = $this->stockRegistry->getStockItem($products[0]->getId());
-        //     $extensionAttributes = $products[0]->getExtensionAttributes();
-        //     $extensionAttributes->setStockItem($stockItem);
-        //     $products[0]->setExtensionAttributes($extensionAttributes);
-        // }
+
         $searchCriteria->setItems($products);
         return $searchCriteria;
     }
@@ -113,7 +108,7 @@ class ProductItemRepository
      * @param int $stockId
      * @return ProductInterface
      */
-    private function loadData($subject, $product, $stockId)
+    public function loadData($subject, $product, $stockId)
     {
         $typeInstance = $product->getTypeInstance();
 
@@ -178,7 +173,7 @@ class ProductItemRepository
                 $extensionAttributes->setStockItems($stockItems);
                 $extensionAttributes->setSourceItems($sourceItems);
                 $extensionAttributes->setConfigurations($configurations);
-            } else if ($productType == 'simple') {
+            } else if ($productType == \Magento\Catalog\Model\Product\Type::TYPE_SIMPLE) {
                 $stockData = $this->getStockData($product->getSku(), $stockId);
                 $stockItem->setIsInStock($stockData['status']);
                 $stockItem->setQty($stockData['qty']);
@@ -220,7 +215,7 @@ class ProductItemRepository
      *
      * @return int
      */
-    private function getStockId()
+    public function getStockId()
     {
         $websiteId = $this->storeManager->getStore()->getWebsiteId();
         $websiteCode = $this->storeManager->getWebsite($websiteId)->getCode();
