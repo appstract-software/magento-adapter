@@ -8,5 +8,12 @@
                 </resource>
             </resource>
         </resources>
+        <resources>
+            <resource id="Magento_Backend::admin">
+                <resource id="Appstractsoftware_MagentoAdapter::config" title="Magento adapter" sortOrder="111">
+                    <resource id="Appstractsoftware_MagentoAdapter::order_status" title="Change order status"/>
+                </resource>
+            </resource>
+        </resources>
     </acl>
 </config>

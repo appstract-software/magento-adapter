@@ -31,7 +31,7 @@ $ bin/magento setup:upgrade                                    # upgrade Magento
 | Anonymous                 | **`GET`** | `/rest/V1/products/best-seller/:limit`   | Get bestseller products `default: [limit: 10]`  |
 | Anonymous                 | **`GET`** | `/rest/V1/products/most-viewed/:limit`   | Get most viewed products `default: [limit: 10]` |
 | Anonymous                 | **`GET`** | `/rest/V1/products/top-rated/:limit`     | Get top rated products `default: [limit: 10]`   |
-| Magento_Catalog::products | **`GET`** | `/rest/V1/configurable-products`         | Filter configurable products                    |
+| Magento_Catalog::products | **`GET`** | `/rest/V1/products/search`               | Filter products (with configurable type)        |
 
 #### Category filters REST API
 
@@ -57,9 +57,10 @@ $ bin/magento setup:upgrade                                    # upgrade Magento
 
 #### Orders REST API
 
-| Role      | Method    | URL                                       | Description          |
-| --------- | --------- | ----------------------------------------- | -------------------- |
-| Anonymous | **`GET`** | `/rest/V1/orders/status/:id`              | Get order status     |
+| Role                                           | Method     | URL                                       | Description          |
+| ---------------------------------------------- | ---------- | ----------------------------------------- | -------------------- |
+| Anonymous                                      | **`GET`**  | `/rest/V1/orders/status/:id`              | Get order status     |
+| Appstractsoftware_MagentoAdapter::order_status | **`POST`** | `/rest/V1/orders/status/:id`              | Set order status     |
 
 #### Payments REST API
 

@@ -15,6 +15,12 @@
             <resource ref="anonymous"/>
         </resources>
     </route>
+    <route url="/V1/orders/status/:orderId" method="POST">
+        <service class="Appstractsoftware\MagentoAdapter\Api\OrdersInterface" method="setStatus"/>
+        <resources>
+            <resource ref="Appstractsoftware_MagentoAdapter::order_status"/>
+        </resources>
+    </route>
     
     <route url="/V1/orders/mine" method="GET">
         <service class="Appstractsoftware\MagentoAdapter\Api\OrdersManagmentInterface" method="getListForCustomer"/>
