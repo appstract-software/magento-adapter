@@ -6,7 +6,7 @@ use \Appstractsoftware\MagentoAdapter\Api\ProductsSearchServiceInterface;
 use \Magento\Framework\Api\SearchCriteria\CollectionProcessorInterface;
 
 /**
- * Configurable products service.
+ * Products search service.
  * 
  * @author Mateusz Lesiak <mateusz.lesiak@appstract.software>
  * @copyright 2020 Appstract Software
@@ -31,6 +31,9 @@ class ProductsSearchService implements ProductsSearchServiceInterface
     /** @var \Magento\Catalog\Api\ProductRepositoryInterface $productRepository */
     private $productRepository;
 
+    /** @var \Magento\Framework\Api\Search\SearchInterface */
+    private $search;
+
     /**
      * Constructor
      */
@@ -41,7 +44,8 @@ class ProductsSearchService implements ProductsSearchServiceInterface
         \Magento\Framework\Api\SearchCriteria\CollectionProcessorInterface $collectionProcessor = null,
         \Magento\ConfigurableProduct\Model\Product\Type\Configurable $configurableProduct,
         \Magento\Catalog\Api\ProductRepositoryInterface $productRepository,
-        \Appstractsoftware\MagentoAdapter\Plugin\ProductItemRepository $productItemRepository
+        \Appstractsoftware\MagentoAdapter\Plugin\ProductItemRepository $productItemRepository,
+        \Magento\Framework\Api\Search\SearchInterface $search
     ) {
         $this->collectionFactory = $collectionFactory;
         $this->extensionAttributesJoinProcessor = $extensionAttributesJoinProcessor;
@@ -50,6 +54,27 @@ class ProductsSearchService implements ProductsSearchServiceInterface
         $this->configurableProduct = $configurableProduct;
         $this->productRepository = $productRepository;
         $this->productItemRepository = $productItemRepository;
+        $this->search = $search;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function searchProductsByQuery(\Magento\Framework\Api\Search\SearchCriteriaInterface $searchCriteria){
+        /** @var \Magento\Framework\Api\Search\SearchResultInterface */
+        $searchData = $this->search->search($searchCriteria);
+        $items = [];
+
+        foreach ($searchData->getItems() as $item) {
+            $items[] = $this->productRepository->getById($item->getId());
+        }
+
+        $searchResult = $this->searchResultsFactory->create();
+        $searchResult->setSearchCriteria($searchCriteria);
+        $searchResult->setItems($items);
+        $searchResult->setTotalCount(count($items));
+
+        return $searchResult;
     }
 
     /**

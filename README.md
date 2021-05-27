@@ -32,6 +32,7 @@ $ bin/magento setup:upgrade                                    # upgrade Magento
 | Anonymous                 | **`GET`** | `/rest/V1/products/most-viewed/:limit`   | Get most viewed products `default: [limit: 10]` |
 | Anonymous                 | **`GET`** | `/rest/V1/products/top-rated/:limit`     | Get top rated products `default: [limit: 10]`   |
 | Magento_Catalog::products | **`GET`** | `/rest/V1/products/search`               | Filter products (with configurable type)        |
+| Anonymous                 | **`GET`** | `/rest/V1/products/search-query`         | Search products using search engine proxy       |
 
 #### Category filters REST API
 
