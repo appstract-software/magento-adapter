@@ -7,6 +7,12 @@
             <resource ref="Magento_Catalog::products"/>
         </resources>
     </route>
+    <route url="/V1/products/search-query" method="GET">
+        <service class="Appstractsoftware\MagentoAdapter\Api\ProductsSearchServiceInterface" method="searchProductsByQuery"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
 
     <!-- ORDERS API -->
     <route url="/V1/orders/status/:id" method="GET">
