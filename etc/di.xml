@@ -88,4 +88,10 @@
     <type name="Magento\Quote\Api\CartManagementInterface">
         <plugin name="get_appstract_mine_cart" type="Appstractsoftware\MagentoAdapter\Plugin\CartRepository" />
     </type>
+    <type name="Magento\InventoryIndexer\Indexer\SelectBuilder">
+        <plugin name="appstract_select_builder" type="Appstractsoftware\MagentoAdapter\Plugin\SelectBuilder" />
+    </type>
+    <type name="Magento\Sales\Model\Order\Payment\Operations\RegisterCaptureNotificationOperation">
+        <plugin name="appstract_register_capture" type="Appstractsoftware\MagentoAdapter\Plugin\RegisterCaptureNotificationOperation" />
+    </type>
 </config>
