@@ -1,0 +1,9 @@
+interface ProductInterface {
+    attributes: [Attribute] @resolver(class: "Appstractsoftware\\MagentoAdapter\\CustomGQL\\Model\\Resolver\\AttributesResolver")
+}
+
+type Attribute {
+    code: String
+    value: String
+    swatch: String
+}
