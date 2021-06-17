@@ -94,4 +94,14 @@
     <type name="Magento\Sales\Model\Order\Payment\Operations\RegisterCaptureNotificationOperation">
         <plugin name="appstract_register_capture" type="Appstractsoftware\MagentoAdapter\Plugin\RegisterCaptureNotificationOperation" />
     </type>
+
+    <!-- Additional attributes for filter input -->
+    <type name="Magento\CatalogGraphQl\Model\Resolver\Products\FilterArgument\ProductEntityAttributesForAst" >
+        <arguments>
+            <argument name="additionalAttributes" xsi:type="array">
+            <item name="news_from_date" xsi:type="string">news_from_date</item>
+            <item name="news_to_date" xsi:type="string">news_to_date</item>
+            </argument>
+        </arguments>
+    </type>
 </config>
