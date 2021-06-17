@@ -17,7 +17,7 @@ class AttributesResolver implements ResolverInterface
   /** @var \Magento\Eav\Model\Config eavConfig */
   private $eavConfig;
 
-  /** @var Magento\Swatches\Helper\Data swatchHelper */
+  /** @var \Magento\Swatches\Helper\Data swatchHelper */
   private $swatchHelper;
 
   public function __construct(
@@ -28,7 +28,7 @@ class AttributesResolver implements ResolverInterface
     $this->swatchHelper = $swatchHelper;
   }
 
-  private function getSwatchValue($id)
+  private function getSwatchValue(int $id)
   {
     $hashcodeData = $this->swatchHelper->getSwatchesByOptionsId([$id]);
 
