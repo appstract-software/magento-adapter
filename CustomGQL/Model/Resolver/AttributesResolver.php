@@ -71,28 +71,28 @@ class AttributesResolver implements ResolverInterface
       $eavAttribute = $this->eavConfig->getAttribute('catalog_product', $code);
       $type = $eavAttribute->getFrontendInput();
 
-      if ($type != 'select') {
-        continue;
-      }
-      
-      $isSwatch = $this->swatchHelper->isTextSwatch($eavAttribute);
-
-      if (!$isSwatch) {
-        $isSwatch = $this->swatchHelper->isVisualSwatch($eavAttribute);
-      }
-
       $data = array(
         'code' => $code,
-        'value' => $eavAttribute->getSource()->getOptionText($option),
+        'value' => $option,
+        'type' => $type
       );
 
-      if ($isSwatch) {
-        $data['swatch'] = $this->getSwatchValue($option);
+      if ($type == 'select') {
+        $isSwatch = $this->swatchHelper->isTextSwatch($eavAttribute);
+
+        if (!$isSwatch) {
+          $isSwatch = $this->swatchHelper->isVisualSwatch($eavAttribute);
+        }
+
+        $data['value'] = $eavAttribute->getSource()->getOptionText($option);
+
+        if ($isSwatch) {
+          $data['swatch'] = $this->getSwatchValue($option);
+        }
       }
 
       $results[] = $data;
     }
-
 
     return $results;
   }
