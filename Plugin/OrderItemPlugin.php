@@ -78,6 +78,7 @@ class OrderItemPlugin
   {
     $productId = $orderItem->getProductId();
     $storeId = $orderItem->getStoreId();
+    $productOptions = [];
 
     if (!$productId || !$storeId) {
       return null;
@@ -86,7 +87,6 @@ class OrderItemPlugin
     try {
       $product = $this->productRepository->getById($productId, false, $storeId);
       $productType = $product->getTypeId();
-      $productOptions = [];
       if ($productType == \Magento\Catalog\Model\Product\Type::TYPE_SIMPLE || $productType == \Magento\Catalog\Model\Product\Type::TYPE_VIRTUAL) {
         $parentIds = $this->configurableProduct->getParentIdsByChild($product->getId());
         if (!empty($parentIds)) {
