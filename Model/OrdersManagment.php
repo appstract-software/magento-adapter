@@ -23,12 +23,10 @@ class OrdersManagment implements OrdersManagmentInterface
   public $_filterBuilder;
 
   public function __construct(
-    \Magento\Catalog\Api\ProductRepositoryInterface $productRepository,
     \Magento\Sales\Api\OrderRepositoryInterface $orderRepository,
     \Magento\Framework\Api\SearchCriteriaBuilder $searchCriteriaBuilder,
     \Magento\Framework\Api\FilterBuilder $filterBuilder
   ) {
-    $this->_productRepository = $productRepository;
     $this->_orderRepository = $orderRepository;
     $this->_searchCriteriaBuilder = $searchCriteriaBuilder;
     $this->_filterBuilder = $filterBuilder;
@@ -45,8 +43,7 @@ class OrdersManagment implements OrdersManagmentInterface
     ];
 
     $searchCriteria = $this->_searchCriteriaBuilder->addFilters($filters)->create();
-    $orderItems = $this->_orderRepository->getList($searchCriteria)->getItems();
 
-    return $orderItems;
+    return $this->_orderRepository->getList($searchCriteria)->getItems();
   }
 }
