@@ -104,4 +104,8 @@
             </argument>
         </arguments>
     </type>
+    <preference for="Appstractsoftware\MagentoAdapter\Api\Data\OrderItemOptionsInterface" type="Appstractsoftware\MagentoAdapter\Model\Data\OrderItemOptions" />
+    <type name="Magento\Sales\Api\Data\OrderItemInterface">
+        <plugin disabled="false" name="StackExchange_Magento_Plugin_Magento_Sales_Api_Data_OrderItemInterface" sortOrder="10" type="Appstractsoftware\MagentoAdapter\Plugin\OrderItemPlugin"/>
+    </type>
 </config>
