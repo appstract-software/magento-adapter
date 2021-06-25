@@ -38,6 +38,13 @@
         </data>
     </route>
 
+    <route url="/V1/products/import-product" method="POST">
+        <service class="Appstractsoftware\MagentoAdapter\Api\ProductInterface" method="create"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
+
     <!-- PAYMENTS -->
     <route url="/V1/payu/create-order" method="POST">
         <service class="Appstractsoftware\MagentoAdapter\Api\PayUOrderInterface" method="createOrder"/>

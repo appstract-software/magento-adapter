@@ -8,7 +8,7 @@ class CategoryFiltersAdditionalInfoPriceDto implements CategoryFiltersAdditional
 {
     /** @var int $minPrice */
     private $minPrice;
- 
+
     /** @var int $maxPrice */
     private $maxPrice;
 
@@ -52,7 +52,7 @@ class CategoryFiltersAdditionalInfoPriceDto implements CategoryFiltersAdditional
      */
     public function setMinPrice($min_price)
     {
-        $this->$minPrice = $min_price;
+        $this->minPrice = $min_price;
     }
 
     /**
@@ -60,7 +60,6 @@ class CategoryFiltersAdditionalInfoPriceDto implements CategoryFiltersAdditional
      */
     public function setMaxPrice($max_price)
     {
-        $this->$maxPrice = $max_price;
+        $this->maxPrice = $max_price;
     }
-
 }

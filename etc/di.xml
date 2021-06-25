@@ -76,6 +76,8 @@
     <preference for="Appstractsoftware\MagentoAdapter\Api\Data\CartItemQuantityInterface" type="Appstractsoftware\MagentoAdapter\Model\Data\CartItemQuantity"></preference>
     <preference for="Appstractsoftware\MagentoAdapter\Api\Data\ProductSimpleOptionInterface" type="Appstractsoftware\MagentoAdapter\Model\Data\ProductSimpleOption"></preference>
     <preference for="Appstractsoftware\MagentoAdapter\Api\Data\CartItemInformationInterface" type="Appstractsoftware\MagentoAdapter\Model\Data\CartItemInformation"></preference>
+    <preference for="Appstractsoftware\MagentoAdapter\Api\Data\ProductDataInterface" type="Appstractsoftware\MagentoAdapter\Model\Data\ProductData"></preference>
+    <preference for="Appstractsoftware\MagentoAdapter\Api\ProductInterface" type="Appstractsoftware\MagentoAdapter\Model\Product"></preference>
     <type name="Magento\Quote\Api\GuestCartItemRepositoryInterface">
         <plugin name="get_appstract_guest_cart_item" type="Appstractsoftware\MagentoAdapter\Plugin\GuestCartItemRepository" />
     </type>
@@ -94,6 +96,7 @@
     <type name="Magento\Sales\Model\Order\Payment\Operations\RegisterCaptureNotificationOperation">
         <plugin name="appstract_register_capture" type="Appstractsoftware\MagentoAdapter\Plugin\RegisterCaptureNotificationOperation" />
     </type>
+    <preference for="\Magento\Catalog\Api\Data\ProductInterface" type="\Magento\Catalog\Model\Product" />
 
     <!-- Additional attributes for filter input -->
     <type name="Magento\CatalogGraphQl\Model\Resolver\Products\FilterArgument\ProductEntityAttributesForAst" >
