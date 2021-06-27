@@ -3,6 +3,7 @@
 namespace Appstractsoftware\MagentoAdapter\Model;
 
 use Appstractsoftware\MagentoAdapter\Api\ProductInterface;
+use Magento\InventoryApi\Api\SourceItemsSaveInterface;
 
 class Product implements ProductInterface
 {
@@ -27,12 +28,13 @@ class Product implements ProductInterface
   public function create($data)
   {
     try {
-      var_dump('start');
       $objectManager = $this->objectManager->getInstance();
       $configurableData = $data->getConfigurable();
       $simpleIds = [];
+      $stocks = $data->getStocks();
 
       foreach ($data->getSimple() as $simpleData) {
+        $sku = $simpleData->getSku();
         $product = $objectManager->create('\Magento\Catalog\Model\Product')
           ->setSku($simpleData->getSku())
           ->setName($simpleData->getName())
@@ -52,17 +54,29 @@ class Product implements ProductInterface
         array_push($simpleIds, $simpleProduct->getId());
 
 
-        $sourceItem = $this->sourceItem->create();
-        $sourceItem->setSourceCode('111');
-        $sourceItem->setQuantity(1);
-        $sourceItem->setSku($product->getSku());
-        $sourceItem->setStatus(\Magento\InventoryApi\Api\Data\SourceItemInterface::STATUS_IN_STOCK);
+        $assignedStock = array_filter(
+          $stocks,
+          function ($e) use ($sku) {
+            return $e->getSku() == $sku;
+          }
+        );
 
-        $this->sourceItemsSaveInterface->execute([$sourceItem]);
+        $sourceItems = [];
+
+        foreach ($assignedStock as $stock) {
+          foreach ($stock->getSources() as $source) {
+            $sourceItem = $this->sourceItem->create();
+            $sourceItem->setSourceCode($source->getSource());
+            $sourceItem->setQuantity($source->getQty());
+            $sourceItem->setSku($product->getSku());
+            $sourceItem->setStatus(\Magento\InventoryApi\Api\Data\SourceItemInterface::STATUS_IN_STOCK);
+
+            array_push($sourceItems, $sourceItem);
+          }
+        }
+
+        $this->sourceItemsSaveInterface->execute($sourceItems);
       }
-
-      var_dump('po simple');
-
 
       $configurable = $objectManager->create('\Magento\Catalog\Model\Product')
         ->setSku($configurableData->getSku())
@@ -91,25 +105,14 @@ class Product implements ProductInterface
       $configurable->setConfigurableAttributesData($configurableAttributesData);
       $configurableProductsData = array();
       $configurable->setConfigurableProductsData($configurableProductsData);
+
       try {
+        $configurable->setAssociatedProductIds($simpleIds);
+        $configurable->setCanSaveConfigurableAttributes(true);
         $configurable->save();
       } catch (Exception $ex) {
         echo '<pre>';
         print_r($ex->getMessage());
-        exit;
-      }
-
-      $productId = $configurable->getId();
-
-
-      try {
-        $configurable = $objectManager->create('Magento\Catalog\Model\Product')->load($productId); // Load Configurable Product
-        $configurable->setAssociatedProductIds($simpleIds); // Setting Associated Products
-        $configurable->setCanSaveConfigurableAttributes(true);
-        $configurable->save();
-      } catch (Exception $e) {
-        echo "<pre>";
-        print_r($e->getMessage());
         exit;
       }
     } catch (Exception $e) {

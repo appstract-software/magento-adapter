@@ -18,6 +18,9 @@ class ProductData implements ProductDataInterface
   /** @var int[] $websiteIds */
   private $websiteIds;
 
+  /** @var Appstractsoftware\MagentoAdapter\Api\Data\ProductDataStocksInterface[] $stocks */
+  private $stocks;
+
   /**
    * @inheritDoc
    */
@@ -53,6 +56,14 @@ class ProductData implements ProductDataInterface
   /**
    * @inheritDoc
    */
+  public function getStocks()
+  {
+    return $this->stocks;
+  }
+
+  /**
+   * @inheritDoc
+   */
   public function setSimple($simple)
   {
     $this->simple = $simple;
@@ -80,5 +91,13 @@ class ProductData implements ProductDataInterface
   public function setWebsiteIds($websiteIds)
   {
     $this->websiteIds = $websiteIds;
+  }
+
+  /**
+   * @inheritDoc
+   */
+  public function setStocks($stocks)
+  {
+    $this->stocks = $stocks;
   }
 }

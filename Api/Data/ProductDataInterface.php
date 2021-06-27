@@ -2,6 +2,7 @@
 
 namespace Appstractsoftware\MagentoAdapter\Api\Data;
 
+
 /**
  * Product interface.
  * @api
@@ -63,4 +64,18 @@ interface ProductDataInterface
    * @return int[] $websiteIds
    */
   public function setWebsiteIds($websiteIds);
+
+  /**
+   * Get Stocks
+   *
+   * @return Appstractsoftware\MagentoAdapter\Api\Data\ProductDataStocksInterface[] $stocks
+   */
+  public function getStocks();
+
+  /**
+   * Set Stocks
+   *
+   * @return Appstractsoftware\MagentoAdapter\Api\Data\ProductDataStocksInterface[] $stocks
+   */
+  public function setStocks($stocks);
 }
