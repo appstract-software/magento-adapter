@@ -3,7 +3,6 @@
 namespace Appstractsoftware\MagentoAdapter\Model;
 
 use Appstractsoftware\MagentoAdapter\Api\ProductInterface;
-use Magento\InventoryApi\Api\SourceItemsSaveInterface;
 
 class Product implements ProductInterface
 {
@@ -120,25 +119,5 @@ class Product implements ProductInterface
       print_r($e->getMessage());
       exit;
     }
-  }
-
-  public function getCustomAttribute($attributeCode)
-  {
-    $this->getCustomAttribute($attributeCode);
-  }
-
-  public function getCustomAttributes()
-  {
-    $this->getCustomAttributes();
-  }
-
-  public function setCustomAttribute($attributeCode, $attributeValue)
-  {
-    $this->getCustomAttributes($attributeCode, $attributeValue);
-  }
-
-  public function setCustomAttributes(\Magento\Framework\Api\AttributeInterface $attributes)
-  {
-    $this->getCustomAttributes($attributes);
   }
 }
