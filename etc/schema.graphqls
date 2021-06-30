@@ -8,3 +8,11 @@ type Attribute {
     type: String
     swatch: String
 }
+
+type Aggregation {
+    type: String
+}
+
+interface AggregationOptionInterface {
+    swatch_value: String
+}
