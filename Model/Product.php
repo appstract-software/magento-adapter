@@ -88,7 +88,7 @@ class Product implements ProductInterface
         ->setWebsiteIds($data->getWebsiteIds())
         ->setPrice($configurableData->getPrice());
 
-      foreach ($configurable->getCustomAttributes() as $attribute) {
+      foreach ($configurableData->getCustomAttributes() as $attribute) {
         $configurable->setCustomAttribute($attribute->getAttributeCode(), $attribute->getValue());
       }
 
