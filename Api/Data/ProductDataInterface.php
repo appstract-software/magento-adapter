@@ -78,4 +78,18 @@ interface ProductDataInterface
    * @return Appstractsoftware\MagentoAdapter\Api\Data\ProductDataStocksInterface[] $stocks
    */
   public function setStocks($stocks);
+
+  /**
+   * Get Stocks
+   *
+   * @return string
+   */
+  public function getConfigurableAttribute();
+
+  /**
+   * Set ConfigetConfigurableAttribute
+   *
+   * @return string $attribute
+   */
+  public function setConfigurableAttribute($attribute);
 }
