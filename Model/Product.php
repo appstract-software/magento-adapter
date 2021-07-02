@@ -109,7 +109,6 @@ class Product implements ProductInterface
       try {
         $configurable->setAssociatedProductIds($simpleIds);
         $configurable->setCanSaveConfigurableAttributes(true);
-        var_dump($configurable->getExtensionAttributes());
         $configurable->save();
       } catch (Exception $ex) {
         echo '<pre>';
