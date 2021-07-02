@@ -84,6 +84,7 @@ class Product implements ProductInterface
         ->setAttributeSetId($configurableData->getAttributeSetId())
         ->setStatus(1)
         ->setWeight($configurableData->getWeight())
+        ->setUrlKey($configurableData->getUrlKey())
         ->setVisibility(4)
         ->setTypeId('configurable')
         ->setWebsiteIds($data->getWebsiteIds())
