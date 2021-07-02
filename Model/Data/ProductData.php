@@ -21,6 +21,9 @@ class ProductData implements ProductDataInterface
   /** @var Appstractsoftware\MagentoAdapter\Api\Data\ProductDataStocksInterface[] $stocks */
   private $stocks;
 
+  /** @var string $configurableAttribute */
+  private $configurableAttribute;
+
   /**
    * @inheritDoc
    */
@@ -43,6 +46,14 @@ class ProductData implements ProductDataInterface
   public function getCategoryLinks()
   {
     return $this->links;
+  }
+
+  /**
+   * @inheritDoc
+   */
+  public function getConfigurableAttribute()
+  {
+    return $this->configurableAttribute;
   }
 
   /**
@@ -99,5 +110,13 @@ class ProductData implements ProductDataInterface
   public function setStocks($stocks)
   {
     $this->stocks = $stocks;
+  }
+
+  /**
+   * @inheritDoc
+   */
+  public function setConfigurableAttribute($attribute)
+  {
+    $this->configurableAttribute = $attribute;
   }
 }

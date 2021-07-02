@@ -60,6 +60,7 @@ class Product implements ProductInterface
           }
         );
 
+
         $sourceItems = [];
 
         foreach ($assignedStock as $stock) {
@@ -74,7 +75,9 @@ class Product implements ProductInterface
           }
         }
 
-        $this->sourceItemsSaveInterface->execute($sourceItems);
+        if (!empty($sourceItems)) {
+          $this->sourceItemsSaveInterface->execute($sourceItems);
+        }
       }
 
       $configurable = $objectManager->create('\Magento\Catalog\Model\Product')
@@ -94,9 +97,7 @@ class Product implements ProductInterface
 
       $configurable->setCategoryIds($data->getCategoryLinks());
 
-      $extensionAttrs = $configurable->getExtensionAttributes();
-      $extensionAttrs->setConfigurableProductLinks($simpleIds);
-      $size_attr_id = $configurable->getResource()->getAttribute('size_spodnie')->getId();
+      $size_attr_id = $configurable->getResource()->getAttribute($data->getConfigurableAttribute())->getId();
       $configurable->getTypeInstance()->setUsedProductAttributeIds(array($size_attr_id), $configurable);
 
       $configurableAttributesData = $configurable->getTypeInstance()->getConfigurableAttributesAsArray($configurable);
@@ -108,6 +109,7 @@ class Product implements ProductInterface
       try {
         $configurable->setAssociatedProductIds($simpleIds);
         $configurable->setCanSaveConfigurableAttributes(true);
+        var_dump($configurable->getExtensionAttributes());
         $configurable->save();
       } catch (Exception $ex) {
         echo '<pre>';
