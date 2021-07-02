@@ -41,6 +41,7 @@ class Product implements ProductInterface
           ->setStatus(1)
           ->setWeight($simpleData->getWeight())
           ->setVisibility(1)
+          ->setUrlKey($simpleData->getUrlKey())
           ->setTypeId('simple')
           ->setWebsiteIds($data->getWebsiteIds())
           ->setPrice($simpleData->getPrice());
