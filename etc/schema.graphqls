@@ -22,5 +22,5 @@ interface OrderItemInterface @doc(description: "Order item details") @typeResolv
 }
 
 type ExtensionAttributes {
-    product_image: String;
+    product_image: String
 }
