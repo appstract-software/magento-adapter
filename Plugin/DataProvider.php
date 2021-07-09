@@ -99,6 +99,8 @@ class DataProvider
    */
   private function fetch()
   {
+    var_dump($this->orderItemIds);
+    var_dump($this->orderItemList);
     if (empty($this->orderItemIds) || !empty($this->orderItemList)) {
       return $this->orderItemList;
     }
