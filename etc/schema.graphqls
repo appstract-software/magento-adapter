@@ -18,9 +18,5 @@ interface AggregationOptionInterface {
 }
 
 interface OrderItemInterface @doc(description: "Order item details") @typeResolver(class: "Magento\\SalesGraphQl\\Model\\TypeResolver\\OrderItem") {
-    extension_attributes: ExtensionAttributes
-}
-
-type ExtensionAttributes {
     product_image: String
 }
