@@ -7,17 +7,10 @@
 
 namespace Appstractsoftware\MagentoAdapter\Plugin;
 
+use \Magento\Sales\Api\OrderRepositoryInterface;
+
 class OrderPlugin
 {
-
-  /** @var \Magento\Sales\Api\OrderRepositoryInterface */
-  private $orderRepository;
-
-  public function __construct(
-    \Magento\Sales\Api\OrderRepositoryInterface $orderRepository
-  ) {
-    $this->orderRepository = $orderRepository;
-  }
 
   /**
    * [afterSave description]
@@ -31,10 +24,7 @@ class OrderPlugin
     $result,
     $object
   ) {
-    $order = $this->orderRepository->get($result);
-    $orderIncrementId = $order->getIncrementId();
-
-    var_dump($orderIncrementId);
+    var_dump($object->getIncrementId());
     return $result;
   }
 }
