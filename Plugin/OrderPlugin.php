@@ -10,6 +10,9 @@ namespace Appstractsoftware\MagentoAdapter\Plugin;
 class OrderPlugin
 {
 
+  /** @var \Magento\Sales\Api\OrderRepositoryInterface */
+  private $orderRepository;
+
   public function __construct(
     \Magento\Sales\Api\OrderRepositoryInterface $orderRepository
   ) {
