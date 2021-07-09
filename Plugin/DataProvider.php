@@ -75,7 +75,7 @@ class DataProvider
    * @param int $orderItemId
    * @return array
    */
-  public function aroundGetOrderItemById(int $orderItemId): array
+  public function aroundGetOrderItemById($subject, $proceed, int $orderItemId): array
   {
     $orderItems = $this->fetch();
     if (!isset($orderItems[$orderItemId])) {
