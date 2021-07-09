@@ -9,6 +9,13 @@ namespace Appstractsoftware\MagentoAdapter\Plugin;
 
 class OrderPlugin
 {
+
+  public function __construct(
+    \Magento\Sales\Api\OrderRepositoryInterface $orderRepository
+  ) {
+    $this->orderRepository = $orderRepository;
+  }
+
   /**
    * [afterSave description]
    * @param  \Magento\Sales\Model\ResourceModel\Order $subject [description]
@@ -21,8 +28,10 @@ class OrderPlugin
     $result,
     $object
   ) {
-    var_dump($object);
-    var_dump($result);
+    $order = $this->orderRepository->get($result);
+    $orderIncrementId = $order->getIncrementId();
+
+    var_dump($orderIncrementId);
     return $result;
   }
 }
