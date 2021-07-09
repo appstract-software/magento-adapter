@@ -9,6 +9,7 @@ use Magento\Sales\Api\Data\OrderInterface;
 use Magento\Sales\Api\Data\OrderItemInterface;
 use Magento\Sales\Api\OrderItemRepositoryInterface;
 use Magento\Sales\Api\OrderRepositoryInterface;
+use Magento\SalesGraphQl\Model\OrderItem\OptionsProcessor;
 
 /**
  * Data provider for order items
@@ -61,12 +62,14 @@ class DataProvider
     OrderItemRepositoryInterface $orderItemRepository,
     ProductRepositoryInterface $productRepository,
     OrderRepositoryInterface $orderRepository,
-    SearchCriteriaBuilder $searchCriteriaBuilder
+    SearchCriteriaBuilder $searchCriteriaBuilder,
+    OptionsProcessor $optionsProcessor
   ) {
     $this->orderItemRepository = $orderItemRepository;
     $this->productRepository = $productRepository;
     $this->orderRepository = $orderRepository;
     $this->searchCriteriaBuilder = $searchCriteriaBuilder;
+    $this->optionsProcessor = $optionsProcessor;
   }
 
   /**
