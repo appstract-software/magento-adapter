@@ -24,7 +24,6 @@ class OrderPlugin
     $result,
     $object
   ) {
-    var_dump($object->getIncrementId());
-    return $result;
+    return $object->getIncrementId();
   }
 }
