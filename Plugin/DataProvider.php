@@ -82,14 +82,9 @@ class DataProvider
     }
   }
 
-  /**
-   * Get order item by item id
-   *
-   * @param int $orderItemId
-   * @return array
-   */
   public function aroundGetOrderItemById($subject, $proceed, int $orderItemId): array
   {
+    var_dump($orderItemId);
     $orderItems = $this->fetch();
     if (!isset($orderItems[$orderItemId])) {
       return [];
