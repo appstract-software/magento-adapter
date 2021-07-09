@@ -70,6 +70,19 @@ class DataProvider
   }
 
   /**
+   * Add order item id to list for fetching
+   *
+   * @param int $orderItemId
+   */
+  public function addOrderItemId(int $orderItemId): void
+  {
+    if (!in_array($orderItemId, $this->orderItemIds)) {
+      $this->orderItemList = [];
+      $this->orderItemIds[] = $orderItemId;
+    }
+  }
+
+  /**
    * Get order item by item id
    *
    * @param int $orderItemId
