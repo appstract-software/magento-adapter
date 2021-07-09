@@ -74,7 +74,7 @@ class DataProvider
    *
    * @param int $orderItemId
    */
-  public function addOrderItemId(int $orderItemId): void
+  public function aroundAddOrderItemId($subject, $proceed, int $orderItemId): void
   {
     if (!in_array($orderItemId, $this->orderItemIds)) {
       $this->orderItemList = [];
