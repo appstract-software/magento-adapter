@@ -87,7 +87,6 @@ class DataProvider
 
   public function aroundGetOrderItemById($subject, $proceed, int $orderItemId): array
   {
-    var_dump($orderItemId);
     $orderItems = $this->fetch();
     if (!isset($orderItems[$orderItemId])) {
       return [];
@@ -102,8 +101,6 @@ class DataProvider
    */
   private function fetch()
   {
-    var_dump($this->orderItemIds);
-    var_dump($this->orderItemList);
     if (empty($this->orderItemIds) || !empty($this->orderItemList)) {
       return $this->orderItemList;
     }
