@@ -2,6 +2,7 @@
 
 namespace Appstractsoftware\MagentoAdapter\Plugin;
 
+use \Appstractsoftware\MagentoAdapter\Api\Data\OrderItemOptionsInterface;
 use Magento\Catalog\Api\Data\ProductInterface;
 use Magento\Catalog\Api\ProductRepositoryInterface;
 use Magento\Framework\Api\SearchCriteriaBuilder;
@@ -119,6 +120,15 @@ class DataProvider
       /** @var OrderInterface $associatedOrder */
       $associatedOrder = $orderList[$orderItem->getOrderId()];
       $itemOptions = $this->optionsProcessor->getItemOptions($orderItem);
+      $orderItemOptions = [];
+
+      foreach ($orderItem->getExtensionAttributes()->getOptions() as $option) {
+        $orderItemOptions[] = [
+          'label' => $option->getOptionLabel(),
+          'value' => $option->getOptionValue(),
+        ];
+      }
+
       $this->orderItemList[$orderItem->getItemId()] = [
         'id' => base64_encode($orderItem->getItemId()),
         'associatedProduct' => $associatedProduct,
@@ -142,7 +152,7 @@ class DataProvider
         'quantity_canceled' => $orderItem->getQtyCanceled(),
         'quantity_returned' => $orderItem->getQtyReturned(),
         'product_image' => $orderItem->getExtensionAttributes()->getProductImage(),
-        'product_options' => $orderItem->getExtensionAttributes()->getOptions()
+        'product_options' => $orderItemOptions
       ];
     }
 
