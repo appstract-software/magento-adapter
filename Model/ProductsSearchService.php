@@ -4,6 +4,7 @@ namespace Appstractsoftware\MagentoAdapter\Model;
 
 use \Appstractsoftware\MagentoAdapter\Api\ProductsSearchServiceInterface;
 use \Magento\Framework\Api\SearchCriteria\CollectionProcessorInterface;
+use \Magento\Sales\Model\ResourceModel\Report\Bestsellers\CollectionFactory;
 
 /**
  * Products search service.
@@ -60,7 +61,8 @@ class ProductsSearchService implements ProductsSearchServiceInterface
     /**
      * @inheritDoc
      */
-    public function searchProductsByQuery(\Magento\Framework\Api\Search\SearchCriteriaInterface $searchCriteria){
+    public function searchProductsByQuery(\Magento\Framework\Api\Search\SearchCriteriaInterface $searchCriteria)
+    {
         /** @var \Magento\Framework\Api\Search\SearchResultInterface */
         $searchData = $this->search->search($searchCriteria);
         $items = [];
@@ -148,7 +150,8 @@ class ProductsSearchService implements ProductsSearchServiceInterface
                         }
                     }
                 }
-            } catch (\Throwable $th) {}
+            } catch (\Throwable $th) {
+            }
         }
 
         $itemsPage = $items;

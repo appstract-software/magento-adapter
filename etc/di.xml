@@ -101,6 +101,12 @@
     <type name="Magento\Sales\Model\Order\Payment\Operations\RegisterCaptureNotificationOperation">
         <plugin name="appstract_register_capture" type="Appstractsoftware\MagentoAdapter\Plugin\RegisterCaptureNotificationOperation" />
     </type>
+    <type name="Magento\SalesGraphQl\Model\OrderItem\DataProvider">
+        <plugin name="appstract_data_provider" type="Appstractsoftware\MagentoAdapter\Plugin\DataProvider" />
+    </type>
+    <type name="Magento\SalesGraphQl\Model\Resolver\CustomerOrders">
+        <plugin name="appstract_customer_orders" type="Appstractsoftware\MagentoAdapter\Plugin\CustomerOrders" />
+    </type>
 
     <!-- Additional attributes for filter input -->
     <type name="Magento\CatalogGraphQl\Model\Resolver\Products\FilterArgument\ProductEntityAttributesForAst" >

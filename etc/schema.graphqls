@@ -16,3 +16,13 @@ type Aggregation {
 interface AggregationOptionInterface {
     swatch_value: String
 }
+
+interface OrderItemInterface @doc(description: "Order item details") @typeResolver(class: "Magento\\SalesGraphQl\\Model\\TypeResolver\\OrderItem") {
+    product_image: String
+    product_options: [OrderItemOptions]
+}
+
+type OrderItemOptions {
+    label: String
+    value: String
+}
