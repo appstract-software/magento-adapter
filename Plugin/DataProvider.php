@@ -141,7 +141,8 @@ class DataProvider
         'quantity_invoiced' => $orderItem->getQtyInvoiced(),
         'quantity_canceled' => $orderItem->getQtyCanceled(),
         'quantity_returned' => $orderItem->getQtyReturned(),
-        'product_image' => $orderItem->getExtensionAttributes()->getProductImage()
+        'product_image' => $orderItem->getExtensionAttributes()->getProductImage(),
+        'product_options' => $orderItem->getExtensionAttributes()->getOptions()
       ];
     }
 
