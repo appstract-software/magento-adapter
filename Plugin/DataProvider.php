@@ -122,11 +122,13 @@ class DataProvider
       $itemOptions = $this->optionsProcessor->getItemOptions($orderItem);
       $orderItemOptions = [];
 
-      foreach ($orderItem->getExtensionAttributes()->getOptions() as $option) {
-        $orderItemOptions[] = [
-          'label' => $option->getOptionLabel(),
-          'value' => $option->getOptionValue(),
-        ];
+      if ($orderItem->getExtensionAttributes()->getOptions()) {
+        foreach ($orderItem->getExtensionAttributes()->getOptions() as $option) {
+          $orderItemOptions[] = [
+            'label' => $option->getOptionLabel(),
+            'value' => $option->getOptionValue(),
+          ];
+        }
       }
 
       $this->orderItemList[$orderItem->getItemId()] = [
