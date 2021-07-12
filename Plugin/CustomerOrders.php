@@ -9,6 +9,7 @@ declare(strict_types=1);
 
 namespace Appstractsoftware\MagentoAdapter\Plugin;
 
+use Magento\Framework\Api\SortOrderBuilder;
 use Magento\Framework\Api\SearchCriteriaBuilder;
 use Magento\Framework\Exception\InputException;
 use Magento\Framework\GraphQl\Config\Element\Field;
@@ -53,6 +54,11 @@ class CustomerOrders
     private $orderFilter;
 
     /**
+     * @var SortOrderBuilder
+     */
+    private $orderBuilder;
+
+    /**
      * @param OrderRepositoryInterface $orderRepository
      * @param OrderAddress $orderAddress
      * @param OrderPayments $orderPayments
@@ -64,13 +70,15 @@ class CustomerOrders
         OrderAddress $orderAddress,
         OrderPayments $orderPayments,
         SearchCriteriaBuilder $searchCriteriaBuilder,
-        OrderFilter $orderFilter
+        OrderFilter $orderFilter,
+        SortOrderBuilder $orderBuilder
     ) {
         $this->orderRepository = $orderRepository;
         $this->orderAddress = $orderAddress;
         $this->orderPayments = $orderPayments;
         $this->searchCriteriaBuilder = $searchCriteriaBuilder;
         $this->orderFilter = $orderFilter;
+        $this->orderBuilder = $orderBuilder;
     }
 
     /**
