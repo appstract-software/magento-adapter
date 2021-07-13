@@ -76,6 +76,6 @@ class DataProvider
 
   public function afterGetOrderItemById($subject, $orderItems): array
   {
-    var_dump($orderItems);
+    var_dump(count($orderItems));
   }
 }
