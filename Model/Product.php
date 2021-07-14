@@ -41,6 +41,7 @@ class Product implements ProductInterface
           ->setStatus(1)
           ->setWeight($simpleData->getWeight())
           ->setVisibility(1)
+          ->setUrlKey($simpleData->getUrlKey())
           ->setTypeId('simple')
           ->setWebsiteIds($data->getWebsiteIds())
           ->setPrice($simpleData->getPrice());
@@ -86,6 +87,7 @@ class Product implements ProductInterface
         ->setAttributeSetId($configurableData->getAttributeSetId())
         ->setStatus(1)
         ->setWeight($configurableData->getWeight())
+        ->setUrlKey($configurableData->getUrlKey())
         ->setVisibility(4)
         ->setTypeId('configurable')
         ->setWebsiteIds($data->getWebsiteIds())
