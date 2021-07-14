@@ -8,6 +8,12 @@ interface ProductInterface {
     class: "Appstractsoftware\\MagentoAdapter\\CustomGQL\\Model\\Resolver\\SourceItemsResolver"
   )
   sources: [Sources]
+}
+
+type CustomerOrder
+@doc(description: "Contains details about each of the customer's orders") {
+  items: [OrderItemInterface]
+  @doc(description: "An array containing the items purchased in this order")
   @resolver(
     class: "Appstractsoftware\\MagentoAdapter\\CustomGQL\\Model\\Resolver\\SourcesResolver"
   )
