@@ -69,7 +69,7 @@ class Product implements ProductInterface
             $sourceItem->setSourceCode($source->getSource());
             $sourceItem->setQuantity($source->getQty());
             $sourceItem->setSku($product->getSku());
-            $sourceItem->setStatus(\Magento\InventoryApi\Api\Data\SourceItemInterface::STATUS_IN_STOCK);
+            $sourceItem->setStatus($source->getQty() > 0 ? \Magento\InventoryApi\Api\Data\SourceItemInterface::STATUS_IN_STOCK : \Magento\InventoryApi\Api\Data\SourceItemInterface::STATUS_OUT_OF_STOCK);
 
             array_push($sourceItems, $sourceItem);
           }
