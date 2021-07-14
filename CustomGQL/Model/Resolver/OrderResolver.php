@@ -157,7 +157,7 @@ class OrderResolver implements ResolverInterface
     {
         $filterGroups = $this->orderFilter->createFilterGroups($args, $userId, (int)$storeId);
         $this->searchCriteriaBuilder->setFilterGroups($filterGroups);
-        $sortOrder = $this->orderBuilder->setField('created_at')->create();
+        $sortOrder = $this->orderBuilder->setField('created_at')->setDirection('DESC')->create();
         $this->searchCriteriaBuilder->addSortOrder($sortOrder);
 
         if (isset($args['currentPage'])) {
