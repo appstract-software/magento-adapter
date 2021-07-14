@@ -1,6 +1,6 @@
 <?php
 
-namespace Appstractsoftware\MagentoAdapter\Plugin;
+namespace Appstractsoftware\MagentoAdapter\Model\Graphql;
 
 use \Appstractsoftware\MagentoAdapter\Api\Data\OrderItemOptionsInterface;
 use Magento\Catalog\Api\Data\ProductInterface;
@@ -78,7 +78,7 @@ class DataProvider
    *
    * @param int $orderItemId
    */
-  public function aroundAddOrderItemId($subject, $proceed, int $orderItemId): void
+  public function addOrderItemId(int $orderItemId): void
   {
     if (!in_array($orderItemId, $this->orderItemIds)) {
       $this->orderItemList = [];
@@ -86,7 +86,7 @@ class DataProvider
     }
   }
 
-  public function aroundGetOrderItemById($subject, $proceed, int $orderItemId): array
+  public function getOrderItemById(int $orderItemId): array
   {
     $orderItems = $this->fetch();
     if (!isset($orderItems[$orderItemId])) {

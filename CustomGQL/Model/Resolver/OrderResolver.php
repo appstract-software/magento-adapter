@@ -1,20 +1,13 @@
 <?php
 
-/**
- * Copyright © Magento, Inc. All rights reserved.
- * See COPYING.txt for license details.
- */
+namespace Appstractsoftware\MagentoAdapter\CustomGQL\Model\Resolver;
 
-declare(strict_types=1);
-
-namespace Appstractsoftware\MagentoAdapter\Plugin;
-
-use Magento\Framework\Api\SortOrderBuilder;
 use Magento\Framework\Api\SearchCriteriaBuilder;
 use Magento\Framework\Exception\InputException;
 use Magento\Framework\GraphQl\Config\Element\Field;
 use Magento\Framework\GraphQl\Exception\GraphQlAuthorizationException;
 use Magento\Framework\GraphQl\Exception\GraphQlInputException;
+use Magento\Framework\GraphQl\Query\ResolverInterface;
 use Magento\Framework\GraphQl\Schema\Type\ResolveInfo;
 use Magento\Sales\Api\Data\OrderInterface;
 use Magento\Sales\Api\OrderRepositoryInterface;
@@ -22,11 +15,12 @@ use Magento\SalesGraphQl\Model\Order\OrderAddress;
 use Magento\SalesGraphQl\Model\Order\OrderPayments;
 use Magento\SalesGraphQl\Model\Resolver\CustomerOrders\Query\OrderFilter;
 use Magento\Store\Api\Data\StoreInterface;
+use Magento\Framework\Api\SortOrderBuilder;
 
 /**
  * Orders data resolver
  */
-class CustomerOrders
+class OrderResolver implements ResolverInterface
 {
     /**
      * @var SearchCriteriaBuilder
@@ -84,14 +78,12 @@ class CustomerOrders
     /**
      * @inheritDoc
      */
-    public function aroundResolve(
-        $subject,
-        $proceed,
-        Field $field,
-        $context,
-        ResolveInfo $info,
-        array $value = null,
-        array $args = null
+    public function resolve(
+      Field $field,
+      $context,
+      ResolveInfo $info,
+      array $value = null,
+      array $args = null
     ) {
         if (false === $context->getExtensionAttributes()->getIsCustomer()) {
             throw new GraphQlAuthorizationException(__('The current customer isn\'t authorized.'));
