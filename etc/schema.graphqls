@@ -1,5 +1,7 @@
 interface ProductInterface {
     attributes: [Attribute] @resolver(class: "Appstractsoftware\\MagentoAdapter\\CustomGQL\\Model\\Resolver\\AttributesResolver")
+    source_items: [SourceItem] @resolver(class: "Appstractsoftware\\MagentoAdapter\\CustomGQL\\Model\\Resolver\\SourceItemsResolver")
+    sources: [Sources] @resolver(class: "Appstractsoftware\\MagentoAdapter\\CustomGQL\\Model\\Resolver\\SourcesResolver")
 }
 
 type Attribute {
@@ -25,4 +27,26 @@ interface OrderItemInterface @doc(description: "Order item details") @typeResolv
 type OrderItemOptions {
     label: String
     value: String
+}
+
+type SourceItem {
+    sku: String
+    source_code: String
+    quantity: Int
+    status: Int
+}
+
+type Sources {
+    source_code: String
+    name: String
+    email: String
+    contact_name: String
+    enabled: Boolean,
+    description: String
+    country_id: String
+    city: String
+    street: String
+    postcode: String
+    phone: String
+    fax: String
 }
