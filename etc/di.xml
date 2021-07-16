@@ -108,7 +108,7 @@
         <plugin name="appstract_customer_orders" type="Appstractsoftware\MagentoAdapter\Plugin\CustomerOrders" />
     </type>
     <type name="Magento\Quote\Api\Data\TotalsInterface">
-        <plugin name="get_appstract_totals_interface" type="Appstractsoftware\MagentoAdapter\Plugin\TotalsInterface" />
+        <plugin name="get_appstract_totals" type="Appstractsoftware\MagentoAdapter\Plugin\Totals" />
     </type>
 
     <!-- Additional attributes for filter input -->

@@ -4,7 +4,7 @@ namespace Appstractsoftware\MagentoAdapter\Plugin;
 use \Magento\Framework\App\Config\ScopeConfigInterface;
 use \Magento\Sales\Api\Data\TotalExtensionFactory;
 
-class TotalsInterface
+class Totals
 {
     /**
      * @var ScopeConfigInterface 
