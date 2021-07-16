@@ -20,4 +20,7 @@
        <attribute code="product_image" type="string" />
        <attribute code="options" type="Appstractsoftware\MagentoAdapter\Api\Data\OrderItemOptionsInterface[]" />
     </extension_attributes>
+    <extension_attributes for="Magento\Quote\Api\Data\TotalsInterface">
+       <attribute code="free_shipping" type="int" />
+    </extension_attributes>
 </config>
