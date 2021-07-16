@@ -39,12 +39,18 @@ class Product implements ProductInterface
           ->setName($simpleData->getName())
           ->setAttributeSetId($simpleData->getAttributeSetId())
           ->setStatus(1)
-          ->setWeight($simpleData->getWeight())
           ->setVisibility(1)
-          ->setUrlKey($simpleData->getUrlKey())
           ->setTypeId('simple')
           ->setWebsiteIds($data->getWebsiteIds())
           ->setPrice($simpleData->getPrice());
+
+        if ($simpleData->getUrlKey()) {
+          $product->setUrlKey($simpleData->getUrlKey());
+        }
+
+        if ($simpleData->getWeight()) {
+          $product->setWeight($simpleData->getWeight());
+        }
 
         foreach ($simpleData->getCustomAttributes() as $attribute) {
           $product->setCustomAttribute($attribute->getAttributeCode(), $attribute->getValue());
@@ -52,33 +58,6 @@ class Product implements ProductInterface
         $product->setCategoryIds($data->getCategoryLinks());
         $simpleProduct = $product->save();
         array_push($simpleIds, $simpleProduct->getId());
-
-
-        $assignedStock = array_filter(
-          $stocks,
-          function ($e) use ($sku) {
-            return $e->getSku() == $sku;
-          }
-        );
-
-
-        $sourceItems = [];
-
-        foreach ($assignedStock as $stock) {
-          foreach ($stock->getSources() as $source) {
-            $sourceItem = $this->sourceItem->create();
-            $sourceItem->setSourceCode($source->getSource());
-            $sourceItem->setQuantity($source->getQty());
-            $sourceItem->setSku($product->getSku());
-            $sourceItem->setStatus($source->getQty() > 0 ? \Magento\InventoryApi\Api\Data\SourceItemInterface::STATUS_IN_STOCK : \Magento\InventoryApi\Api\Data\SourceItemInterface::STATUS_OUT_OF_STOCK);
-
-            array_push($sourceItems, $sourceItem);
-          }
-        }
-
-        if (!empty($sourceItems)) {
-          $this->sourceItemsSaveInterface->execute($sourceItems);
-        }
       }
 
       $configurable = $objectManager->create('\Magento\Catalog\Model\Product')
@@ -87,11 +66,25 @@ class Product implements ProductInterface
         ->setAttributeSetId($configurableData->getAttributeSetId())
         ->setStatus(1)
         ->setWeight($configurableData->getWeight())
-        ->setUrlKey($configurableData->getUrlKey())
         ->setVisibility(4)
         ->setTypeId('configurable')
         ->setWebsiteIds($data->getWebsiteIds())
-        ->setPrice($configurableData->getPrice());
+        ->setPrice($configurableData->getPrice())
+        ->setStockData(
+          [
+            'use_config_manage_stock' => 0,
+            'manage_stock' => 1,
+            'is_in_stock' => 1,
+          ]
+        );
+
+      if ($configurableData->getUrlKey()) {
+        $configurable->setUrlKey($configurableData->getUrlKey());
+      }
+
+      if ($configurableData->getWeight()) {
+        $configurable->setWeight($configurableData->getWeight());
+      }
 
       foreach ($configurableData->getCustomAttributes() as $attribute) {
         $configurable->setCustomAttribute($attribute->getAttributeCode(), $attribute->getValue());
@@ -112,6 +105,36 @@ class Product implements ProductInterface
         $configurable->setAssociatedProductIds($simpleIds);
         $configurable->setCanSaveConfigurableAttributes(true);
         $configurable->save();
+
+
+        foreach ($data->getSimple() as $simpleData) {
+          $sku = $simpleData->getSku();
+          $assignedStock = array_filter(
+            $stocks,
+            function ($e) use ($sku) {
+              return $e->getSku() == $sku;
+            }
+          );
+
+
+          $sourceItems = [];
+
+          foreach ($assignedStock as $stock) {
+            foreach ($stock->getSources() as $source) {
+              $sourceItem = $this->sourceItem->create();
+              $sourceItem->setSourceCode($source->getSource());
+              $sourceItem->setQuantity($source->getQty());
+              $sourceItem->setSku($sku);
+              $sourceItem->setStatus($source->getQty() > 0 ? \Magento\InventoryApi\Api\Data\SourceItemInterface::STATUS_IN_STOCK : \Magento\InventoryApi\Api\Data\SourceItemInterface::STATUS_OUT_OF_STOCK);
+
+              array_push($sourceItems, $sourceItem);
+            }
+          }
+
+          if (!empty($sourceItems)) {
+            $this->sourceItemsSaveInterface->execute($sourceItems);
+          }
+        }
       } catch (Exception $ex) {
         echo '<pre>';
         print_r($ex->getMessage());
