@@ -113,6 +113,13 @@
     <type name="Magento\Quote\Api\Data\TotalsInterface">
         <plugin name="get_appstract_totals" type="Appstractsoftware\MagentoAdapter\Plugin\Totals" />
     </type>
+    <type name="Magento\CatalogGraphQl\Model\Resolver\Products\DataProvider\Product\CompositeCollectionProcessor">
+        <plugin name="appstract_composite_collection_processor" type="Appstractsoftware\MagentoAdapter\Plugin\CompositeCollectionProcessor" />
+    </type>
+        <type name="Magento\Elasticsearch\SearchAdapter\Query\Builder\Sort">
+        <plugin name="appstract_sort_builder" type="Appstractsoftware\MagentoAdapter\Plugin\Sort" />
+    </type>
+
 
     <!-- Additional attributes for filter input -->
     <type name="Magento\CatalogGraphQl\Model\Resolver\Products\FilterArgument\ProductEntityAttributesForAst" >

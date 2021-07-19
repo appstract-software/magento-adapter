@@ -50,3 +50,7 @@ type Sources {
     phone: String
     fax: String
 }
+
+input ProductAttributeSortInput {
+    is_salable: SortEnum
+}
