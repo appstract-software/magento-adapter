@@ -39,7 +39,6 @@ class Product implements ProductInterface
           ->setName($simpleData->getName())
           ->setAttributeSetId($simpleData->getAttributeSetId())
           ->setStatus(1)
-          ->setWeight($simpleData->getWeight())
           ->setVisibility(1)
           ->setTypeId('simple')
           ->setWebsiteIds($data->getWebsiteIds())
@@ -47,6 +46,10 @@ class Product implements ProductInterface
 
         if ($simpleData->getUrlKey()) {
           $product->setUrlKey($simpleData->getUrlKey());
+        }
+
+        if ($simpleData->getWeight()) {
+          $product->setWeight($simpleData->getWeight());
         }
 
         foreach ($simpleData->getCustomAttributes() as $attribute) {
@@ -66,10 +69,21 @@ class Product implements ProductInterface
         ->setVisibility(4)
         ->setTypeId('configurable')
         ->setWebsiteIds($data->getWebsiteIds())
-        ->setPrice($configurableData->getPrice());
+        ->setPrice($configurableData->getPrice())
+        ->setStockData(
+          [
+            'use_config_manage_stock' => 0,
+            'manage_stock' => 1,
+            'is_in_stock' => 1,
+          ]
+        );
 
       if ($configurableData->getUrlKey()) {
         $configurable->setUrlKey($configurableData->getUrlKey());
+      }
+
+      if ($configurableData->getWeight()) {
+        $configurable->setWeight($configurableData->getWeight());
       }
 
       foreach ($configurableData->getCustomAttributes() as $attribute) {
@@ -116,8 +130,6 @@ class Product implements ProductInterface
               array_push($sourceItems, $sourceItem);
             }
           }
-
-          var_dump($sourceItems);
 
           if (!empty($sourceItems)) {
             $this->sourceItemsSaveInterface->execute($sourceItems);
