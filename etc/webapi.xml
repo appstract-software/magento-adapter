@@ -166,6 +166,12 @@
             <resource ref="anonymous"/>
         </resources>
     </route>
+    <route url="/V1/send-contact-email" method="POST">
+        <service class="Appstractsoftware\MagentoAdapter\Api\MailingServiceInterface" method="sendEmail"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
 
     <!-- NEW PRODUCTS API -->
     <route url="/V1/products/new/:limit" method="GET">

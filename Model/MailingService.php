@@ -34,7 +34,7 @@ class MailingService extends AbstractHelper implements MailingServiceInterface
         parent::__construct($context);
     }
 
-    public function sendEmail($email, $templateId, $variables, $topic, $name, $message, $orderId = '', $date, $status, $ip)
+    public function sendEmail($email, $templateId, $variables)
     {
         // Getting mail from Magento Store Settings
         $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
@@ -62,8 +62,18 @@ class MailingService extends AbstractHelper implements MailingServiceInterface
             $transport->sendMessage();
             $this->inlineTranslation->resume();
 
-            $resourceConnection = $objectManager->get('Magento\Framework\App\ResourceConnection');
+            return $storeId;
+        } catch (\Exception $e) {
+            return $e->getMessage();
+        }
+    }
+    public function sendContactEmail($email, $templateId, $variables, $topic, $name, $message, $orderId = '', $date, $status, $ip)
+    {
+        try {
+            $emailSended = $this->sendEmail($email, $templateId, $variables);
 
+            $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+            $resourceConnection = $objectManager->get('Magento\Framework\App\ResourceConnection');
             $connection = $resourceConnection->getConnection();
             $themeTable = $resourceConnection->getTableName('appstract_contact_form');
 
@@ -79,7 +89,7 @@ class MailingService extends AbstractHelper implements MailingServiceInterface
                 . "', '" . $ip . "')";
             $connection->query($sql);
 
-            return $storeId;
+            return $emailSended;
         } catch (\Exception $e) {
             return $e->getMessage();
         }
