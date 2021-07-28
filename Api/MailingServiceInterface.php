@@ -11,15 +11,10 @@ interface MailingServiceInterface
     /**
      * Subscribe an email.
      *
-     * @param string $mail
+     * @param string $email
      * @param string $templateId
      * @param mixed $variables
      * @return \Appstractsoftware\MagentoAdapter\Api\MailingServiceInterface
      */
-    public function sendMail($mail, $templateId, $variables);
+    public function sendEmail($email, $templateId, $variables);
 }
-
-
-
-
-
