@@ -53,7 +53,7 @@ class InstallSchema implements \Magento\Framework\Setup\InstallSchemaInterface
         )
         ->addColumn(
           'date',
-          Table::TYPE_TEXT,
+          Table::TYPE_TIMESTAMP,
           255,
           ['nullbale' => false, 'default' => '']
         )
@@ -61,7 +61,7 @@ class InstallSchema implements \Magento\Framework\Setup\InstallSchemaInterface
           'status',
           Table::TYPE_TEXT,
           255,
-          ['nullbale' => false, 'default' => '']
+          ['nullbale' => false, 'default' => 'OPEN']
         )
         ->addColumn(
           'ip',

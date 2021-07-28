@@ -9,7 +9,6 @@ use Magento\Framework\Mail\Template\TransportBuilder;
 use Magento\Framework\App\Helper\AbstractHelper;
 use Magento\Framework\Translate\Inline\StateInterface;
 use Magento\Store\Model\StoreManagerInterface;
-use Magento\Framework\App\ObjectManager;
 
 class MailingService extends AbstractHelper implements MailingServiceInterface
 {
@@ -35,18 +34,18 @@ class MailingService extends AbstractHelper implements MailingServiceInterface
         parent::__construct($context);
     }
 
-    public function sendEmail($email, $templateId, $variables)
+    public function sendEmail($email, $templateId, $variables, $topic, $name, $message, $orderId = '', $date, $status, $ip)
     {
         // Getting mail from Magento Store Settings
         $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
         $scopeConfig = $objectManager->create('\Magento\Framework\App\Config\ScopeConfigInterface');
         $storeEmail = $scopeConfig->getValue('trans_email/ident_general/email', \Magento\Store\Model\ScopeInterface::SCOPE_STORE);
-        $name = $scopeConfig->getValue('trans_email/ident_general/name', \Magento\Store\Model\ScopeInterface::SCOPE_STORE);
+        $storeName = $scopeConfig->getValue('trans_email/ident_general/name', \Magento\Store\Model\ScopeInterface::SCOPE_STORE);
 
         try {
             $store = $this->storeManager->getStore();
             $storeId = $store->getId();
-            $from = ['email' => $storeEmail, 'name' => $name];
+            $from = ['email' => $storeEmail, 'name' => $storeName];
             $this->inlineTranslation->suspend();
 
             $storeScope = \Magento\Store\Model\ScopeInterface::SCOPE_STORE;
@@ -68,27 +67,21 @@ class MailingService extends AbstractHelper implements MailingServiceInterface
             $connection = $resourceConnection->getConnection();
             $themeTable = $resourceConnection->getTableName('appstract_contact_form');
 
-            var_dump($variables);
 
             $sql = "INSERT INTO " . $themeTable . "(topic, email, name, message, orderId, date, status, ip) VALUES ('"
-                . $this->getValueFromArray($variables, 'topic')
+                . $topic
                 . "', '" . $email
-                . "', '" . $this->getValueFromArray($variables, 'name')
-                . "', '" . $this->getValueFromArray($variables, 'message')
-                . "', '" . $this->getValueFromArray($variables, 'orderId')
-                . "', '" . $this->getValueFromArray($variables, 'date')
-                . "', '" . $this->getValueFromArray($variables, 'status')
-                . "', '" . $this->getValueFromArray($variables, 'ip') . "')";
+                . "', '" . $name
+                . "', '" . $message
+                . "', '" . $orderId
+                . "', '" . $date
+                . "', '" . $status
+                . "', '" . $ip . "')";
             $connection->query($sql);
 
             return $storeId;
         } catch (\Exception $e) {
             return $e->getMessage();
         }
-    }
-
-    private function getValueFromArray($arr, $key)
-    {
-        return array_key_exists($key, $arr) ? $arr[$key] : null;
     }
 }
