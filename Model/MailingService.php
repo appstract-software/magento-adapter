@@ -70,7 +70,6 @@ class MailingService extends AbstractHelper implements MailingServiceInterface
     public function sendContactEmail($email, $templateId, $variables, $topic, $name, $company, $message, $orderId = '')
     {
         try {
-            date_default_timezone_set("Etc/GMT-2");
             if (!empty($_SERVER['HTTP_CLIENT_IP'])) {
                 $ip = $_SERVER['HTTP_CLIENT_IP'];
             } elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
