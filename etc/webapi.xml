@@ -160,8 +160,14 @@
     </route>
 
     <!-- Mailing -->
-    <route url="/V1/send-mail" method="POST">
-        <service class="Appstractsoftware\MagentoAdapter\Api\MailingServiceInterface" method="sendMail"/>
+    <route url="/V1/send-email" method="POST">
+        <service class="Appstractsoftware\MagentoAdapter\Api\MailingServiceInterface" method="sendEmail"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
+    <route url="/V1/send-contact-email" method="POST">
+        <service class="Appstractsoftware\MagentoAdapter\Api\MailingServiceInterface" method="sendContactEmail"/>
         <resources>
             <resource ref="anonymous"/>
         </resources>
