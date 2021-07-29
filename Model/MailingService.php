@@ -98,13 +98,17 @@ class MailingService extends AbstractHelper implements MailingServiceInterface
             $ip = $_SERVER['REMOTE_ADDR'];
         }
 
+        $time = time();
+
+        var_dump($time);
+
         $data = [
             'topic' => $topic,
             'name' => $name,
             'company' => $company,
             'message' => $message,
             'orderId' => $orderId,
-            'date' => date("Y-m-d H:i:s"),
+            'date' => $time,
             'ip' => $ip,
             'email' => $email
         ];

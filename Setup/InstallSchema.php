@@ -59,9 +59,9 @@ class InstallSchema implements \Magento\Framework\Setup\InstallSchemaInterface
         )
         ->addColumn(
           'date',
-          Table::TYPE_TIMESTAMP,
+          Table::TYPE_INTEGER,
           255,
-          ['nullbale' => false, 'default' => '']
+          ['nullbale' => false, 'default' => 0]
         )
         ->addColumn(
           'status',
