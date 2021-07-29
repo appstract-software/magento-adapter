@@ -67,9 +67,18 @@ class MailingService extends AbstractHelper implements MailingServiceInterface
             return $e->getMessage();
         }
     }
-    public function sendContactEmail($email, $templateId, $variables, $topic, $name, $message, $orderId = '', $date, $status, $ip)
+    public function sendContactEmail($email, $templateId, $variables, $topic, $name, $company, $message, $orderId = '')
     {
         try {
+            date_default_timezone_set("Etc/GMT-2");
+            if (!empty($_SERVER['HTTP_CLIENT_IP'])) {
+                $ip = $_SERVER['HTTP_CLIENT_IP'];
+            } elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
+                $ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
+            } else {
+                $ip = $_SERVER['REMOTE_ADDR'];
+            }
+
             $emailSended = $this->sendEmail($email, $templateId, $variables);
 
             $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
@@ -78,15 +87,16 @@ class MailingService extends AbstractHelper implements MailingServiceInterface
             $themeTable = $resourceConnection->getTableName('appstract_contact_form');
 
 
-            $sql = "INSERT INTO " . $themeTable . "(topic, email, name, message, orderId, date, status, ip) VALUES ('"
+            $sql = "INSERT INTO " . $themeTable . "(topic, email, name, company, message, orderId, date, ip) VALUES ('"
                 . $topic
                 . "', '" . $email
                 . "', '" . $name
+                . "', '" . $company
                 . "', '" . $message
                 . "', '" . $orderId
-                . "', '" . $date
-                . "', '" . $status
+                . "', '" . date("Y-m-d H:i:s")
                 . "', '" . $ip . "')";
+
             $connection->query($sql);
 
             return $emailSended;

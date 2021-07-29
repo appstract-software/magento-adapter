@@ -40,6 +40,12 @@ class InstallSchema implements \Magento\Framework\Setup\InstallSchemaInterface
           ['nullbale' => false, 'default' => '']
         )
         ->addColumn(
+          'company',
+          Table::TYPE_TEXT,
+          255,
+          ['nullbale' => false, 'default' => '']
+        )
+        ->addColumn(
           'message',
           Table::TYPE_TEXT,
           '2M',

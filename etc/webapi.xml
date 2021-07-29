@@ -167,7 +167,7 @@
         </resources>
     </route>
     <route url="/V1/send-contact-email" method="POST">
-        <service class="Appstractsoftware\MagentoAdapter\Api\MailingServiceInterface" method="sendEmail"/>
+        <service class="Appstractsoftware\MagentoAdapter\Api\MailingServiceInterface" method="sendContactEmail"/>
         <resources>
             <resource ref="anonymous"/>
         </resources>
