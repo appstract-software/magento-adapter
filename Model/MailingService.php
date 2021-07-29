@@ -9,6 +9,7 @@ use Magento\Framework\Mail\Template\TransportBuilder;
 use Magento\Framework\App\Helper\AbstractHelper;
 use Magento\Framework\Translate\Inline\StateInterface;
 use Magento\Store\Model\StoreManagerInterface;
+use Magento\Framework\App\ResourceConnection;
 
 class MailingService extends AbstractHelper implements MailingServiceInterface
 {
@@ -20,16 +21,19 @@ class MailingService extends AbstractHelper implements MailingServiceInterface
     protected $transportBuilder;
     protected $storeManager;
     protected $inlineTranslation;
+    protected $resourceConnection;
 
     public function __construct(
         Context $context,
         TransportBuilder $transportBuilder,
         StoreManagerInterface $storeManager,
+        ResourceConnection $resourceConnection,
         StateInterface $state
 
     ) {
         $this->transportBuilder = $transportBuilder;
         $this->storeManager = $storeManager;
+        $this->resourceConnection = $resourceConnection;
         $this->inlineTranslation = $state;
         parent::__construct($context);
     }
@@ -70,37 +74,41 @@ class MailingService extends AbstractHelper implements MailingServiceInterface
     public function sendContactEmail($email, $templateId, $variables, $topic, $name, $company, $message, $orderId = '')
     {
         try {
-            if (!empty($_SERVER['HTTP_CLIENT_IP'])) {
-                $ip = $_SERVER['HTTP_CLIENT_IP'];
-            } elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
-                $ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
-            } else {
-                $ip = $_SERVER['REMOTE_ADDR'];
-            }
 
             $emailSended = $this->sendEmail($email, $templateId, $variables);
 
-            $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
-            $resourceConnection = $objectManager->get('Magento\Framework\App\ResourceConnection');
-            $connection = $resourceConnection->getConnection();
-            $themeTable = $resourceConnection->getTableName('appstract_contact_form');
-
-
-            $sql = "INSERT INTO " . $themeTable . "(topic, email, name, company, message, orderId, date, ip) VALUES ('"
-                . $topic
-                . "', '" . $email
-                . "', '" . $name
-                . "', '" . $company
-                . "', '" . $message
-                . "', '" . $orderId
-                . "', '" . date("Y-m-d H:i:s")
-                . "', '" . $ip . "')";
-
-            $connection->query($sql);
+            $this->insertStatus($topic, $email, $name, $company, $message, $orderId);
 
             return $emailSended;
         } catch (\Exception $e) {
             return $e->getMessage();
         }
+    }
+
+
+    public function insertStatus($topic, $email, $name, $company, $message, $orderId)
+    {
+        $connection  = $this->resourceConnection->getConnection();
+
+        if (!empty($_SERVER['HTTP_CLIENT_IP'])) {
+            $ip = $_SERVER['HTTP_CLIENT_IP'];
+        } elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
+            $ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
+        } else {
+            $ip = $_SERVER['REMOTE_ADDR'];
+        }
+
+        $data = [
+            'topic' => $topic,
+            'name' => $name,
+            'company' => $company,
+            'message' => $message,
+            'orderId' => $orderId,
+            'date' => date("Y-m-d H:i:s"),
+            'ip' => $ip,
+            'email' => $email
+        ];
+
+        $connection->insert('appstract_contact_form', $data);
     }
 }
