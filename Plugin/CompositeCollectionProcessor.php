@@ -46,7 +46,7 @@ class CompositeCollectionProcessor
   ) {
     $stockId = $this->getStockIdForCurrentWebsite->execute();
 
-    if ($this->defaultStockProvider->getId() === $stockId) {
+    if ($this->defaultStockProvider->getId() === $stockId || is_null($searchCriteria->getSortOrders())) {
       return $result;
     }
 
