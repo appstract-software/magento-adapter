@@ -80,7 +80,7 @@
     <preference for="Appstractsoftware\MagentoAdapter\Api\Data\ProductDataStocksInterface" type="Appstractsoftware\MagentoAdapter\Model\Data\ProductDataStocks"></preference>
     <preference for="Appstractsoftware\MagentoAdapter\Api\Data\ProductDataStockSourcesInterface" type="Appstractsoftware\MagentoAdapter\Model\Data\ProductDataStockSources"></preference>
     <preference for="Appstractsoftware\MagentoAdapter\Api\ProductInterface" type="Appstractsoftware\MagentoAdapter\Model\Product"></preference>
-    <type name="Magento\Quote\Api\GuestCartItemRepositoryInterface">
+    <!-- <type name="Magento\Quote\Api\GuestCartItemRepositoryInterface">
         <plugin name="get_appstract_guest_cart_item" type="Appstractsoftware\MagentoAdapter\Plugin\GuestCartItemRepository" />
     </type>
     <type name="Magento\Quote\Api\GuestCartRepositoryInterface">
@@ -91,7 +91,7 @@
     </type>
     <type name="Magento\Quote\Api\CartManagementInterface">
         <plugin name="get_appstract_mine_cart" type="Appstractsoftware\MagentoAdapter\Plugin\CartRepository" />
-    </type>
+    </type> -->
     <type name="Magento\InventoryIndexer\Indexer\SelectBuilder">
         <plugin name="appstract_select_builder" type="Appstractsoftware\MagentoAdapter\Plugin\SelectBuilder" />
     </type>
@@ -131,7 +131,7 @@
         </arguments>
     </type>
     <preference for="Appstractsoftware\MagentoAdapter\Api\Data\OrderItemOptionsInterface" type="Appstractsoftware\MagentoAdapter\Model\Data\OrderItemOptions" />
-    <type name="Magento\Sales\Api\Data\OrderItemInterface">
+    <!-- <type name="Magento\Sales\Api\Data\OrderItemInterface">
         <plugin disabled="false" name="StackExchange_Magento_Plugin_Magento_Sales_Api_Data_OrderItemInterface" sortOrder="10" type="Appstractsoftware\MagentoAdapter\Plugin\OrderItemPlugin"/>
-    </type>
+    </type> -->
 </config>
