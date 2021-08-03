@@ -85,8 +85,9 @@ class AttributesResolver implements ResolverInterface
         }
 
         $data['value'] = $eavAttribute->getSource()->getOptionText($option);
+        var_dump(implode(',', $data['value']));
 
-        if (gettype($data['value']) == 'array') {
+        if (is_array($data['value'])) {
           $data['value'] = implode(',', $data['value']);
         }
 
