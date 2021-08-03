@@ -77,7 +77,7 @@ class AttributesResolver implements ResolverInterface
         'type' => $type
       );
 
-      if ($type == 'select') {
+      if ($type == 'select' || $type == 'multiselect') {
         $isSwatch = $this->swatchHelper->isTextSwatch($eavAttribute);
 
         if (!$isSwatch) {
@@ -85,6 +85,10 @@ class AttributesResolver implements ResolverInterface
         }
 
         $data['value'] = $eavAttribute->getSource()->getOptionText($option);
+
+        if (is_array($data['value'])) {
+          $data['value'] = implode(',', $data['value']);
+        }
 
         if ($isSwatch) {
           $data['swatch'] = $this->getSwatchValue($option);
