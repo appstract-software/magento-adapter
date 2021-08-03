@@ -13,8 +13,28 @@ use Magento\Framework\Setup\ModuleDataSetupInterface;
 
 class InstallData implements InstallDataInterface
 {
-    const AGREED_TO_PROMOTIONS = 'agreed_to_promotions';
-    
+    const AGREED_TO_PROMOTIONS = ['attribute_code' => 'agreed_to_promotions', 'label' => 'Zgoda na marketing'];
+
+    /**
+     * Configurator custom attributes
+     */
+    const CONFIGURATOR_GENDER = ['attribute_code' => 'selected_gender', 'label' => 'Wybrana płeć'];
+    const CONFIGURATOR_SORT_FIELD = ['attribute_code' => 'sort_field', 'label' => 'Preferowane sortowanie'];
+    const CONFIGURATOR_PREFERRED_COLORS = ['attribute_code' => 'preferred_colors', 'label' => 'Preferowane kolory'];
+    const CONFIGURATOR_PREFERRED_STYLES = ['attribute_code' => 'preferred_styles', 'label' => 'Preferowane style'];
+    const CONFIGURATOR_SIZES = [
+        ['attribute_code' => 'size_collar', 'label' => 'Rozmiar kołnierzyka'],
+        ['attribute_code' => 'size_chest',  'label' => 'Obwód w klatce'],
+        ['attribute_code' => 'size_waist',  'label' => 'Obwód pasa'],
+        ['attribute_code' => 'size_height', 'label' => 'Wzrost'],
+        ['attribute_code' => 'size_insole', 'label' => 'Rozmiar wkładki']
+    ];
+
+    /**
+     * Configurator custom attributes starting postion and sort_order
+     */
+    private $attributePosition = 300;
+
     /**
      * @var EavSetupFactory
      */
@@ -56,21 +76,25 @@ class InstallData implements InstallDataInterface
         $attributeSet = $this->attributeSetFactory->create();
         $attributeGroupId = $attributeSet->getDefaultGroupId($attributeSetId);
 
-        $customerSetup->addAttribute(Customer::ENTITY, self::AGREED_TO_PROMOTIONS,
+        /**
+         *  Attribute: agreed_to_promotions
+         */
+        $customerSetup->addAttribute(Customer::ENTITY, self::AGREED_TO_PROMOTIONS['attribute_code'],
             [
                 'type'         => 'int',
-				'label'        => 'Agreed to promotions',
+				'label'        => self::AGREED_TO_PROMOTIONS['label'],
 				'input'        => 'boolean',
 				'required'     => false,
                 'default'      => 0,
                 'visible'      => true,
                 'user_defined' => true,
-                'sort_order'   => 210,
-                'position'     => 210,
+                'sort_order'   => $this->attributePosition,
+                'position'     => $this->attributePosition++,
                 'system'       => false,
-        ]);
+            ]
+        );
 
-        $agreedToPromotions = $customerSetup->getEavConfig()->getAttribute(Customer::ENTITY, self::AGREED_TO_PROMOTIONS)
+        $agreedToPromotions = $customerSetup->getEavConfig()->getAttribute(Customer::ENTITY, self::AGREED_TO_PROMOTIONS['attribute_code'])
             ->addData([
                 'attribute_set_id'   => $attributeSetId,
                 'attribute_group_id' => $attributeGroupId,
@@ -78,6 +102,152 @@ class InstallData implements InstallDataInterface
             ]);
     
         $agreedToPromotions->save();
+
+        /**
+         *  Attribute: selected_gender
+         */
+        $customerSetup->addAttribute(Customer::ENTITY, self::CONFIGURATOR_GENDER['attribute_code'],
+            [
+                'backend'      => 'Magento\Eav\Model\Entity\Attribute\Backend\ArrayBackend',
+                'type'         => 'varchar',
+				'label'        => self::CONFIGURATOR_GENDER['label'],
+				'input'        => 'select',
+                'source'       => 'Appstractsoftware\MagentoAdapter\Model\Config\Source\ConfiguratorGenderOptions',
+				'required'     => false,
+                'default'      => '',
+                'visible'      => true,
+                'user_defined' => true,
+                'sort_order'   => $this->attributePosition,
+                'position'     => $this->attributePosition++,
+                'system'       => false,
+            ]
+        );
+
+        $configuratorGender = $customerSetup->getEavConfig()->getAttribute(Customer::ENTITY, self::CONFIGURATOR_GENDER['attribute_code'])
+            ->addData([
+                'attribute_set_id'   => $attributeSetId,
+                'attribute_group_id' => $attributeGroupId,
+                'used_in_forms'      => ['adminhtml_customer'],
+            ]);
+    
+        $configuratorGender->save();
+
+        /**
+         *  Attribute: 'size_collar', 'size_chest', 'size_waist', 'size_height', 'size_insole'
+         */
+        foreach (self::CONFIGURATOR_SIZES as &$size) {
+            $customerSetup->addAttribute(Customer::ENTITY, $size['attribute_code'],
+                [
+                    'type'         => 'int',
+                    'label'        => $size['label'],
+                    'input'        => 'text',
+                    'required'     => false,
+                    'default'      => '',
+                    'visible'      => true,
+                    'user_defined' => true,
+                    'sort_order'   => $this->attributePosition,
+                    'position'     => $this->attributePosition++,
+                    'system'       => false,
+                ]
+            );
+
+            $configuratorStep = $customerSetup->getEavConfig()->getAttribute(Customer::ENTITY, $size['attribute_code'])
+                ->addData([
+                    'attribute_set_id'   => $attributeSetId,
+                    'attribute_group_id' => $attributeGroupId,
+                    'used_in_forms'      => ['adminhtml_customer'],
+                ]);
+    
+            $configuratorStep->save();
+        }
+
+        /**
+         *  Attribute: sort_fields
+         */
+        $customerSetup->addAttribute(Customer::ENTITY, self::CONFIGURATOR_SORT_FIELD['attribute_code'],
+            [
+                'backend'      => 'Magento\Eav\Model\Entity\Attribute\Backend\ArrayBackend',
+                'type'         => 'varchar',
+				'label'        => self::CONFIGURATOR_SORT_FIELD['label'],
+				'input'        => 'select',
+                'source'       => 'Appstractsoftware\MagentoAdapter\Model\Config\Source\ConfiguratorSortOptions',
+				'required'     => false,
+                'default'      => '',
+                'visible'      => true,
+                'user_defined' => true,
+                'sort_order'   => $this->attributePosition,
+                'position'     => $this->attributePosition++,
+                'system'       => false,
+            ]
+        );
+
+        $configuratorSortField = $customerSetup->getEavConfig()->getAttribute(Customer::ENTITY, self::CONFIGURATOR_SORT_FIELD['attribute_code'])
+            ->addData([
+                'attribute_set_id'   => $attributeSetId,
+                'attribute_group_id' => $attributeGroupId,
+                'used_in_forms'      => ['adminhtml_customer'],
+            ]);
+    
+        $configuratorSortField->save();
+
+        /**
+         *  Attribute: preferred_colors
+         */
+        $customerSetup->addAttribute(Customer::ENTITY, self::CONFIGURATOR_PREFERRED_COLORS['attribute_code'],
+            [
+                'backend'      => 'Magento\Eav\Model\Entity\Attribute\Backend\ArrayBackend',
+                'type'         => 'varchar',
+				'label'        => self::CONFIGURATOR_PREFERRED_COLORS['label'],
+				'input'        => 'multiselect',
+                'source'       => 'Appstractsoftware\MagentoAdapter\Model\Config\Source\ConfiguratorPreferredColorsOptions',
+				'required'     => false,
+                'default'      => '',
+                'visible'      => true,
+                'user_defined' => true,
+                'sort_order'   => $this->attributePosition,
+                'position'     => $this->attributePosition++,
+                'system'       => false,
+            ]
+        );
+
+        $configuratorPreferredColors= $customerSetup->getEavConfig()->getAttribute(Customer::ENTITY, self::CONFIGURATOR_PREFERRED_COLORS['attribute_code'])
+            ->addData([
+                'attribute_set_id'   => $attributeSetId,
+                'attribute_group_id' => $attributeGroupId,
+                'used_in_forms'      => ['adminhtml_customer'],
+            ]);
+    
+        $configuratorPreferredColors->save();
+
+        /**
+         *  Attribute: preferred_styles
+         */
+        $customerSetup->addAttribute(Customer::ENTITY, self::CONFIGURATOR_PREFERRED_STYLES['attribute_code'],
+            [
+                'backend'      => 'Magento\Eav\Model\Entity\Attribute\Backend\ArrayBackend',
+                'type'         => 'varchar',
+				'label'        => self::CONFIGURATOR_PREFERRED_STYLES['label'],
+				'input'        => 'multiselect',
+                'source'       => 'Appstractsoftware\MagentoAdapter\Model\Config\Source\ConfiguratorPreferredStylesOptions',
+				'required'     => false,
+                'default'      => '',
+                'visible'      => true,
+                'user_defined' => true,
+                'sort_order'   => $this->attributePosition,
+                'position'     => $this->attributePosition++,
+                'system'       => false,
+            ]
+        );
+        
+        $configuratorPreferredStyles= $customerSetup->getEavConfig()->getAttribute(Customer::ENTITY, self::CONFIGURATOR_PREFERRED_STYLES['attribute_code'])
+            ->addData([
+                'attribute_set_id'   => $attributeSetId,
+                'attribute_group_id' => $attributeGroupId,
+                'used_in_forms'      => ['adminhtml_customer'],
+            ]);
+    
+        $configuratorPreferredStyles->save();
+
         $setup->endSetup();
     }
 }
