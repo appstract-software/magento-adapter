@@ -2,6 +2,8 @@
 
 namespace Appstractsoftware\MagentoAdapter\Api;
 
+use Magento\Inventory\Model\SourceItem\Command\SourceItemsSave;
+
 /**
  * @api
  */
