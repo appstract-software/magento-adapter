@@ -95,6 +95,9 @@
     <type name="Magento\InventoryIndexer\Indexer\SelectBuilder">
         <plugin name="appstract_select_builder" type="Appstractsoftware\MagentoAdapter\Plugin\SelectBuilder" />
     </type>
+    <type name="Magento\Inventory\Model\ResourceModel\SourceItem\SaveMultiple">
+        <plugin name="appstract_stock_item" type="Appstractsoftware\MagentoAdapter\Plugin\SourceItem" />
+    </type>
     <type name="Magento\CatalogGraphQl\DataProvider\Product\LayeredNavigation\Builder\Attribute">
         <plugin name="appstract_attribute_builder" type="Appstractsoftware\MagentoAdapter\Plugin\AttributeBuilder" />
     </type>
