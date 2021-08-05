@@ -137,4 +137,10 @@
     <!-- <type name="Magento\Sales\Api\Data\OrderItemInterface">
         <plugin disabled="false" name="StackExchange_Magento_Plugin_Magento_Sales_Api_Data_OrderItemInterface" sortOrder="10" type="Appstractsoftware\MagentoAdapter\Plugin\OrderItemPlugin"/>
     </type> -->
+
+    <!-- Prepared admin-customer cart -->
+    <preference for="Appstractsoftware\MagentoAdapter\Api\PreparedCartRepositoryInterface" type="Appstractsoftware\MagentoAdapter\Model\PreparedCartRepository" />
+    <type name="Magento\Quote\Api\ChangeQuoteControlInterface">
+        <plugin name="get_appstract_is_allowed" type="Appstractsoftware\MagentoAdapter\Plugin\ChangeQuoteControl" />
+    </type>
 </config>

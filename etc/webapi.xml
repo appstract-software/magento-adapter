@@ -293,4 +293,28 @@
             <parameter name="customerId" force="true">%customer_id%</parameter>            <!-- Provided by resource self -->
         </data>
     </route>
+
+    <!-- Prepared admin-customer cart API -->
+    <route url="/V1/prepared-cart" method="POST">
+        <service class="Appstractsoftware\MagentoAdapter\Api\PreparedCartRepositoryInterface" method="createGuestCartBasedOnAdminCustomerCart"/>
+        <resources>
+            <resource ref="self"/>
+        </resources>
+        <data>
+            <parameter name="cartId" force="true">%cart_id%</parameter>
+        </data>
+    </route>
+    <route url="/V1/prepared-cart" method="DELETE">
+        <service class="Appstractsoftware\MagentoAdapter\Api\PreparedCartRepositoryInterface" method="emptyPreparedAdminCustomerCart"/>
+        <resources>
+            <resource ref="self"/>
+        </resources>
+        <data>
+            <parameter name="customerId" force="true">%customer_id%</parameter>
+            <parameter name="cartId" force="true">%cart_id%</parameter>
+        </data>
+    </route>
+    <route url="/V1/prepared-cart/apply/:preparedCartId" method="POST">
+        <service class="Appstractsoftware\MagentoAdapter\Api\PreparedCartRepositoryInterface" method="applyPreparedQuestCartToCustomerCart"/>
+    </route>
 </routes>
