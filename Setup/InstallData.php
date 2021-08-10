@@ -138,7 +138,7 @@ class InstallData implements InstallDataInterface
         foreach (self::CONFIGURATOR_SIZES as &$size) {
             $customerSetup->addAttribute(Customer::ENTITY, $size['attribute_code'],
                 [
-                    'type'         => 'int',
+                    'type'         => 'decimal',
                     'label'        => $size['label'],
                     'input'        => 'text',
                     'required'     => false,
