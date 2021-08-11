@@ -143,4 +143,9 @@
     <type name="Magento\Quote\Api\ChangeQuoteControlInterface">
         <plugin name="get_appstract_is_allowed" type="Appstractsoftware\MagentoAdapter\Plugin\ChangeQuoteControl" />
     </type>
+
+    <!-- Customer -->
+    <type name="Magento\Customer\Api\Data\CustomerInterface">
+        <plugin name="get_appstract_customer_group" type="Appstractsoftware\MagentoAdapter\Plugin\Customer" />
+    </type>
 </config>
