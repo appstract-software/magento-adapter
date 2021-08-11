@@ -14,6 +14,7 @@ use Magento\Framework\Setup\ModuleDataSetupInterface;
 class InstallData implements InstallDataInterface
 {
     const AGREED_TO_PROMOTIONS = ['attribute_code' => 'agreed_to_promotions', 'label' => 'Zgoda na marketing'];
+    const KSK_NUMBER = ['attribute_code' => 'ksk_number', 'label' => 'Numer KSK'];
 
     /**
      * Configurator custom attributes
@@ -102,6 +103,33 @@ class InstallData implements InstallDataInterface
             ]);
     
         $agreedToPromotions->save();
+
+        /**
+         *  Attribute: ksk_number
+         */
+        $customerSetup->addAttribute(Customer::ENTITY, self::KSK_NUMBER['attribute_code'],
+            [
+                'type'         => 'varchar',
+				'label'        => self::KSK_NUMBER['label'],
+				'input'        => 'text',
+				'required'     => false,
+                'default'      => 0,
+                'visible'      => true,
+                'user_defined' => true,
+                'sort_order'   => $this->attributePosition,
+                'position'     => $this->attributePosition++,
+                'system'       => false,
+            ]
+        );
+
+        $kskNumber = $customerSetup->getEavConfig()->getAttribute(Customer::ENTITY, self::KSK_NUMBER['attribute_code'])
+            ->addData([
+                'attribute_set_id'   => $attributeSetId,
+                'attribute_group_id' => $attributeGroupId,
+                'used_in_forms'      => ['adminhtml_customer'],
+            ]);
+    
+        $kskNumber->save();
 
         /**
          *  Attribute: selected_gender
