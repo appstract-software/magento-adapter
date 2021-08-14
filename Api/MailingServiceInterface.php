@@ -14,9 +14,10 @@ interface MailingServiceInterface
      * @param string $email
      * @param string $templateId
      * @param mixed $variables
+     * @param \Appstractsoftware\MagentoAdapter\Api\Data\AttachmentInterface[]  $attachments
      * @return \Appstractsoftware\MagentoAdapter\Api\MailingServiceInterface
      */
-    public function sendEmail($email, $templateId, $variables);
+    public function sendEmail($email, $templateId, $variables, $attachments = []);
 
     /**
      * Subscribe an email.
