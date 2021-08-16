@@ -166,12 +166,11 @@ class Product implements ProductInterface
   {
     try {
       $product = $this->productRepository->get($sku);
+      $productActionObject = $this->objectManager->create('Magento\Catalog\Model\Product\Action');
 
       foreach ($attributes as $attribute) {
-        $product->setCustomAttribute($attribute->getAttributeCode(), $attribute->getValue());
+        $productActionObject->updateAttributes([$product->getId()], array($attribute->getAttributeCode() => $attribute->getValue()), 0);
       }
-
-      $product->save();
       return true;
     } catch (Exception $e) {
       return false;
