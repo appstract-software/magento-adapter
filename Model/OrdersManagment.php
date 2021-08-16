@@ -3,7 +3,7 @@
 namespace Appstractsoftware\MagentoAdapter\Model;
 
 use \Appstractsoftware\MagentoAdapter\Api\OrdersManagmentInterface;
-use Magento\Sales\Api\OrderRepositoryInterface;
+use Magento\Framework\Api\Search\SearchCriteriaInterface;
 
 class OrdersManagment implements OrdersManagmentInterface
 {
@@ -69,15 +69,22 @@ class OrdersManagment implements OrdersManagmentInterface
 
   /**
    * @param int $customerId
+   * @param SearchCriteriaInterface $searchCriteria
    * @return \Magento\Sales\Api\Data\OrderInterface[]
    */
-  public function getListForCustomer($customerId)
+  public function getListForCustomer($customerId, $searchCriteria)
   {
     $filters = [
       $this->_filterBuilder->setField('customer_id')->setValue($customerId)->create()
     ];
-    $searchCriteria = $this->_searchCriteriaBuilder->addFilters($filters)->create();
-    $items = $this->_orderRepository->getList($searchCriteria)->getItems();
+
+    $customerSearchCriteria = $this->_searchCriteriaBuilder
+      ->addFilters($filters)
+      ->create()
+      ->setCurrentPage($searchCriteria->getCurrentPage())
+      ->setPageSize($searchCriteria->getPageSize());
+
+    $items = $this->_orderRepository->getList($customerSearchCriteria)->getItems();
 
     $products = $this->getProducts($items);
     $parents = $this->getParents($products);
