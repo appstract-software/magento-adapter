@@ -4,12 +4,14 @@ namespace Appstractsoftware\MagentoAdapter\Model;
 
 
 use Appstractsoftware\MagentoAdapter\Api\MailingServiceInterface;
+// use Magento\Framework\Mail\Template\TransportBuilder;
+use Appstractsoftware\MagentoAdapter\Model\TransportBuilder;
 use Magento\Framework\App\Helper\Context;
-use Magento\Framework\Mail\Template\TransportBuilder;
 use Magento\Framework\App\Helper\AbstractHelper;
 use Magento\Framework\Translate\Inline\StateInterface;
 use Magento\Store\Model\StoreManagerInterface;
 use Magento\Framework\App\ResourceConnection;
+use Magento\Framework\Mail\MimePartInterfaceFactory;
 
 class MailingService extends AbstractHelper implements MailingServiceInterface
 {
@@ -22,23 +24,26 @@ class MailingService extends AbstractHelper implements MailingServiceInterface
     protected $storeManager;
     protected $inlineTranslation;
     protected $resourceConnection;
+    protected $mimeFactory;
 
     public function __construct(
         Context $context,
         TransportBuilder $transportBuilder,
         StoreManagerInterface $storeManager,
         ResourceConnection $resourceConnection,
-        StateInterface $state
+        StateInterface $state,
+        MimePartInterfaceFactory $mimeFactory
 
     ) {
         $this->transportBuilder = $transportBuilder;
         $this->storeManager = $storeManager;
         $this->resourceConnection = $resourceConnection;
         $this->inlineTranslation = $state;
+        $this->mimeFactory = $mimeFactory;
         parent::__construct($context);
     }
 
-    public function sendEmail($email, $templateId, $variables)
+    public function sendEmail($email, $templateId, $variables, $attachments = [])
     {
         // Getting mail from Magento Store Settings
         $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
@@ -61,9 +66,15 @@ class MailingService extends AbstractHelper implements MailingServiceInterface
                 ->setTemplateOptions($templateOptions)
                 ->setTemplateVars($variables)
                 ->setFrom($from)
-                ->addTo($email)
-                ->getTransport();
-            $transport->sendMessage();
+                ->addTo($email);
+
+            if (!empty($attachments)) {
+                foreach ($attachments as $attachment) {
+                    $transport->addAttachment($attachment->getContent(), $attachment->getFileName(), $attachment->getFileType(), $attachment->getDisposition(), $attachment->getEncoding());
+                }
+            }
+
+            $transport->getTransport()->sendMessage();
             $this->inlineTranslation->resume();
 
             return $storeId;
@@ -85,7 +96,6 @@ class MailingService extends AbstractHelper implements MailingServiceInterface
         }
     }
 
-
     public function insertStatus($topic, $email, $name, $company, $message, $orderId)
     {
         $connection  = $this->resourceConnection->getConnection();
@@ -99,8 +109,6 @@ class MailingService extends AbstractHelper implements MailingServiceInterface
         }
 
         $time = time();
-
-        var_dump($time);
 
         $data = [
             'topic' => $topic,
