@@ -83,6 +83,14 @@
         </resources>
     </route>
 
+    <!-- Product Attributes -->
+    <route url="/V1/product/set-custom-attributes" method="POST">
+        <service class="Appstractsoftware\MagentoAdapter\Api\ProductInterface" method="setAttributes"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
+
     <!-- PRODUCT OPTIONS API -->
     <route url="/V1/product-options/category" method="GET">
         <service class="Appstractsoftware\MagentoAdapter\Api\ProductOptionsServiceInterface" method="getCategoryProductsOptions"/>

@@ -12,6 +12,21 @@ class Product implements ProductInterface
    */
   protected $sourceItemsSaveInterface;
 
+  /**
+   * @var \Magento\Catalog\Api\ProductRepositoryInterface
+   */
+  protected $productRepository;
+
+  /**
+   * @var \Magento\Framework\ObjectManagerInterface
+   */
+  protected $objectManager;
+
+  /**
+   * @var \Magento\InventoryApi\Api\Data\SourceItemInterfaceFactory
+   */
+  protected $sourceItem;
+
   public function __construct(
     \Magento\Framework\ObjectManagerInterface $objectManager,
     \Magento\Catalog\Api\ProductRepositoryInterface $productRepository,
@@ -144,6 +159,22 @@ class Product implements ProductInterface
       echo "<pre>";
       print_r($e->getMessage());
       exit;
+    }
+  }
+
+  public function setAttributes($sku, $attributes)
+  {
+    try {
+      $product = $this->productRepository->get($sku);
+
+      foreach ($attributes as $attribute) {
+        $product->setCustomAttribute($attribute->getAttributeCode(), $attribute->getValue());
+      }
+
+      $product->save();
+      return true;
+    } catch (Exception $e) {
+      return false;
     }
   }
 }
