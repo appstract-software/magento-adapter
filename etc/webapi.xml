@@ -58,6 +58,12 @@
             <resource ref="anonymous"/>
         </resources>
     </route>
+    <route url="/V1/przelewy24/register-transaction" method="POST">
+        <service class="Appstractsoftware\MagentoAdapter\Api\Przelewy24Interface" method="registerTransaction"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
 
     <!-- SET CUSTOMER TAX CLASS ID -->
     <route url="/V1/customer-group" method="POST">

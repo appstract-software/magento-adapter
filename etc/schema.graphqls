@@ -54,3 +54,11 @@ type Sources {
 input ProductAttributeSortInput {
     is_salable: SortEnum
 }
+
+input CartAddressInput {
+    vat_id: String
+}
+
+interface CartAddressInterface {
+    vat_id: String  
+}

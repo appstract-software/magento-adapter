@@ -65,10 +65,11 @@ $ bin/magento setup:upgrade                                    # upgrade Magento
 
 #### Payments REST API
 
-| Role                      | Method     | URL                                      | Description                                     |
-| ------------------------- | ---------- | ---------------------------------------- | ----------------------------------------------- |
-| Anonymous                 | **`POST`** | `/rest/V1/payu/create-order`             | Create PayU order                               |
-| Anonymous                 | **`GET`**  | `/rest/V1/payu/order-status/:id`         | Get PayU order details                          |
+| Role                      | Method     | URL                                        | Description                                     |
+| ------------------------- | ---------- | ------------------------------------------ | ----------------------------------------------- |
+| Anonymous                 | **`POST`** | `/rest/V1/payu/create-order`               | Create PayU order                               |
+| Anonymous                 | **`GET`**  | `/rest/V1/payu/order-status/:id`           | Get PayU order details                          |
+| Anonymous                 | **`POST`** | `/rest/V1/przelewy24/register-transaction` | Register new Przelewy24 transaction             |
 
 ---
 
