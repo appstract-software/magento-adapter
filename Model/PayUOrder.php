@@ -9,19 +9,17 @@ class PayUOrder implements PayUOrderInterface
   public function __construct(
     \Magento\Sales\Api\OrderRepositoryInterface $orderRepository,
     \Magento\Framework\ObjectManagerInterface $objectManager,
-    \PayU\PaymentGateway\Api\CreateOrderResolverInterface $createOrderResolver,
-    \PayU\PaymentGateway\Api\PayUCreateOrderInterface $payUCreateOrder,
     \Appstractsoftware\MagentoAdapter\Api\Data\PayUOrderCreateResponseInterface $payUOrderCreateResponse,
-    \OpenPayU_Order $openPayUOrder,
-    \PayU\PaymentGateway\Api\PayUConfigInterface $payUConfig
+    \Appstractsoftware\MagentoAdapter\Model\ModuleLoader $moduleLoader
   ) {
+    $this->createOrderResolver = $moduleLoader->create('PayU_PaymentGateway', '\PayU\PaymentGateway\Api\CreateOrderResolverInterface');
+    $this->payUCreateOrder = $moduleLoader->create('PayU_PaymentGateway', '\PayU\PaymentGateway\Api\PayUCreateOrderInterface');
+    $this->openPayUOrder = $moduleLoader->create('PayU_PaymentGateway', '\OpenPayU_Order');
+    $this->payUConfig = $moduleLoader->create('PayU_PaymentGateway', '\PayU\PaymentGateway\Api\PayUConfigInterface');
+
     $this->orderRepository = $orderRepository;
     $this->objectManager = $objectManager;
-    $this->createOrderResolver = $createOrderResolver;
-    $this->payUCreateOrder = $payUCreateOrder;
     $this->payUOrderCreateResponse = $payUOrderCreateResponse;
-    $this->openPayUOrder = $openPayUOrder;
-    $this->payUConfig = $payUConfig;
   }
 
   /**
@@ -29,7 +27,12 @@ class PayUOrder implements PayUOrderInterface
    */
   public function createOrder($orderId, $continueUrl)
   {
+    if (is_null($this->createOrderResolver)) {
+      throw new \Magento\Framework\Exception\LocalizedException(__('Module PayU_PaymentGateway is not enabled'));
+    }
+
     $order = $this->orderRepository->get($orderId);
+
     $orderAdapter = $this->objectManager->create(\Magento\Payment\Gateway\Data\Order\OrderAdapter::class, ['order' => $order]);
 
     $createOrderData = $this->createOrderResolver->resolve(
@@ -51,6 +54,10 @@ class PayUOrder implements PayUOrderInterface
    */
   public function getOrderStatus($id)
   {
+    if (is_null($this->createOrderResolver)) {
+      throw new \Magento\Framework\Exception\LocalizedException(__('Module PayU_PaymentGateway is not enabled'));
+    }
+
     $this->payUConfig->setDefaultConfig('payu_gateway');
 
     $data = $this->openPayUOrder::retrieve($id);
