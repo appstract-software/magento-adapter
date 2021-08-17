@@ -95,10 +95,26 @@ class OrdersManagment implements OrdersManagmentInterface
 
     $products = $this->getProducts($items);
     $parents = $this->getParents($products);
+    $filteredProducts = [];
+
+    foreach ($items as $order) {
+      $filteredOrderItems = [];
+      foreach ($order->getItems() as $orderItem) {
+        $productType = $orderItem->getProductType();
+
+        if (
+          $productType == \Magento\Catalog\Model\Product\Type::TYPE_SIMPLE ||
+          $productType == \Magento\Catalog\Model\Product\Type::TYPE_VIRTUAL
+        ) {
+          $filteredOrderItems[] = $orderItem;
+        }
+      }
+      $order->setItems($filteredOrderItems);
+    }
 
     foreach ($items as $order) {
       foreach ($order->getItems() as $orderItem) {
-        foreach ($products as $product) {
+        foreach ($filteredProducts as $product) {
           if ($orderItem->getSku() === $product->getSku()) {
             $this->assignExtensionAttributes($orderItem, $product, $parents);
           }
