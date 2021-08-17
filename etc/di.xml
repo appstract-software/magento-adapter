@@ -48,6 +48,7 @@
     <preference for="Appstractsoftware\MagentoAdapter\Api\PayUOrderInterface" type="Appstractsoftware\MagentoAdapter\Model\PayUOrder"></preference>
     <preference for="Appstractsoftware\MagentoAdapter\Api\Data\PayUOrderCreateResponseInterface" type="Appstractsoftware\MagentoAdapter\Model\Data\PayUOrderCreateResponse"></preference>
     <preference for="Appstractsoftware\MagentoAdapter\Api\Przelewy24Interface" type="Appstractsoftware\MagentoAdapter\Model\Przelewy24"></preference>
+    <preference for="Appstractsoftware\MagentoAdapter\Api\Data\Przelewy24RegisterTransactionResponseInterface" type="Appstractsoftware\MagentoAdapter\Model\Data\Przelewy24RegisterTransactionResponse"></preference>
 
     <!-- Orders -->
     <preference for="Appstractsoftware\MagentoAdapter\Api\OrdersInterface" type="Appstractsoftware\MagentoAdapter\Model\Orders"></preference>

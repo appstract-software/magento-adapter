@@ -9,14 +9,14 @@ class Przelewy24 implements Przelewy24Interface
   public function __construct(
     \Magento\Sales\Api\OrderRepositoryInterface $orderRepository,
     \Magento\Framework\ObjectManagerInterface $objectManager,
-    \Appstractsoftware\MagentoAdapter\Api\Data\PayUOrderCreateResponseInterface $payUOrderCreateResponse,
+    \Appstractsoftware\MagentoAdapter\Api\Data\Przelewy24RegisterTransactionResponseInterface $p24Response,
     \Appstractsoftware\MagentoAdapter\Model\ModuleLoader $moduleLoader
   ) {
     $this->przelewy = $moduleLoader->create('Dialcom_Przelewy', '\Dialcom\Przelewy\Model\Payment\Przelewy');
     $this->helper = $moduleLoader->create('Dialcom_Przelewy', '\Dialcom\Przelewy\Helper\Data');
     $this->orderRepository = $orderRepository;
     $this->objectManager = $objectManager;
-    $this->payUOrderCreateResponse = $payUOrderCreateResponse;
+    $this->p24Response = $p24Response;
   }
 
   /**
@@ -56,6 +56,8 @@ class Przelewy24 implements Przelewy24Interface
       throw new \Magento\Framework\Exception\LocalizedException(__($data['errorMessage'] || 'Something went wrong'));
     }
 
-    return $data['token'];
+    $data['sessionId'] = $postData['p24_session_id'];
+
+    return $this->p24Response->load($data);
   }
 }

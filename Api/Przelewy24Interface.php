@@ -12,7 +12,7 @@ interface Przelewy24Interface
      *
      * @param string $orderId
      * @param string $urlReturn
-     * @return string
+     * @return Appstractsoftware\MagentoAdapter\Api\Data\Przelewy24RegisterTransactionResponseInterface
      */
     public function registerTransaction($orderId, $urlReturn);
 }
