@@ -47,6 +47,11 @@ class OrdersManagment implements OrdersManagmentInterface
    */
   public $orderItemOptions;
 
+  /**
+   * @var \Magento\Catalog\Model\ResourceModel\Product\CollectionFactory
+   */
+  public $productCollectionFactory;
+
   public function __construct(
     \Magento\Sales\Api\Data\OrderItemExtensionFactory $orderItemExtensionFactory,
     \Magento\ConfigurableProduct\Model\Product\Type\Configurable $configurableProduct,
@@ -55,8 +60,10 @@ class OrdersManagment implements OrdersManagmentInterface
     \Magento\Framework\Api\SearchCriteriaBuilder $searchCriteriaBuilder,
     \Magento\Store\Model\StoreManagerInterface $storeManager,
     \Magento\Framework\Api\FilterBuilder $filterBuilder,
-    \Appstractsoftware\MagentoAdapter\Api\Data\OrderItemOptionsInterface $orderItemOptions
+    \Appstractsoftware\MagentoAdapter\Api\Data\OrderItemOptionsInterface $orderItemOptions,
+    \Magento\Catalog\Model\ResourceModel\Product\CollectionFactory $productCollectionFactory
   ) {
+    $this->_productCollectionFactory = $productCollectionFactory;
     $this->orderItemExtensionFactory = $orderItemExtensionFactory;
     $this->configurableProduct = $configurableProduct;
     $this->_productRepository = $productRepository;
@@ -113,50 +120,38 @@ class OrdersManagment implements OrdersManagmentInterface
         }
       }
     }
-    $filters = [];
 
-    foreach ($skus as $sku) {
-      $filters[] = $this->_filterBuilder->setField('sku')->setValue($sku)->create();
-    }
-
-
-    $searchCriteria = $this->_searchCriteriaBuilder->addFilters($filters)->create();
-    $products = $this->_productRepository->getList($searchCriteria)->getItems();
-
-    return $products;
+    $collection = $this->_productCollectionFactory->create();
+    $collection->addAttributeToSelect('*');
+    $collection->addFieldToFilter('sku', ['in' => $skus]);
+    return $collection;
   }
 
   public function getParents($products)
   {
-    $parentIds = [];
+    $productParentIds = [];
 
     foreach ($products as $product) {
       $parentIds = $this->configurableProduct->getParentIdsByChild($product->getId());
 
       if (!empty($parentIds)) {
         $parentId = array_shift($parentIds);
-        if (!in_array($parentId, $parentIds)) {
-          $parentIds[] = $parentId;
+        if (!in_array($parentId, $productParentIds)) {
+          $productParentIds[] = $parentId;
         }
       }
     }
 
 
-    if (empty($parentIds)) {
+
+    if (empty($productParentIds)) {
       return [];
     }
 
-    $filters = [];
-
-    foreach ($parentIds as $id) {
-      $filters[] = $this->_filterBuilder->setField('entity_id')->setValue($id)->create();
-    }
-
-    $searchCriteria = $this->_searchCriteriaBuilder->addFilters($filters)->create();
-
-    $parents = $this->_productRepository->getList($searchCriteria)->getItems();
-
-    return $parents;
+    $collection = $this->_productCollectionFactory->create();
+    $collection->addAttributeToSelect('*');
+    $collection->addFieldToFilter('entity_id', ['in' => $productParentIds]);
+    return $collection;
   }
 
 
