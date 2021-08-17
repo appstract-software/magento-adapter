@@ -120,15 +120,11 @@ class OrdersManagment implements OrdersManagmentInterface
         }
       }
     }
-    foreach ($skus as $sku) {
-      $filters[] = $this->_filterBuilder->setField('sku')->setValue($sku)->create();
-    }
 
-
-    $searchCriteria = $this->_searchCriteriaBuilder->addFilters($filters)->create();
-    $products = $this->_productRepository->getList($searchCriteria)->getItems();
-
-    return $products;
+    $collection = $this->_productCollectionFactory->create();
+    $collection->addAttributeToSelect('*');
+    $collection->addFieldToFilter('sku', ['in' => $skus]);
+    return $collection;
   }
 
   public function getParents($products)
@@ -156,18 +152,6 @@ class OrdersManagment implements OrdersManagmentInterface
     $collection->addAttributeToSelect('*');
     $collection->addFieldToFilter('entity_id', ['in' => $productParentIds]);
     return $collection;
-
-    $filters = [];
-
-    foreach ($productParentIds as $id) {
-      $filters[] = $this->_filterBuilder->setField('entity_id')->setValue($id)->create();
-    }
-
-    $searchCriteria = $this->_searchCriteriaBuilder->addFilters($filters)->create();
-
-    $parents = $this->_productRepository->getList($searchCriteria)->getItems();
-
-    return $parents;
   }
 
 
