@@ -37,7 +37,7 @@ class PayUOrder implements PayUOrderInterface
 
     $createOrderData = $this->createOrderResolver->resolve(
       $orderAdapter,
-      '',
+      'PBL',
       '',
       $order->getGrandTotal(),
       $order->getOrderCurrencyCode(),
