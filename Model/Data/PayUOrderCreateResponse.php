@@ -25,7 +25,7 @@ class PayUOrderCreateResponse implements PayUOrderCreateResponseInterface
     {
         $this->status = $responseArray['status']->statusCode;
         $this->orderId = $responseArray['orderId'];
-        $this->extOrderId = $responseArray['extOrderId'];
+        // $this->extOrderId = $responseArray['extOrderId'];
         $this->redirectUri = $responseArray['redirectUri'];
 
         return clone $this;
