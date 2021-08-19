@@ -82,18 +82,6 @@
     <preference for="Appstractsoftware\MagentoAdapter\Api\Data\ProductDataStocksInterface" type="Appstractsoftware\MagentoAdapter\Model\Data\ProductDataStocks"></preference>
     <preference for="Appstractsoftware\MagentoAdapter\Api\Data\ProductDataStockSourcesInterface" type="Appstractsoftware\MagentoAdapter\Model\Data\ProductDataStockSources"></preference>
     <preference for="Appstractsoftware\MagentoAdapter\Api\ProductInterface" type="Appstractsoftware\MagentoAdapter\Model\Product"></preference>
-    <!-- <type name="Magento\Quote\Api\GuestCartItemRepositoryInterface">
-        <plugin name="get_appstract_guest_cart_item" type="Appstractsoftware\MagentoAdapter\Plugin\GuestCartItemRepository" />
-    </type>
-    <type name="Magento\Quote\Api\GuestCartRepositoryInterface">
-        <plugin name="get_appstract_guest_cart" type="Appstractsoftware\MagentoAdapter\Plugin\GuestCartRepository" />
-    </type>
-    <type name="Magento\Quote\Api\CartItemRepositoryInterface">
-        <plugin name="get_appstract_mine_cart_item" type="Appstractsoftware\MagentoAdapter\Plugin\CartItemRepository" />
-    </type>
-    <type name="Magento\Quote\Api\CartManagementInterface">
-        <plugin name="get_appstract_mine_cart" type="Appstractsoftware\MagentoAdapter\Plugin\CartRepository" />
-    </type> -->
     <type name="Magento\InventoryIndexer\Indexer\SelectBuilder">
         <plugin name="appstract_select_builder" type="Appstractsoftware\MagentoAdapter\Plugin\SelectBuilder" />
     </type>
@@ -123,6 +111,14 @@
     </type>
         <type name="Magento\Elasticsearch\SearchAdapter\Query\Builder\Sort">
         <plugin name="appstract_sort_builder" type="Appstractsoftware\MagentoAdapter\Plugin\Sort" />
+    </type>
+
+    <!-- GraphQL -->
+    <type name="Magento\QuoteGraphQl\Model\Resolver\PlaceOrder">
+        <plugin name="appstract_gql_place_order_resolver" type="Appstractsoftware\MagentoAdapter\Plugin\PlaceOrder" />
+    </type>
+    <type name="Magento\QuoteGraphQl\Model\Resolver\ShippingAddress\SelectedShippingMethod">
+        <plugin name="appstract_gql_selected_shipping_method_resolver" type="Appstractsoftware\MagentoAdapter\Plugin\SelectedShippingMethod" />
     </type>
 
 
