@@ -2,6 +2,14 @@ interface ProductInterface {
     attributes: [Attribute] @resolver(class: "Appstractsoftware\\MagentoAdapter\\CustomGQL\\Model\\Resolver\\AttributesResolver")
     source_items: [SourceItem] @resolver(class: "Appstractsoftware\\MagentoAdapter\\CustomGQL\\Model\\Resolver\\SourceItemsResolver")
     sources: [Sources] @resolver(class: "Appstractsoftware\\MagentoAdapter\\CustomGQL\\Model\\Resolver\\SourcesResolver")
+    salable_quantity: Float @resolver(class: "Appstractsoftware\\MagentoAdapter\\CustomGQL\\Model\\Resolver\\SalableQuantityResolver")
+    configuration_options: [ConfigurationOption] @resolver(class: "Appstractsoftware\\MagentoAdapter\\CustomGQL\\Model\\Resolver\\ConfigurationOptionsResolver")
+}
+
+type ConfigurationOption {
+    code: String
+    value: String
+    label: String
 }
 
 type Attribute {
