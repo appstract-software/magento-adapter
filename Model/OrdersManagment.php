@@ -74,6 +74,21 @@ class OrdersManagment implements OrdersManagmentInterface
     $this->orderItemOptions = $orderItemOptions;
   }
 
+  public function getCustomerOrdersTotalCount($customerId)
+  {
+    $filters = [
+      $this->_filterBuilder->setField('customer_id')->setValue($customerId)->create()
+    ];
+
+    $customerSearchCriteria = $this->_searchCriteriaBuilder
+      ->addFilters($filters)
+      ->create();
+
+    $totalCount = $this->_orderRepository->getList($customerSearchCriteria)->getTotalCount();
+
+    return $totalCount;
+  }
+
   /**
    * @param int $customerId
    * @param SearchCriteriaInterface $searchCriteria

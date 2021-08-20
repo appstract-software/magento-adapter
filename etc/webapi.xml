@@ -37,6 +37,16 @@
             <parameter name="customerId" force="true">%customer_id%</parameter>
         </data>
     </route>
+    
+    <route url="/V1/orders/mine/count" method="GET">
+        <service class="Appstractsoftware\MagentoAdapter\Api\OrdersManagmentInterface" method="getCustomerOrdersTotalCount"/>
+        <resources>
+            <resource ref="self"/>
+        </resources>
+        <data>
+            <parameter name="customerId" force="true">%customer_id%</parameter>
+        </data>
+    </route>
 
     <route url="/V1/products/import-product" method="POST">
         <service class="Appstractsoftware\MagentoAdapter\Api\ProductInterface" method="create"/>
