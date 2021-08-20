@@ -10,6 +10,7 @@ use Magento\Framework\GraphQl\Schema\Type\ResolveInfo;
 use Magento\ConfigurableProductGraphQl\Model\Options\Collection as OptionCollection;
 use Magento\ConfigurableProduct\Model\Product\Type\Configurable;
 use Magento\Catalog\Model\Product\Type;
+use Magento\Framework\GraphQl\Query\Resolver\ValueFactory;
 
 /**
  * Class to resolve configurable options in simple product GraphQL query
@@ -26,12 +27,19 @@ class ConfigurationOptionsResolver implements ResolverInterface
    */
   private $configurableProduct;
 
+  /**
+   * @var ValueFactory
+   */
+  private $valueFactory;
+
   public function __construct(
     OptionCollection $optionCollection,
-    Configurable $configurableProduct
+    Configurable $configurableProduct,
+    ValueFactory $valueFactory
   ) {
     $this->optionCollection = $optionCollection;
     $this->configurableProduct = $configurableProduct;
+    $this->valueFactory = $valueFactory;
   }
 
   private function findOptionValue($values, $id)
@@ -72,18 +80,22 @@ class ConfigurationOptionsResolver implements ResolverInterface
     $parentId = array_shift($parentIds);
 
     $this->optionCollection->addProductId($parentId);
-    $options = $this->optionCollection->getAttributesByProductId($parentId);
 
-    $results = [];
+    $result = function () use ($parentId, $product) {
+      $results = [];
+      $options = $this->optionCollection->getAttributesByProductId($parentId);
 
-    foreach ($options as $option) {
-      $results[] = array(
-        'code' => $option['attribute_code'],
-        'label' => $option['label'],
-        'value' => $this->findOptionValue($option['values'], $product->getData($option['attribute_code'])),
-      );
-    }
+      foreach ($options as $option) {
+        $results[] = array(
+          'code' => $option['attribute_code'],
+          'label' => $option['label'],
+          'value' => $this->findOptionValue($option['values'], $product->getData($option['attribute_code'])),
+        );
+      }
 
-    return $results;
+      return $results;
+    };
+
+    return $this->valueFactory->create($result);
   }
 }
