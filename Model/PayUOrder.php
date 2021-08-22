@@ -16,6 +16,7 @@ class PayUOrder implements PayUOrderInterface
     $this->payUCreateOrder = $moduleLoader->create('PayU_PaymentGateway', '\PayU\PaymentGateway\Api\PayUCreateOrderInterface');
     $this->openPayUOrder = $moduleLoader->create('PayU_PaymentGateway', '\OpenPayU_Order');
     $this->payUConfig = $moduleLoader->create('PayU_PaymentGateway', '\PayU\PaymentGateway\Api\PayUConfigInterface');
+    $this->payURepayOrder = $moduleLoader->create('PayU_PaymentGateway', '\PayU\PaymentGateway\Api\PayURepayOrderInterface');
 
     $this->orderRepository = $orderRepository;
     $this->objectManager = $objectManager;
@@ -32,19 +33,22 @@ class PayUOrder implements PayUOrderInterface
     }
 
     $order = $this->orderRepository->get($orderId);
-
     $orderAdapter = $this->objectManager->create(\Magento\Payment\Gateway\Data\Order\OrderAdapter::class, ['order' => $order]);
+    $method = 'payu_gateway';
+    $payUMethodType = 'PBL';
+    $payUMethod = '';
 
     $createOrderData = $this->createOrderResolver->resolve(
       $orderAdapter,
-      'PBL',
-      '',
+      $payUMethodType,
+      $payUMethod,
       $order->getGrandTotal(),
       $order->getOrderCurrencyCode(),
       $continueUrl
     );
 
-    $response = $this->payUCreateOrder->execute('payu_gateway', $createOrderData);
+    $response = $this->payUCreateOrder->execute($method, $createOrderData);
+    $this->payURepayOrder->execute($order, $method, $payUMethodType, $payUMethod, $response['orderId']);
 
     return $this->payUOrderCreateResponse->load($response);
   }
