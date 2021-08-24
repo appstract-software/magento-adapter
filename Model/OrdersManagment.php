@@ -87,6 +87,7 @@ class OrdersManagment implements OrdersManagmentInterface
 
     $customerSearchCriteria = $this->_searchCriteriaBuilder
       ->addFilters($filters)
+      ->setSortOrders($searchCriteria->getSortOrders())
       ->create()
       ->setCurrentPage($searchCriteria->getCurrentPage())
       ->setPageSize($searchCriteria->getPageSize());
