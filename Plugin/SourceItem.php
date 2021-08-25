@@ -27,7 +27,7 @@ class SourceItem
     $items = [];
 
     foreach ($sourceItems as $item) {
-      if (!in_array($item->getSourceCode(), $sourceCodes)) {
+      if (!in_array($item->getSourceCode(), $sourceCodes) || $item->getSourceCode() != 'default') {
         $sourceCodes[] = $item->getSourceCode();
         $items[] = $item;
       }
