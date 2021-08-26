@@ -30,14 +30,6 @@
     <preference for="Appstractsoftware\MagentoAdapter\Api\Data\ProductPriceInterface" type="Appstractsoftware\MagentoAdapter\Model\Data\ProductPrice" />
     <preference for="Appstractsoftware\MagentoAdapter\Api\Data\ProductUnitsInterface" type="Appstractsoftware\MagentoAdapter\Model\Data\ProductUnits" />
     <preference for="Appstractsoftware\MagentoAdapter\Api\Data\ProductConfigurationsInterface" type="Appstractsoftware\MagentoAdapter\Model\Data\ProductConfigurations" />
-    <type name="Magento\Catalog\Api\ProductRepositoryInterface">
-        <plugin name="get_appstract_product_price" type="Appstractsoftware\MagentoAdapter\Plugin\ProductItemRepository" />
-        <plugin name="get_appstract_units" type="Appstractsoftware\MagentoAdapter\Plugin\ProductItemRepository" />
-        <plugin name="get_appstract_sources" type="Appstractsoftware\MagentoAdapter\Plugin\ProductItemRepository" />
-        <plugin name="get_appstract_source_items" type="Appstractsoftware\MagentoAdapter\Plugin\ProductItemRepository" />
-        <plugin name="get_appstract_stock_items" type="Appstractsoftware\MagentoAdapter\Plugin\ProductItemRepository" />
-        <plugin name="get_appstract_configurations" type="Appstractsoftware\MagentoAdapter\Plugin\ProductItemRepository" />
-    </type>
     <preference for="Appstractsoftware\MagentoAdapter\Api\BestSellerRepositoryInterface" type="Appstractsoftware\MagentoAdapter\Model\BestSellerRepository"></preference>
     <preference for="Appstractsoftware\MagentoAdapter\Api\CustomerGroupInterface" type="Appstractsoftware\MagentoAdapter\Model\CustomerGroup"></preference>
     <preference for="Appstractsoftware\MagentoAdapter\Api\MostViewedRepositoryInterface" type="Appstractsoftware\MagentoAdapter\Model\MostViewedRepository"></preference>
