@@ -44,7 +44,7 @@ class CartItems
     }
 
     $ids = [];
-    $parentChild = [];
+    $parentsData = [];
 
     foreach ($itemsData as $item) {
       $productType = $item['product']['type_id'];
@@ -59,7 +59,7 @@ class CartItems
 
         $parentId = array_shift($parentIds);
         $ids[] = $parentId;
-        $parentChild[$parentId] = $productId;
+        $parentsData[$productId] = $parentId;
       }
     }
 
@@ -70,15 +70,16 @@ class CartItems
     $searchCriteria = $this->searchCriteriaBuilder->addFilter('entity_id', $ids, 'in')->create();
     $products = $this->productRepository->getList($searchCriteria)->getItems();
 
-    $parentsData = [];
-
-    foreach ($products as $parent) {
-      $parentsData[$parentChild[$parent->getId()]] = $parent;
-    }
-
     foreach ($itemsData as $key => $item) {
-      if (isset($parentsData[$item['product']['entity_id']])) {
-        $itemsData[$key]['parent'] = $parentsData[$item['product']['entity_id']];
+      $productId = $item['product']['entity_id'];
+      
+      if (isset($parentsData[$productId])) {
+        foreach ($products as $parent) {
+          if ($parent->getId() === $parentsData[$productId]) {
+            $itemsData[$key]['parent'] = $parent;
+            continue;
+          }
+        }
       }
     }
 
