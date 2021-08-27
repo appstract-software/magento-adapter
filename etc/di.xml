@@ -115,6 +115,9 @@
     <type name="Magento\Framework\Search\Dynamic\Algorithm\Auto">
         <plugin name="appstract_price_range" type="Appstractsoftware\MagentoAdapter\Plugin\Auto" />
     </type>
+    <type name="Magento\QuoteGraphQl\Model\Resolver\CartItems">
+        <plugin name="appstract_gql_cart_items" type="Appstractsoftware\MagentoAdapter\Plugin\CartItems" />
+    </type>
 
 
     <!-- Additional attributes for filter input -->
