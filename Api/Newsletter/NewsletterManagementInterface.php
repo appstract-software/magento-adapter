@@ -15,4 +15,12 @@ interface NewsletterManagementInterface
      * @return \Appstractsoftware\MagentoAdapter\Api\Newsletter\NewsletterSubscribeInterface
      */
     public function subscribe($email);
+
+    /**
+     * Unsubscribe an email.
+     *
+     * @param string $email
+     * @return \Appstractsoftware\MagentoAdapter\Api\Newsletter\NewsletterSubscribeInterface
+     */
+    public function unsubscribe($email);
 }
