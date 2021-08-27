@@ -70,3 +70,7 @@ input CartAddressInput {
 interface CartAddressInterface {
     vat_id: String  
 }
+
+interface CartItemInterface {
+    parent: ProductInterface @resolver(class: "Appstractsoftware\\MagentoAdapter\\CustomGQL\\Model\\Resolver\\ParentResolver")
+}

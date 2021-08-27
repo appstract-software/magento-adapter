@@ -32,7 +32,7 @@ class AttributesResolver implements ResolverInterface
   {
     $hashcodeData = $this->swatchHelper->getSwatchesByOptionsId([$id]);
 
-    return $hashcodeData[$id]['value'];
+    return isset($hashcodeData[$id]) ? $hashcodeData[$id]['value'] : null;
   }
 
 
