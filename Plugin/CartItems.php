@@ -28,6 +28,10 @@ class CartItems
 
   public function afterResolve($subject, array $itemsData, Field $field, $context, ResolveInfo $info)
   {
+    if (!empty($itemsData) && !is_array($itemsData[0])) {
+      return $itemsData;
+    }
+    
     $parentFieldExists = false;
 
     foreach ($info->fieldNodes as $node) {
