@@ -331,4 +331,12 @@
     <route url="/V1/prepared-cart/apply/:preparedCartId" method="POST">
         <service class="Appstractsoftware\MagentoAdapter\Api\PreparedCartRepositoryInterface" method="applyPreparedQuestCartToCustomerCart"/>
     </route>
+
+    <!-- Acctivate account - custom resource -->
+    <route url="/V1/customers/:email/activate-account" method="PUT">
+        <service class="Magento\Customer\Api\AccountManagementInterface" method="activate"/>
+        <resources>
+            <resource ref="Appstractsoftware_MagentoAdapter::activate_account"/>
+        </resources>
+    </route>
 </routes>
