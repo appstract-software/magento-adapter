@@ -110,7 +110,10 @@ class PreparedCartRepository implements PreparedCartRepositoryInterface
         $newCustomerCart = $this->cartRepository->get($newCustomerCartId);
         $this->cartRepository->save($newCustomerCart);
 
-        return $newCustomerCart->getId();
+        $quoteIdMask = $this->quoteIdMaskFactory->create();
+        $quoteIdMask->setQuoteId($newCustomerCartId)->save();
+
+        return $quoteIdMask->getMaskedId();
     }
 
     /**
