@@ -25,15 +25,18 @@ class ChangeQuoteControl
     private $customerRepository;
 
     /**
+     * @param \Appstractsoftware\MagentoAdapter\Helper\Data $helper
      * @param UserContextInterface $userContext
      * @param GroupRepositoryInterface $groupRepository
      * @param CustomerRepositoryInterface $customerRepository
      */
     public function __construct(
+        \Appstractsoftware\MagentoAdapter\Helper\Data $helper,
         UserContextInterface $userContext, 
         GroupRepositoryInterface $groupRepository, 
         CustomerRepositoryInterface $customerRepository
     ) {
+        $this->helper = $helper;
         $this->userContext = $userContext;
         $this->groupRepository = $groupRepository;
         $this->customerRepository = $customerRepository;
@@ -60,8 +63,8 @@ class ChangeQuoteControl
                 $groupId = $customer->getGroupId();
                 $group = $this->groupRepository->getById($groupId);
 
-                // TODO: Change hardcoded groupId.
-                $isCustomerInAdminGroup = $groupId === '5';
+                $clientAdminGroupId = $this->helper->getClientAdminGroupId();
+                $isCustomerInAdminGroup = $groupId === $clientAdminGroupId;
                 $isAllowed = $isCustomerInAdminGroup;
                 
                 break;

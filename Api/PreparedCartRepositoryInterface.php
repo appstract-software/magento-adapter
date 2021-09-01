@@ -25,7 +25,7 @@ interface PreparedCartRepositoryInterface
      *
      * @param string $preparedCartId The prepared guest cart ID.
      * @param int $customerId The customer ID.
-     * @return int New cart ID.
+     * @return string New cart ID.
      */
     public function applyPreparedQuestCartToCustomerCart($preparedCartId, $customerId);
 }

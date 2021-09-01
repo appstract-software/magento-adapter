@@ -15,6 +15,10 @@
                     <label>Sources to skip</label>
                     <comment>Those sources will be skipped while checking product availability (comma separated source codes)</comment>
                 </field>
+                <field id="client_admin_group_id" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>CLIENT-ADMIN group ID</label>
+                    <comment>Customer with that group ID can create prepared carts.</comment>
+                </field>
             </group>
         </section>
     </system>

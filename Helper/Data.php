@@ -7,12 +7,11 @@ use Magento\Store\Model\ScopeInterface;
 
 class Data extends AbstractHelper
 {
-
   const XML_PATH_SECTION = 'appstract';
   const XML_PATH_GROUP = 'appstract_configuration';
   const AUTO_GENERATE_INVOICE = 'auto_generate_invoice';
   const SOURCES_TO_SKIP = 'sources_to_skip';
-
+  const CLIENT_ADMIN_GROUP_ID = 'client_admin_group_id';
 
   public function getConfigValue($field, $storeId = null)
   {
@@ -25,7 +24,6 @@ class Data extends AbstractHelper
 
   public function getConfiguration($field, $storeId = null)
   {
-
     return $this->getConfigValue(self::XML_PATH_SECTION . '/' . self::XML_PATH_GROUP . '/' . $field, $storeId);
   }
 
@@ -38,5 +36,10 @@ class Data extends AbstractHelper
     }
 
     return explode(',', $sources);
+  }
+
+  public function getClientAdminGroupId($storeId = null)
+  {
+    return $this->getConfigValue(self::CLIENT_ADMIN_GROUP_ID, $storeId);
   }
 }
