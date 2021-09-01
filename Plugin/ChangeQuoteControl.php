@@ -25,12 +25,13 @@ class ChangeQuoteControl
     private $customerRepository;
 
     /**
+     * @param \Appstractsoftware\MagentoAdapter\Helper\Data $helper
      * @param UserContextInterface $userContext
      * @param GroupRepositoryInterface $groupRepository
      * @param CustomerRepositoryInterface $customerRepository
      */
     public function __construct(
-        \Appstract\MagentoAdapter\Helper\Data $helper,
+        \Appstractsoftware\MagentoAdapter\Helper\Data $helper,
         UserContextInterface $userContext, 
         GroupRepositoryInterface $groupRepository, 
         CustomerRepositoryInterface $customerRepository
