@@ -40,6 +40,6 @@ class Data extends AbstractHelper
 
   public function getClientAdminGroupId($storeId = null)
   {
-    return $this->getConfigValue(self::CLIENT_ADMIN_GROUP_ID, $storeId);
+    return $this->getConfiguration(self::CLIENT_ADMIN_GROUP_ID, $storeId);
   }
 }
