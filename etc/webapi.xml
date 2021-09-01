@@ -332,11 +332,22 @@
         <service class="Appstractsoftware\MagentoAdapter\Api\PreparedCartRepositoryInterface" method="applyPreparedQuestCartToCustomerCart"/>
     </route>
 
-    <!-- Acctivate account - custom resource -->
+    <!-- Acctivate account based on custom resource -->
     <route url="/V1/customers/:email/activate-account" method="PUT">
         <service class="Magento\Customer\Api\AccountManagementInterface" method="activate"/>
         <resources>
             <resource ref="Appstractsoftware_MagentoAdapter::activate_account"/>
         </resources>
+    </route>
+
+    <!-- Delete customer based on self resource  -->
+    <route url="/V1/customers/me" method="DELETE">
+        <service class="Magento\Customer\Api\CustomerRepositoryInterface" method="deleteById" />
+        <resources>
+            <resource ref="self" />
+        </resources>
+        <data>
+            <parameter name="customerId" force="true">%customer_id%</parameter>
+        </data>
     </route>
 </routes>
