@@ -6,6 +6,7 @@
                 <resource id="Appstractsoftware_MagentoAdapter::config" title="Magento adapter" sortOrder="110">
                     <resource id="Appstractsoftware_MagentoAdapter::wishlist_admin" title="Wishlist admin" sortOrder="111"/>
                     <resource id="Appstractsoftware_MagentoAdapter::order_status" title="Change order status" sortOrder="112"/>
+                    <resource id="Appstractsoftware_MagentoAdapter::activate_account" title="Activate account" sortOrder="113"/>
                 </resource>
             </resource>
         </resources>
