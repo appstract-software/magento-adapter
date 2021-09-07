@@ -101,7 +101,10 @@
     <type name="Magento\CatalogGraphQl\Model\Resolver\Products\DataProvider\Product\CompositeCollectionProcessor">
         <plugin name="appstract_composite_collection_processor" type="Appstractsoftware\MagentoAdapter\Plugin\CompositeCollectionProcessor" />
     </type>
-        <type name="Magento\Elasticsearch\SearchAdapter\Query\Builder\Sort">
+    <type name="Magento\CatalogGraphQl\Model\Resolver\Products\DataProvider\Product\CollectionPostProcessor">
+        <plugin name="appstract_composite_collection_processor" type="Appstractsoftware\MagentoAdapter\Plugin\CollectionPostProcessor" />
+    </type>
+    <type name="Magento\Elasticsearch\SearchAdapter\Query\Builder\Sort">
         <plugin name="appstract_sort_builder" type="Appstractsoftware\MagentoAdapter\Plugin\Sort" />
     </type>
 

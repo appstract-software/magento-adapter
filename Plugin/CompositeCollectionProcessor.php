@@ -71,14 +71,7 @@ class CompositeCollectionProcessor
       ['msi_stock_status_index' => $tableName],
       'e.sku = msi_stock_status_index.sku',
       []
-    )->order('msi_stock_status_index.' . IndexStructure::IS_SALABLE . ' ' . $direction);
-
-    // $result->getSelect()->joinLeft(
-    //   ['soi' => 'sales_order_item'],
-    //   'e.entity_id = soi.product_id',
-    //   array('qty_ordered' => '(select sum(soi.qty_ordered) from sales_order_item soi where soi.product_id = e.entity_id)')
-    // )->distinct(true)
-    //   ->order('qty_ordered ' . $direction);
+    )->order('msi_stock_status_index.' . IndexStructure::QUANTITY . ' ' . $direction);
 
     return $result;
   }
