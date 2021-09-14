@@ -74,3 +74,12 @@ interface CartAddressInterface {
 interface CartItemInterface {
     parent: ProductInterface @resolver(class: "Appstractsoftware\\MagentoAdapter\\CustomGQL\\Model\\Resolver\\ParentResolver")
 }
+
+interface OrderItemInterface {
+    product: ProductInterface @resolver(class: "Appstractsoftware\\MagentoAdapter\\CustomGQL\\Model\\Resolver\\OrderItemProductResolver")
+    parent: ProductInterface @resolver(class: "Appstractsoftware\\MagentoAdapter\\CustomGQL\\Model\\Resolver\\ParentResolver")
+}
+
+type CustomerOrder {
+    tracking_number: String @resolver(class: "Appstractsoftware\\MagentoAdapter\\CustomGQL\\Model\\Resolver\\TrackingNumberResolver")
+}
