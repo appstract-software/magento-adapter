@@ -121,6 +121,9 @@
     <type name="Magento\QuoteGraphQl\Model\Resolver\CartItems">
         <plugin name="appstract_gql_cart_items" type="Appstractsoftware\MagentoAdapter\Plugin\CartItems" />
     </type>
+    <type name="Magento\SalesGraphQl\Model\Resolver\OrderItems">
+        <plugin name="appstract_gql_customer_orders" type="Appstractsoftware\MagentoAdapter\Plugin\OrderItems" />
+    </type>
 
 
     <!-- Additional attributes for filter input -->

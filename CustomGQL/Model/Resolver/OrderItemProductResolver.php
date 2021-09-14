@@ -9,21 +9,21 @@ use Magento\Framework\GraphQl\Query\ResolverInterface;
 use Magento\Framework\GraphQl\Schema\Type\ResolveInfo;
 
 
-class ParentResolver implements ResolverInterface
+class OrderItemProductResolver implements ResolverInterface
 {
 
   public function resolve(Field $field, $context, ResolveInfo $info, array $value = null, array $args = null)
   {
-    if (!array_key_exists('parent', $value) || is_null($value['parent'])) {
+    if (!array_key_exists('associatedProduct', $value)) {
       return null;
     }
 
-    if (!$value['parent'] instanceof ProductInterface) {
-      throw new LocalizedException(__('"parent" value should be specified'));
+    if (!$value['associatedProduct'] instanceof ProductInterface) {
+      throw new LocalizedException(__('"associatedProduct" value should be specified'));
     }
 
     /* @var $product ProductInterface */
-    $product = $value['parent'];
+    $product = $value['associatedProduct'];
 
     $productData = $product->getData();
     $productData['model'] = $product;
