@@ -16,7 +16,7 @@ interface PreparedCartRepositoryInterface
      *
      * @param int $customerId The admin-customer ID.
      * @param int $cartId The admin-customer cart ID.
-     * @return int New cart ID.
+     * @return string New cart ID.
      */
     public function emptyPreparedAdminCustomerCart($customerId, $cartId);
 
