@@ -83,6 +83,7 @@ interface OrderItemInterface {
 type CustomerOrder {
     tracking_number: String @resolver(class: "Appstractsoftware\\MagentoAdapter\\CustomGQL\\Model\\Resolver\\TrackingNumberResolver")
     status_code: String @resolver(class: "Appstractsoftware\\MagentoAdapter\\CustomGQL\\Model\\Resolver\\StatusCodeResolver")
+    shipping_method_code: String @resolver(class: "Appstractsoftware\\MagentoAdapter\\CustomGQL\\Model\\Resolver\\ShippingMethodCodeResolver")
 }
 
 input CustomerOrdersFilterInput {
