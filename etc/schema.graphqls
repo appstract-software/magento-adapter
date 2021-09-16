@@ -83,3 +83,7 @@ interface OrderItemInterface {
 type CustomerOrder {
     tracking_number: String @resolver(class: "Appstractsoftware\\MagentoAdapter\\CustomGQL\\Model\\Resolver\\TrackingNumberResolver")
 }
+
+input CustomerOrdersFilterInput {
+    status: FilterStringTypeInput @doc(description: "Filters by order status.")
+}
