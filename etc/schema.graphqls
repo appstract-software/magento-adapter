@@ -4,6 +4,7 @@ interface ProductInterface {
     sources: [Sources] @resolver(class: "Appstractsoftware\\MagentoAdapter\\CustomGQL\\Model\\Resolver\\SourcesResolver")
     salable_quantity: Float @resolver(class: "Appstractsoftware\\MagentoAdapter\\CustomGQL\\Model\\Resolver\\SalableQuantityResolver")
     configuration_options: [ConfigurationOption] @resolver(class: "Appstractsoftware\\MagentoAdapter\\CustomGQL\\Model\\Resolver\\ConfigurationOptionsResolver")
+    paczkomaty_disabled: Boolean
 }
 
 type ConfigurationOption {
