@@ -124,6 +124,9 @@
     <type name="Magento\SalesGraphQl\Model\Resolver\OrderItems">
         <plugin name="appstract_gql_customer_orders" type="Appstractsoftware\MagentoAdapter\Plugin\OrderItems" />
     </type>
+    <type name="Magento\SalesGraphQl\Model\Resolver\OrderTotal">
+        <plugin name="appstract_gql_customer_order_total" type="Appstractsoftware\MagentoAdapter\Plugin\OrderTotal" />
+    </type>
 
 
     <!-- Additional attributes for filter input -->

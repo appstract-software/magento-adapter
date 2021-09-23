@@ -93,3 +93,7 @@ type CustomerOrder {
 input CustomerOrdersFilterInput {
     status: FilterStringTypeInput @doc(description: "Filters by order status.")
 }
+
+type OrderTotal {
+    subtotal_including_tax: Money!
+}
