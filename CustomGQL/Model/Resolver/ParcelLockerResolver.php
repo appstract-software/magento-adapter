@@ -22,7 +22,7 @@ class ParcelLockerResolver implements ResolverInterface
     $order = $value['model'];
     $methodCode = $order->getShippingMethod();
 
-    if ($methodCode == 'paczkomaty2' || $methodCode == 'paczkomaty2cod') {
+    if ($methodCode == 'smpaczkomaty2_paczkomaty2' || $methodCode == 'smpaczkomaty2_paczkomaty2cod') {
       $paczkomatyData = json_decode($order->getPaczkomatyData());
       $shipmentGenerated = $paczkomatyData
         && property_exists($paczkomatyData, 'shipmentData')
