@@ -86,6 +86,8 @@ type CustomerOrder {
     status_code: String @resolver(class: "Appstractsoftware\\MagentoAdapter\\CustomGQL\\Model\\Resolver\\StatusCodeResolver")
     shipping_method_code: String @resolver(class: "Appstractsoftware\\MagentoAdapter\\CustomGQL\\Model\\Resolver\\ShippingMethodCodeResolver")
     coupon_code: String @resolver(class: "Appstractsoftware\\MagentoAdapter\\CustomGQL\\Model\\Resolver\\CouponCodeResolver")
+    applied_rule_ids: String @resolver(class: "Appstractsoftware\\MagentoAdapter\\CustomGQL\\Model\\Resolver\\AppliedRuleIdsResolver")
+    parcel_locker: String @resolver(class: "Appstractsoftware\\MagentoAdapter\\CustomGQL\\Model\\Resolver\\ParcelLockerResolver")
 }
 
 input CustomerOrdersFilterInput {
