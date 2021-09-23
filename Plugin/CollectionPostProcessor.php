@@ -13,7 +13,7 @@ class CollectionPostProcessor
     $newOrders = [];
 
     foreach ($orders as $order) {
-      if ($order[0] === 'msi_stock_status_index.quantity') {
+      if (is_array($order) && $order[0] === 'msi_stock_status_index.quantity') {
         array_unshift($newOrders, $order);
       } else {
         $newOrders[] = $order;
