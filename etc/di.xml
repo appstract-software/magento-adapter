@@ -135,6 +135,7 @@
             <argument name="additionalAttributes" xsi:type="array">
             <item name="news_from_date" xsi:type="string">news_from_date</item>
             <item name="news_to_date" xsi:type="string">news_to_date</item>
+            <item name="is_salable" xsi:type="string">is_salable</item>
             </argument>
         </arguments>
     </type>
