@@ -19,6 +19,16 @@
                     <label>CLIENT-ADMIN group ID</label>
                     <comment>Customer with that group ID can create prepared carts.</comment>
                 </field>
+                <field id="elasticsearch_skip_url_key" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Elasticsearch skip url_key</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="elasticsearch_fuzziness" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Elascticsearch fuzziness</label>
+                </field>
+                <field id="elasticsearch_sku_boost" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Elascticsearch sku boost</label>
+                </field>
             </group>
         </section>
     </system>
