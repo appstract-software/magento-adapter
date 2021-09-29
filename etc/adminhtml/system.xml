@@ -24,10 +24,10 @@
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
                 </field>
                 <field id="elasticsearch_fuzziness" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
-                    <label>Elascticsearch fuzziness</label>
+                    <label>Elasticsearch fuzziness</label>
                 </field>
                 <field id="elasticsearch_sku_boost" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
-                    <label>Elascticsearch sku boost</label>
+                    <label>Elasticsearch sku boost</label>
                 </field>
             </group>
         </section>
