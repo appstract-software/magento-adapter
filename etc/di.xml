@@ -101,9 +101,6 @@
     <type name="Magento\CatalogGraphQl\Model\Resolver\Products\DataProvider\Product\CompositeCollectionProcessor">
         <plugin name="appstract_composite_collection_processor" type="Appstractsoftware\MagentoAdapter\Plugin\CompositeCollectionProcessor" />
     </type>
-    <type name="Magento\CatalogGraphQl\Model\Resolver\Products\DataProvider\Product\CollectionPostProcessor">
-        <plugin name="appstract_composite_collection_processor" type="Appstractsoftware\MagentoAdapter\Plugin\CollectionPostProcessor" />
-    </type>
     <type name="Magento\Elasticsearch\SearchAdapter\Query\Builder\Sort">
         <plugin name="appstract_sort_builder" type="Appstractsoftware\MagentoAdapter\Plugin\Sort" />
     </type>
@@ -130,6 +127,13 @@
     <type name="Magento\Elasticsearch\SearchAdapter\Query\Builder\Match">
         <plugin name="appstract_elasticsearch_match" type="Appstractsoftware\MagentoAdapter\Plugin\Match" />
     </type>
+    <type name="Magento\CatalogGraphQl\Model\Resolver\Products">
+        <plugin name="appstract_gql_products" type="Appstractsoftware\MagentoAdapter\Plugin\Products" />
+    </type>
+    <type name="Magento\Catalog\Model\ResourceModel\Product\Collection">
+        <plugin name="appstract_gql_products" type="Appstractsoftware\MagentoAdapter\Plugin\Collection" />
+    </type>
+
 
 
     <!-- Additional attributes for filter input -->

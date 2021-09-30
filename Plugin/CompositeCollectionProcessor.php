@@ -51,12 +51,10 @@ class CompositeCollectionProcessor
     }
 
     $hasSortByIsSalable = false;
-    $direction = \Magento\Framework\Api\SortOrder::SORT_ASC;
 
     foreach ($searchCriteria->getSortOrders() as $sort) {
       if ($sort->getField() === 'is_salable') {
         $hasSortByIsSalable = true;
-        $direction = $sort->getDirection();
         break;
       }
     }
@@ -67,11 +65,11 @@ class CompositeCollectionProcessor
 
     $tableName = $this->stockIndexTableProvider->execute($stockId);
 
-    $result->getSelect()->join(
+    $collection->getSelect()->joinLeft(
       ['msi_stock_status_index' => $tableName],
       'e.sku = msi_stock_status_index.sku',
-      []
-    )->order('msi_stock_status_index.' . IndexStructure::QUANTITY . ' ' . $direction);
+      ['is_salable' => 'IFNULL(msi_stock_status_index.is_salable, 0)']
+    );
 
     return $result;
   }
