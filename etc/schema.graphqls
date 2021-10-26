@@ -22,6 +22,7 @@ type Attribute {
 
 type Aggregation {
     type: String
+    position: Int
 }
 
 interface AggregationOptionInterface {

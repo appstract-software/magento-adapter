@@ -133,7 +133,12 @@
     <type name="Magento\Catalog\Model\ResourceModel\Product\Collection">
         <plugin name="appstract_gql_products" type="Appstractsoftware\MagentoAdapter\Plugin\Collection" />
     </type>
+        <type name="Magento\CatalogGraphQl\DataProvider\Product\LayeredNavigation\Formatter\LayerFormatter">
+        <plugin name="appstract_gql_layer_formatter" type="Appstractsoftware\MagentoAdapter\Plugin\LayerFormatter" />
+    </type>
 
+    <preference for="Magento\CatalogGraphQl\DataProvider\Product\LayeredNavigation\AttributeOptionProvider" type="Appstractsoftware\MagentoAdapter\Model\AttributeOptionProvider"></preference>
+    <preference for="Magento\CatalogGraphQl\DataProvider\Product\LayeredNavigation\Builder\Attribute" type="Appstractsoftware\MagentoAdapter\Model\Attribute"></preference>
 
 
     <!-- Additional attributes for filter input -->
