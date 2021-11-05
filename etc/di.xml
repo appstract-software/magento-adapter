@@ -136,6 +136,9 @@
         <type name="Magento\CatalogGraphQl\DataProvider\Product\LayeredNavigation\Formatter\LayerFormatter">
         <plugin name="appstract_gql_layer_formatter" type="Appstractsoftware\MagentoAdapter\Plugin\LayerFormatter" />
     </type>
+    <type name="Magento\Framework\Search\Search">
+        <plugin name="appstract_gql_custom_order_by" type="Appstractsoftware\MagentoAdapter\Plugin\Search" />
+    </type>
 
     <preference for="Magento\CatalogGraphQl\DataProvider\Product\LayeredNavigation\AttributeOptionProvider" type="Appstractsoftware\MagentoAdapter\Model\AttributeOptionProvider"></preference>
     <preference for="Magento\CatalogGraphQl\DataProvider\Product\LayeredNavigation\Builder\Attribute" type="Appstractsoftware\MagentoAdapter\Model\Attribute"></preference>
