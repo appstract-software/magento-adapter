@@ -17,4 +17,14 @@ class Collection
       $dir
     ];
   }
+
+  public function afterAddAttributeToSort($subject, $result, $attribute, $dir = DataCollection::SORT_ORDER_ASC)
+  {
+    if ($attribute == 'created_at') {
+      $subject->getSelect()->order('created_at ' . $dir);
+      return $subject;
+    }
+
+    return $result;
+  }
 }
