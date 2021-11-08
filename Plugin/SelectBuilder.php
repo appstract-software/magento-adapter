@@ -24,10 +24,12 @@ class SelectBuilder
 
   public function __construct(
     \Appstractsoftware\MagentoAdapter\Helper\Data $helper,
-    \Magento\Store\Model\StoreManagerInterface $storeManager
+    \Magento\Store\Model\StoreManagerInterface $storeManager,
+    \Magento\Framework\App\State $state
   ) {
     $this->helper = $helper;
     $this->storeManager = $storeManager;
+    $this->state = $state;
   }
 
   /**
@@ -36,8 +38,9 @@ class SelectBuilder
   public function afterExecute(\Magento\InventoryIndexer\Indexer\SelectBuilder $subject, Select $select): Select
   {
     $sourcesToSkip = $this->helper->getSourcesToSkip($this->storeManager->getStore()->getId());
+    $area = $this->state->getAreaCode();
 
-    if (count($sourcesToSkip) > 0) {
+    if (count($sourcesToSkip) > 0 && $area != 'adminhtml') {
       $select->where('source_item.' . SourceItemInterface::SOURCE_CODE . ' NOT IN (?)', $sourcesToSkip);
     }
 
