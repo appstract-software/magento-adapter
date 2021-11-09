@@ -125,6 +125,8 @@ class TransportBuilder
    */
   private $addressConverter;
 
+  protected $attachments = [];
+  
   /**
    * TransportBuilder constructor
    *
