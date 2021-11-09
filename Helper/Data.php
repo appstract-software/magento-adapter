@@ -15,6 +15,9 @@ class Data extends AbstractHelper
   const ELASTICSEARCH_FUZZINESS = 'elasticsearch_fuzziness';
   const ELASTICSEARCH_SKIP_URL_KEY = 'elasticsearch_skip_url_key';
   const ELASTICSEARCH_SKU_BOOST = 'elasticsearch_sku_boost';
+  const INPOST_SENT_STATUS = 'inpost_sent_status';
+  const INPOST_READY_TO_PICKUP_STATUS = 'inpost_ready_to_pickup_status';
+  const INPOST_DELIVERED_STATUS = 'inpost_delivered_status';
 
   public function getConfigValue($field, $storeId = null)
   {
@@ -71,5 +74,20 @@ class Data extends AbstractHelper
     }
 
     return (int)$boost;
+  }
+
+    public function getInPostSentStatus($storeId = null)
+  {
+    return $this->getConfiguration(self::INPOST_SENT_STATUS, $storeId);
+  }
+
+  public function getInPostReadyToPickupStatus($storeId = null)
+  {
+    return $this->getConfiguration(self::INPOST_READY_TO_PICKUP_STATUS, $storeId);
+  }
+
+  public function getInPostDeliveredStatus($storeId = null)
+  {
+    return $this->getConfiguration(self::INPOST_DELIVERED_STATUS, $storeId);
   }
 }

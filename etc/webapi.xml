@@ -45,6 +45,14 @@
         </resources>
     </route>
 
+    <!-- SHIPPING -->
+    <route url="/V1/inpost/status" method="POST">
+        <service class="Appstractsoftware\MagentoAdapter\Api\InPostInterface" method="updateOrderStatus"/>
+        <resources>
+            <resource ref="Appstractsoftware_MagentoAdapter::inpost_order_status"/>
+        </resources>
+    </route>
+
     <!-- PAYMENTS -->
     <route url="/V1/payu/create-order" method="POST">
         <service class="Appstractsoftware\MagentoAdapter\Api\PayUOrderInterface" method="createOrder"/>
