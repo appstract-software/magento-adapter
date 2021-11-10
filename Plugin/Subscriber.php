@@ -8,10 +8,15 @@ use Magento\Newsletter\Model\Subscriber as ParentSubscriber;
 
 class Subscriber extends ParentSubscriber
 {
+  const XML_PATH_CONFIRM_EMAIL_TEMPLATE = 'newsletter/subscription/confirm_email_template';
+  const XML_PATH_CONFIRM_EMAIL_IDENTITY = 'newsletter/subscription/confirm_email_identity';   
+
   public function aroundSendConfirmationRequestEmail(
     $subject,
     callable $proceed
   ) {
+    var_dump('JESTEM TU ELO');
+
     $vars = [
       'store' => $this->_storeManager->getStore($this->getStoreId()),
       'subscriber_data' => [
