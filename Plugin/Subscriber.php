@@ -8,7 +8,7 @@ use Magento\Newsletter\Model\Subscriber as ParentSubscriber;
 
 class Subscriber extends ParentSubscriber
 {
-  public function aroundSndConfirmationRequestEmail(
+  public function aroundSendConfirmationRequestEmail(
     $subject,
     callable $proceed
   ) {
@@ -24,7 +24,7 @@ class Subscriber extends ParentSubscriber
     $this->sendEmail(self::XML_PATH_CONFIRM_EMAIL_TEMPLATE, self::XML_PATH_CONFIRM_EMAIL_IDENTITY, $vars);
     return $this;
   }
-  
+
   /**
    * Send email about change status
    *
