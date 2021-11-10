@@ -21,7 +21,7 @@ class Subscriber extends ParentSubscriber
     $subject,
     callable $proceed
   ) {
-    var_dump('JESTEM TU ELO');
+    var_dump('JESTEM TU ELO aroundSendConfirmationRequestEmail');
 
     $vars = [
       'store' => $this->_storeManager->getStore($this->getStoreId()),
@@ -42,6 +42,8 @@ class Subscriber extends ParentSubscriber
 
   public function sendConfirmationSuccessEmail()
   {
+    var_dump('JESTEM TU ELO sendConfirmationSuccessEmail');
+
      $this->sendEmail(self::XML_PATH_SUCCESS_EMAIL_TEMPLATE, self::XML_PATH_SUCCESS_EMAIL_IDENTITY);
 
       return $this;
@@ -49,6 +51,8 @@ class Subscriber extends ParentSubscriber
 
   public function sendUnsubscriptionEmail()
   {
+    var_dump('JESTEM TU ELO sendUnsubscriptionEmail');
+
      $this->sendEmail(self::XML_PATH_UNSUBSCRIBE_EMAIL_TEMPLATE, self::XML_PATH_UNSUBSCRIBE_EMAIL_IDENTITY);
 
       return $this;
