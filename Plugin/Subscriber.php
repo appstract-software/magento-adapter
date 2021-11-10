@@ -20,9 +20,9 @@ class Subscriber extends ParentSubscriber
     $vars = [
       'store' => $this->_storeManager->getStore($this->getStoreId()),
       'subscriber_data' => [
-        'confirmation_link' => $this->getConfirmationLink(),
+        // 'confirmation_link' => $this->getConfirmationLink(),
         'confirmation_code' => $this->getCode(),
-        'email' => $this->getEmail(),
+        // 'email' => $this->getEmail(),
         // 'encoded_email' => base64_encode($this->getEmail()),
       ],
     ];
