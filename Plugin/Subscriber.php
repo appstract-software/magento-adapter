@@ -73,4 +73,18 @@ class Subscriber extends ParentSubscriber
     $transport->sendMessage();
     $this->inlineTranslation->resume();
   }
+
+  public function sendConfirmationSuccessEmail()
+  {
+     $this->sendEmail(self::XML_PATH_SUCCESS_EMAIL_TEMPLATE, self::XML_PATH_SUCCESS_EMAIL_IDENTITY);
+
+      return $this;
+  }
+
+  public function sendUnsubscriptionEmail()
+  {
+     $this->sendEmail(self::XML_PATH_UNSUBSCRIBE_EMAIL_TEMPLATE, self::XML_PATH_UNSUBSCRIBE_EMAIL_IDENTITY);
+
+      return $this;
+  }
 }
