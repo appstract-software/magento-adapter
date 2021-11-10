@@ -23,7 +23,7 @@ class Subscriber extends ParentSubscriber
         'confirmation_link' => $this->getConfirmationLink(),
         'confirmation_code' => $this->getCode(),
         'email' => $this->getEmail(),
-        'encoded_email' => base64_encode($this->getEmail()),
+        // 'encoded_email' => base64_encode($this->getEmail()),
       ],
     ];
     var_dump($vars);
