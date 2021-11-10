@@ -86,7 +86,7 @@ class Search
 
       foreach ($searchCriteria->getSortOrders() as $sort) {
         // we need to skip sort by this custom field because it's not present in elasticsearch, otherwise we get empty results
-        if ($sort->getField() !== 'created_at') {
+        if (property_exists($sort, 'getField') && $sort->getField() !== 'created_at') {
           $sorts[] = $sort;
         }
       }
