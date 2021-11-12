@@ -70,7 +70,13 @@ class Subscriber extends ParentSubscriber
     var_dump('#4');
 
     $transport = $subject->_transportBuilder->getTransport();
+    var_dump('#5');
+
     $transport->sendMessage();
+    var_dump('#6');
+
     $subject->inlineTranslation->resume();
+    var_dump('#7');
+
   }
 }
