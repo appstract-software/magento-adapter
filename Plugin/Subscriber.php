@@ -27,7 +27,7 @@ class Subscriber extends ParentSubscriber
     var_dump($subject->getEmail());
     var_dump($subject->getCode());
     var_dump($subject->getConfirmationLink());
-var_dump($subject->_storeManager->getStore($subject->getStoreId()));
+var_dump($subject->getStoreId());
     $vars = [
       'store' => $subject->_storeManager->getStore($subject->getStoreId()),
       'subscriber_data' => [
