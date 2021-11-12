@@ -23,16 +23,16 @@ class Subscriber extends ParentSubscriber
   ) {
     var_dump('JESTEM TU ELO aroundSendConfirmationRequestEmail');
 
-    // $vars = [
-    //   'store' => $this->_storeManager->getStore($this->getStoreId()),
-    //   'subscriber_data' => [
-    //     // 'confirmation_link' => $this->getConfirmationLink(),
-    //     'confirmation_code' => $this->getCode(),
-    //     // 'email' => $this->getEmail(),
-    //     // 'encoded_email' => base64_encode($this->getEmail()),
-    //   ],
-    // ];
-    // var_dump($vars);
+    $vars = [
+      'store' => $this->_storeManager->getStore($this->getStoreId()),
+      'subscriber_data' => [
+        // 'confirmation_link' => $this->getConfirmationLink(),
+        'confirmation_code' => $this->getCode(),
+        'email' => $this->getEmail(),
+        // 'encoded_email' => base64_encode($this->getEmail()),
+      ],
+    ];
+    var_dump($vars);
     var_dump(self::XML_PATH_CONFIRM_EMAIL_TEMPLATE);
     var_dump(self::XML_PATH_CONFIRM_EMAIL_IDENTITY);
 
