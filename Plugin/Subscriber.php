@@ -12,7 +12,6 @@ class Subscriber extends ParentSubscriber
     $subject,
     callable $proceed
   ) {
-    var_dump(222);
     $vars = [
       'store' => $subject->_storeManager->getStore($subject->getStoreId()),
       'subscriber_data' => [
@@ -22,7 +21,7 @@ class Subscriber extends ParentSubscriber
         'encoded_email' => base64_encode($subject->getEmail()),
       ],
     ];
-    var_dump(base64_encode($subject->getEmail()));
+
     $this->sendEmail(self::XML_PATH_CONFIRM_EMAIL_TEMPLATE, self::XML_PATH_CONFIRM_EMAIL_IDENTITY, $vars, $subject);
 
     return $this;
@@ -33,9 +32,7 @@ class Subscriber extends ParentSubscriber
     if ($subject->getImportMode()) {
       return;
     }
-    
-    var_dump('#1');
-    
+        
     $template = $subject->_scopeConfig->getValue($emailTemplatePath, ScopeInterface::SCOPE_STORE, $subject->getStoreId());
     $identity = $subject->_scopeConfig->getValue($emailIdentityPath, ScopeInterface::SCOPE_STORE, $subject->getStoreId());
 
@@ -43,14 +40,8 @@ class Subscriber extends ParentSubscriber
       return;
     }
 
-    var_dump('#2');
-
-
     $templateVars += ['subscriber' => $subject];
     $subject->inlineTranslation->suspend();
-
-    var_dump('#3');
-
     $subject->_transportBuilder->setTemplateIdentifier(
       $template
     )->setTemplateOptions(
@@ -66,17 +57,8 @@ class Subscriber extends ParentSubscriber
       $subject->getEmail(),
       $subject->getName()
     );
-
-    var_dump('#4');
-
     $transport = $subject->_transportBuilder->getTransport();
-    var_dump('#5');
-
     $transport->sendMessage();
-    var_dump('#6');
-
     $subject->inlineTranslation->resume();
-    var_dump('#7');
-
   }
 }
