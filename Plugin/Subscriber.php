@@ -26,13 +26,14 @@ class Subscriber extends ParentSubscriber
     var_dump($this->getEmail());
     var_dump($subject->getEmail());
     var_dump($subject->getCode());
+    var_dump($subject->getConfirmationLink());
 
     $vars = [
       'store' => $this->_storeManager->getStore($this->getStoreId()),
       'subscriber_data' => [
-        // 'confirmation_link' => $this->getConfirmationLink(),
-        'confirmation_code' => $this->getCode(),
-        'email' => $this->getEmail(),
+        'confirmation_link' => $subject->getConfirmationLink(),
+        'confirmation_code' => $subject->getCode(),
+        'email' => $subject->getEmail(),
         // 'encoded_email' => base64_encode($this->getEmail()),
       ],
     ];
