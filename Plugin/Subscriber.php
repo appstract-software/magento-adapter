@@ -32,7 +32,7 @@ class Subscriber extends ParentSubscriber
         // 'encoded_email' => base64_encode($this->getEmail()),
       ],
     ];
-    var_dump($vars);
+    // var_dump($vars);
     var_dump(self::XML_PATH_CONFIRM_EMAIL_TEMPLATE);
     var_dump(self::XML_PATH_CONFIRM_EMAIL_IDENTITY);
 
