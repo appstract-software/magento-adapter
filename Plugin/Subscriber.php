@@ -40,20 +40,11 @@ class Subscriber extends ParentSubscriber
     return $this;
   }
 
-  public function sendConfirmationSuccessEmail()
+  public function aroundSendConfirmationSuccessEmail()
   {
     var_dump('JESTEM TU ELO sendConfirmationSuccessEmail');
 
      $this->sendEmail(self::XML_PATH_SUCCESS_EMAIL_TEMPLATE, self::XML_PATH_SUCCESS_EMAIL_IDENTITY);
-
-      return $this;
-  }
-
-  public function sendUnsubscriptionEmail()
-  {
-    var_dump('JESTEM TU ELO sendUnsubscriptionEmail');
-
-     $this->sendEmail(self::XML_PATH_UNSUBSCRIBE_EMAIL_TEMPLATE, self::XML_PATH_UNSUBSCRIBE_EMAIL_IDENTITY);
 
       return $this;
   }
