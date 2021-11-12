@@ -72,6 +72,9 @@ var_dump($subject->getStoreId());
 
     var_dump('elo 2');
 
+    $test = $this->getStoreId();
+    var_dump($test, 'TEST');
+
     $template = $this->_scopeConfig->getValue($emailTemplatePath, ScopeInterface::SCOPE_STORE, $this->getStoreId());
     $identity = $this->_scopeConfig->getValue($emailIdentityPath, ScopeInterface::SCOPE_STORE, $this->getStoreId());
 
