@@ -25,6 +25,7 @@ class Subscriber extends ParentSubscriber
     var_dump($this->getCode());
     var_dump($this->getEmail());
     var_dump($subject->getEmail());
+    var_dump($subject->getCode());
 
     $vars = [
       'store' => $this->_storeManager->getStore($this->getStoreId()),
