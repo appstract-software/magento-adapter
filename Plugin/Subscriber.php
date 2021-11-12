@@ -18,7 +18,7 @@ class Subscriber
         'confirmation_link' => $subject->getConfirmationLink(),
         'confirmation_code' => $subject->getCode(),
         'email' => $subject->getEmail(),
-        'encoded_email' => base64_encode($this->getEmail()),
+        'encoded_email' => base64_encode($subject->getEmail()),
       ],
     ];
 
