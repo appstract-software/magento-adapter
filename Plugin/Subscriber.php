@@ -16,13 +16,13 @@ class Subscriber
     $vars = [
       'store' => $subject->_storeManager->getStore($subject->getStoreId()),
       'subscriber_data' => [
-        'confirmation_link' => $subject->getConfirmationLink(),
+        // 'confirmation_link' => $subject->getConfirmationLink(),
         'confirmation_code' => $subject->getCode(),
         'email' => $subject->getEmail(),
         // 'encoded_email' => base64_encode($subject->getEmail()),
       ],
     ];
-    var_dump('mongol 1');
+    var_dump(333);
     $subject->sendEmail(self::XML_PATH_CONFIRM_EMAIL_TEMPLATE, self::XML_PATH_CONFIRM_EMAIL_IDENTITY, $vars, $subject);
 
     return $this;
