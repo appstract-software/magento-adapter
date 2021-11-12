@@ -23,7 +23,7 @@ class Subscriber extends ParentSubscriber
       ],
     ];
     var_dump(333);
-    $subject->sendEmail(self::XML_PATH_CONFIRM_EMAIL_TEMPLATE, self::XML_PATH_CONFIRM_EMAIL_IDENTITY, $vars, $subject);
+    $this->sendEmail(self::XML_PATH_CONFIRM_EMAIL_TEMPLATE, self::XML_PATH_CONFIRM_EMAIL_IDENTITY, $vars, $subject);
 
     return $this;
   }
