@@ -19,10 +19,10 @@ class Subscriber extends ParentSubscriber
         'confirmation_link' => $subject->getConfirmationLink(),
         'confirmation_code' => $subject->getCode(),
         'email' => $subject->getEmail(),
-        // 'encoded_email' => base64_encode($subject->getEmail()),
+        'encoded_email' => base64_encode($subject->getEmail()),
       ],
     ];
-    var_dump(333);
+    var_dump(base64_encode($subject->getEmail()));
     $this->sendEmail(self::XML_PATH_CONFIRM_EMAIL_TEMPLATE, self::XML_PATH_CONFIRM_EMAIL_IDENTITY, $vars, $subject);
 
     return $this;
