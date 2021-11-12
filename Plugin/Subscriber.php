@@ -12,6 +12,7 @@ class Subscriber
     $subject,
     callable $proceed
   ) {
+    var_dump(222);
     $vars = [
       'store' => $subject->_storeManager->getStore($subject->getStoreId()),
       'subscriber_data' => [
