@@ -43,11 +43,14 @@ class Subscriber extends ParentSubscriber
       return;
     }
 
-    var_dump('#1');
+    var_dump('#2');
 
 
     $templateVars += ['subscriber' => $subject];
     $subject->inlineTranslation->suspend();
+
+    var_dump('#3');
+
     $subject->_transportBuilder->setTemplateIdentifier(
       $template
     )->setTemplateOptions(
@@ -63,6 +66,9 @@ class Subscriber extends ParentSubscriber
       $subject->getEmail(),
       $subject->getName()
     );
+
+    var_dump('#4');
+
     $transport = $subject->_transportBuilder->getTransport();
     $transport->sendMessage();
     $subject->inlineTranslation->resume();
