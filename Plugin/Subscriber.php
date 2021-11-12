@@ -22,6 +22,8 @@ class Subscriber extends ParentSubscriber
     callable $proceed
   ) {
     var_dump('JESTEM TU ELO aroundSendConfirmationRequestEmail');
+    var_dump($this->getCode());
+    var_dump($this->getEmail());
 
     $vars = [
       'store' => $this->_storeManager->getStore($this->getStoreId()),
