@@ -27,7 +27,7 @@ class Subscriber extends ParentSubscriber
     var_dump($subject->getEmail());
     var_dump($subject->getCode());
     var_dump($subject->getConfirmationLink());
-
+var_dump($subject->_storeManager->getStore($subject->getStoreId()));
     $vars = [
       'store' => $subject->_storeManager->getStore($subject->getStoreId()),
       'subscriber_data' => [
@@ -41,7 +41,7 @@ class Subscriber extends ParentSubscriber
     // var_dump(self::XML_PATH_CONFIRM_EMAIL_TEMPLATE);
     // var_dump(self::XML_PATH_CONFIRM_EMAIL_IDENTITY);
 
-    $subject->sendEmail(self::XML_PATH_CONFIRM_EMAIL_TEMPLATE, self::XML_PATH_CONFIRM_EMAIL_IDENTITY, $vars);
+    $this->sendEmail(self::XML_PATH_CONFIRM_EMAIL_TEMPLATE, self::XML_PATH_CONFIRM_EMAIL_IDENTITY, $vars);
     return $this;
   }
 
