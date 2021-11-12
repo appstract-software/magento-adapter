@@ -27,19 +27,9 @@ class Subscriber extends ParentSubscriber
     return $this;
   }
 
-  public function aroundSendUnsubscriptionEmail(
-    $subject,
-    callable $proceed)
+  public function aroundSendUnsubscriptionEmail()
   {
-    $vars = [
-      'subscriber_data' => [
-        'confirmation_code' => $subject->getCode(),
-        'email' => $subject->getEmail(),
-        'encoded_email' => base64_encode($subject->getEmail()),
-      ],
-    ];
-
-    $this->sendEmail(self::XML_PATH_UNSUBSCRIBE_EMAIL_TEMPLATE, self::XML_PATH_UNSUBSCRIBE_EMAIL_IDENTITY, $vars, $subject);
+    $this->sendEmail(self::XML_PATH_UNSUBSCRIBE_EMAIL_TEMPLATE, self::XML_PATH_UNSUBSCRIBE_EMAIL_IDENTITY);
 
     return $this;
   }
