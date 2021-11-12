@@ -16,7 +16,7 @@ class Subscriber extends ParentSubscriber
     $vars = [
       'store' => $subject->_storeManager->getStore($subject->getStoreId()),
       'subscriber_data' => [
-        // 'confirmation_link' => $subject->getConfirmationLink(),
+        'confirmation_link' => $subject->getConfirmationLink(),
         'confirmation_code' => $subject->getCode(),
         'email' => $subject->getEmail(),
         // 'encoded_email' => base64_encode($subject->getEmail()),
