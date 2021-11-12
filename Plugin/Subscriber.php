@@ -6,7 +6,7 @@ use Magento\Framework\App\Area;
 use Magento\Store\Model\ScopeInterface;
 use Magento\Newsletter\Model\Subscriber as ParentSubscriber;
 
-class Subscriber
+class Subscriber extends ParentSubscriber
 {
   public function aroundSendConfirmationRequestEmail(
     $subject,
