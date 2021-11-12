@@ -64,15 +64,25 @@ var_dump($subject->getStoreId());
    */
   private function sendEmail(string $emailTemplatePath, string $emailIdentityPath, array $templateVars = []): void
   {
+    var_dump('elo 1');
+
     if ($this->getImportMode()) {
       return;
     }
+
+    var_dump('elo 2');
+
     $template = $this->_scopeConfig->getValue($emailTemplatePath, ScopeInterface::SCOPE_STORE, $this->getStoreId());
     $identity = $this->_scopeConfig->getValue($emailIdentityPath, ScopeInterface::SCOPE_STORE, $this->getStoreId());
+
     if (!$template || !$identity) {
       return;
     }
+    var_dump('elo 3');
+
     $templateVars += ['subscriber' => $this];
+    
+    var_dump('elo 4');
     $this->inlineTranslation->suspend();
     $this->_transportBuilder->setTemplateIdentifier(
       $template
