@@ -10,8 +10,8 @@ class Subscriber extends ParentSubscriber
 {
   const XML_PATH_CONFIRM_EMAIL_TEMPLATE = 'newsletter/subscription/confirm_email_template';
   const XML_PATH_CONFIRM_EMAIL_IDENTITY = 'newsletter/subscription/confirm_email_identity'; 
-  // const XML_PATH_SUCCESS_EMAIL_TEMPLATE = 'newsletter/subscription/success_email_template';
-  // const XML_PATH_SUCCESS_EMAIL_IDENTITY = 'newsletter/subscription/success_email_identity';
+  const XML_PATH_SUCCESS_EMAIL_TEMPLATE = 'newsletter/subscription/success_email_template';
+  const XML_PATH_SUCCESS_EMAIL_IDENTITY = 'newsletter/subscription/success_email_identity';
   // const XML_PATH_UNSUBSCRIBE_EMAIL_TEMPLATE = 'newsletter/subscription/un_email_template';
   // const XML_PATH_UNSUBSCRIBE_EMAIL_IDENTITY = 'newsletter/subscription/un_email_identity';
   // const XML_PATH_CONFIRMATION_FLAG = 'newsletter/subscription/confirm';
@@ -40,14 +40,14 @@ class Subscriber extends ParentSubscriber
     return $this;
   }
 
-  public function aroundSendConfirmationSuccessEmail()
-  {
-    var_dump('JESTEM TU ELO sendConfirmationSuccessEmail');
+  // public function aroundSendConfirmationSuccessEmail()
+  // {
+  //   var_dump('JESTEM TU ELO sendConfirmationSuccessEmail');
 
-     $this->sendEmail(self::XML_PATH_SUCCESS_EMAIL_TEMPLATE, self::XML_PATH_SUCCESS_EMAIL_IDENTITY);
+  //    $this->sendEmail(self::XML_PATH_SUCCESS_EMAIL_TEMPLATE, self::XML_PATH_SUCCESS_EMAIL_IDENTITY);
 
-      return $this;
-  }
+  //     return $this;
+  // }
 
   /**
    * Send email about change status
