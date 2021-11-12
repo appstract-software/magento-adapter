@@ -78,7 +78,7 @@ var_dump($subject->getStoreId());
     if (!$template || !$identity) {
       return;
     }
-    var_dump('elo 3');
+    var_dump('elo 3', $template);
 
     $templateVars += ['subscriber' => $this];
     
