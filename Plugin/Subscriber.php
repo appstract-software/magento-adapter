@@ -62,35 +62,35 @@ var_dump($subject->getStoreId());
    * @param array $templateVars
    * @return void
    */
-  // private function sendEmail(string $emailTemplatePath, string $emailIdentityPath, array $templateVars = []): void
-  // {
-  //   if ($this->getImportMode()) {
-  //     return;
-  //   }
-  //   $template = $this->_scopeConfig->getValue($emailTemplatePath, ScopeInterface::SCOPE_STORE, $this->getStoreId());
-  //   $identity = $this->_scopeConfig->getValue($emailIdentityPath, ScopeInterface::SCOPE_STORE, $this->getStoreId());
-  //   if (!$template || !$identity) {
-  //     return;
-  //   }
-  //   $templateVars += ['subscriber' => $this];
-  //   $this->inlineTranslation->suspend();
-  //   $this->_transportBuilder->setTemplateIdentifier(
-  //     $template
-  //   )->setTemplateOptions(
-  //     [
-  //       'area' => Area::AREA_FRONTEND,
-  //       'store' => $this->getStoreId(),
-  //     ]
-  //   )->setTemplateVars(
-  //     $templateVars
-  //   )->setFrom(
-  //     $identity
-  //   )->addTo(
-  //     $this->getEmail(),
-  //     $this->getName()
-  //   );
-  //   $transport = $this->_transportBuilder->getTransport();
-  //   $transport->sendMessage();
-  //   $this->inlineTranslation->resume();
-  // }
+  private function sendEmail(string $emailTemplatePath, string $emailIdentityPath, array $templateVars = []): void
+  {
+    if ($this->getImportMode()) {
+      return;
+    }
+    $template = $this->_scopeConfig->getValue($emailTemplatePath, ScopeInterface::SCOPE_STORE, $this->getStoreId());
+    $identity = $this->_scopeConfig->getValue($emailIdentityPath, ScopeInterface::SCOPE_STORE, $this->getStoreId());
+    if (!$template || !$identity) {
+      return;
+    }
+    $templateVars += ['subscriber' => $this];
+    $this->inlineTranslation->suspend();
+    $this->_transportBuilder->setTemplateIdentifier(
+      $template
+    )->setTemplateOptions(
+      [
+        'area' => Area::AREA_FRONTEND,
+        'store' => $this->getStoreId(),
+      ]
+    )->setTemplateVars(
+      $templateVars
+    )->setFrom(
+      $identity
+    )->addTo(
+      $this->getEmail(),
+      $this->getName()
+    );
+    $transport = $this->_transportBuilder->getTransport();
+    $transport->sendMessage();
+    $this->inlineTranslation->resume();
+  }
 }
