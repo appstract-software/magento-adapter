@@ -36,6 +36,9 @@
     <preference for="Appstractsoftware\MagentoAdapter\Api\NewProductsRepositoryInterface" type="Appstractsoftware\MagentoAdapter\Model\NewProductsRepository"></preference>
     <preference for="Appstractsoftware\MagentoAdapter\Api\TopRatedRepositoryInterface" type="Appstractsoftware\MagentoAdapter\Model\TopRatedRepository"></preference>
 
+    <!-- SHIPPING -->
+    <preference for="Appstractsoftware\MagentoAdapter\Api\InPostInterface" type="Appstractsoftware\MagentoAdapter\Model\InPost"></preference>
+
     <!-- Payments -->
     <preference for="Appstractsoftware\MagentoAdapter\Api\PayUOrderInterface" type="Appstractsoftware\MagentoAdapter\Model\PayUOrder"></preference>
     <preference for="Appstractsoftware\MagentoAdapter\Api\Data\PayUOrderCreateResponseInterface" type="Appstractsoftware\MagentoAdapter\Model\Data\PayUOrderCreateResponse"></preference>

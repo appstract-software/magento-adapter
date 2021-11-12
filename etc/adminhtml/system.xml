@@ -29,6 +29,15 @@
                 <field id="elasticsearch_sku_boost" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Elasticsearch sku boost</label>
                 </field>
+                <field id="inpost_sent_status" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Order status when InPost shipment has been sent</label>
+                </field>
+                <field id="inpost_ready_to_pickup_status" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Order status when InPost shipment is ready to pickup</label>
+                </field>
+                <field id="inpost_delivered_status" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Order status when InPost shipment has been delivered</label>
+                </field>
             </group>
         </section>
     </system>

@@ -7,6 +7,7 @@
                     <resource id="Appstractsoftware_MagentoAdapter::wishlist_admin" title="Wishlist admin" sortOrder="111"/>
                     <resource id="Appstractsoftware_MagentoAdapter::order_status" title="Change order status" sortOrder="112"/>
                     <resource id="Appstractsoftware_MagentoAdapter::activate_account" title="Activate account" sortOrder="113"/>
+                    <resource id="Appstractsoftware_MagentoAdapter::inpost_order_status" title="Change order status by InPost webhook" sortOrder="114"/>
                 </resource>
             </resource>
         </resources>
