@@ -32,13 +32,18 @@ class Subscriber
     if ($subject->getImportMode()) {
       return;
     }
-
+    
+    var_dump('#1');
+    
     $template = $subject->_scopeConfig->getValue($emailTemplatePath, ScopeInterface::SCOPE_STORE, $subject->getStoreId());
     $identity = $subject->_scopeConfig->getValue($emailIdentityPath, ScopeInterface::SCOPE_STORE, $subject->getStoreId());
 
     if (!$template || !$identity) {
       return;
     }
+
+    var_dump('#1');
+
 
     $templateVars += ['subscriber' => $subject];
     $subject->inlineTranslation->suspend();
