@@ -21,7 +21,7 @@ class Subscriber
         // 'encoded_email' => base64_encode($subject->getEmail()),
       ],
     ];
-
+    var_dump('mongol 1');
     $subject->sendEmail(self::XML_PATH_CONFIRM_EMAIL_TEMPLATE, self::XML_PATH_CONFIRM_EMAIL_IDENTITY, $vars, $subject);
 
     return $this;
