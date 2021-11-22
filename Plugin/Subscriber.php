@@ -9,6 +9,9 @@ use Magento\Store\Model\ScopeInterface;
 
 class Subscriber
 {
+  const XML_PATH_CONFIRM_EMAIL_TEMPLATE = 'newsletter/subscription/confirm_email_template';
+  const XML_PATH_CONFIRM_EMAIL_IDENTITY = 'newsletter/subscription/confirm_email_identity';
+    
   public function aroundSendConfirmationRequestEmail(
     $subject,
     callable $proceed
