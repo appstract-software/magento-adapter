@@ -158,6 +158,19 @@
     </type>
     <preference for="Appstractsoftware\MagentoAdapter\Api\Data\OrderItemOptionsInterface" type="Appstractsoftware\MagentoAdapter\Model\Data\OrderItemOptions" />
 
+    <!-- Fix https://github.com/magento/magento2/commit/e6e5c738eb47a982d90aef8e9a087cb3fd9bcacf -->
+    <type name="Magento\GraphQl\Model\Query\ContextFactory">
+        <arguments>
+            <argument name="contextParametersProcessors" xsi:type="array">
+                <item name="add_user_info_to_context" xsi:type="object">Magento\CustomerGraphQl\Model\Context\AddUserInfoToContext</item>
+                <item name="add_customer_group_to_context" xsi:type="object">Appstractsoftware\MagentoAdapter\Model\AddCustomerGroupToContext</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Magento\CatalogGraphQl\Model\Resolver\Product\PriceRange">
+        <plugin name="appstract_gql_price_range" type="Appstractsoftware\MagentoAdapter\Plugin\PriceRange" />
+    </type>
+
     <!-- Prepared admin-customer cart -->
     <preference for="Appstractsoftware\MagentoAdapter\Api\PreparedCartRepositoryInterface" type="Appstractsoftware\MagentoAdapter\Model\PreparedCartRepository" />
     <preference for="Appstractsoftware\MagentoAdapter\Api\Data\AttachmentInterface" type="Appstractsoftware\MagentoAdapter\Model\Data\Attachment"></preference>
