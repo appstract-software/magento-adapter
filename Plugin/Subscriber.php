@@ -4,7 +4,8 @@ namespace Appstractsoftware\MagentoAdapter\Plugin;
 
 use Magento\Framework\App\Area;
 use Magento\Store\Model\ScopeInterface;
-use Magento\Newsletter\Model\Subscriber as ParentSubscriber;
+// use Magento\Newsletter\Model\Subscriber as ParentSubscriber;
+use Albedo\NewsletterApi\Model\Subscriber as ParentSubscriber;
 
 class Subscriber extends ParentSubscriber
 {
