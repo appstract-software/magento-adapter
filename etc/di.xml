@@ -6,13 +6,6 @@
     <preference for="Appstractsoftware\MagentoAdapter\Api\Data\WishlistDtoInterface" type="Appstractsoftware\MagentoAdapter\Model\Data\WishlistDto" />
     <preference for="Appstractsoftware\MagentoAdapter\Api\Data\ItemDtoInterface" type="Appstractsoftware\MagentoAdapter\Model\Data\ItemDto" />
 
-    <!-- Newsletter -->
-    <preference for="Appstractsoftware\MagentoAdapter\Api\Newsletter\NewsletterManagementInterface" type="Appstractsoftware\MagentoAdapter\Model\Newsletter\NewsletterManagement"/>
-    <preference for="Appstractsoftware\MagentoAdapter\Api\Newsletter\NewsletterManagementInterface" type="Appstractsoftware\MagentoAdapter\Model\Newsletter\NewsletterManagement"/>
-    <type name="Magento\Newsletter\Model\Subscriber">
-        <plugin name="appstract_subscriber" type="Appstractsoftware\MagentoAdapter\Plugin\Subscriber" />
-    </type>
-
     <!-- Mailing -->
     <preference for="Appstractsoftware\MagentoAdapter\Api\MailingServiceInterface" type="Appstractsoftware\MagentoAdapter\Model\MailingService"/>
 
