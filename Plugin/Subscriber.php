@@ -4,13 +4,13 @@ namespace Appstractsoftware\MagentoAdapter\Plugin;
 
 use Magento\Framework\App\Area;
 use Magento\Store\Model\ScopeInterface;
-// use Magento\Newsletter\Model\Subscriber as ParentSubscriber;
+use Magento\Newsletter\Model\Subscriber as ParentSubscriber;
 // use Albedo\NewsletterApi\Model\Subscriber as ParentSubscriber;
 
-class Subscriber
+class Subscriber extends ParentSubscriber
 {
-  const XML_PATH_CONFIRM_EMAIL_TEMPLATE = 'newsletter/subscription/confirm_email_template';
-  const XML_PATH_CONFIRM_EMAIL_IDENTITY = 'newsletter/subscription/confirm_email_identity';
+  // const XML_PATH_CONFIRM_EMAIL_TEMPLATE = 'newsletter/subscription/confirm_email_template';
+  // const XML_PATH_CONFIRM_EMAIL_IDENTITY = 'newsletter/subscription/confirm_email_identity';
     
   public function aroundSendConfirmationRequestEmail(
     $subject,
