@@ -338,6 +338,9 @@
     </route>
     <route url="/V1/prepared-cart/apply/:preparedCartId" method="POST">
         <service class="Appstractsoftware\MagentoAdapter\Api\PreparedCartRepositoryInterface" method="applyPreparedQuestCartToCustomerCart"/>
+        <resources>
+            <resource ref="self" />
+        </resources>
     </route>
 
     <!-- Acctivate account based on custom resource -->
