@@ -80,15 +80,7 @@
             <resource ref="anonymous"/>
         </resources>
     </route>
-
-    <!-- NEWSLETTER API -->
-    <route url="/V1/newsletter/subscribe" method="POST">
-        <service class="Appstractsoftware\MagentoAdapter\Api\Newsletter\NewsletterManagementInterface" method="subscribe"/>
-        <resources>
-            <resource ref="anonymous" />
-        </resources>
-    </route>
-
+    
     <!-- CATEGORY FILTERS API -->
     <route url="/V1/categories/:categoryId/filters" method="GET">
         <service class="Appstractsoftware\MagentoAdapter\Api\CategoryFiltersServiceInterface" method="getCategoryFilters"/>
