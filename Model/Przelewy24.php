@@ -22,7 +22,7 @@ class Przelewy24 implements Przelewy24Interface
   /**
    * @inheritDoc
    */
-  public function registerTransaction($orderId, $urlReturn, $predefinedMethod)
+  public function registerTransaction($orderId, $urlReturn)
   {
     if (is_null($this->przelewy)) {
       throw new \Magento\Framework\Exception\LocalizedException(__('Module Dialcom_Przelewy is not enabled'));
@@ -45,10 +45,6 @@ class Przelewy24 implements Przelewy24Interface
     );
     $postData = $this->przelewy->getRedirectionFormData($orderId);
     $postData['p24_url_return'] = $urlReturn;
-
-    if ($predefinedMethod && $predefinedMethod > 0) {
-      $postData['p24_method'] = (int) $predefinedMethod;
-    }
 
     foreach ($postData as $k => $v) {
       $P24C->addValue($k, $v);
