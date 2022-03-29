@@ -61,7 +61,7 @@ class SalableQuantityResolver implements ResolverInterface
       foreach ($children as $key => $child) {
         $qty += $this->getProductSalableQty->execute($child['sku'], $stockId);
       }
-    } else if ($productType == \Magento\Catalog\Model\Product\Type::TYPE_SIMPLE) {
+    } else if ($productType == \Magento\Catalog\Model\Product\Type::TYPE_SIMPLE || $productType == 'mpgiftcard') {
       $qty = $this->getProductSalableQty->execute($product->getSku(), $stockId);
     }
 
