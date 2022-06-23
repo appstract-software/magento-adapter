@@ -7,13 +7,13 @@
     <preference for="Appstractsoftware\MagentoAdapter\Api\Data\ItemDtoInterface" type="Appstractsoftware\MagentoAdapter\Model\Data\ItemDto" />
 
     <!-- Newsletter -->
-    <preference for="Appstractsoftware\MagentoAdapter\Api\Newsletter\NewsletterManagementInterface" type="Appstractsoftware\MagentoAdapter\Model\Newsletter\NewsletterManagement"/>
+    <preference for="Appstractsoftware\MagentoAdapter\Api\Newsletter\NewsletterManagementInterface" type="Appstractsoftware\MagentoAdapter\Model\Newsletter\NewsletterManagement" />
 
     <!-- Mailing -->
-    <preference for="Appstractsoftware\MagentoAdapter\Api\MailingServiceInterface" type="Appstractsoftware\MagentoAdapter\Model\MailingService"/>
+    <preference for="Appstractsoftware\MagentoAdapter\Api\MailingServiceInterface" type="Appstractsoftware\MagentoAdapter\Model\MailingService" />
 
     <!-- Orders -->
-    <preference for="Appstractsoftware\MagentoAdapter\Api\OrdersManagmentInterface" type="Appstractsoftware\MagentoAdapter\Model\OrdersManagment"/>
+    <preference for="Appstractsoftware\MagentoAdapter\Api\OrdersManagmentInterface" type="Appstractsoftware\MagentoAdapter\Model\OrdersManagment" />
 
     <!-- Category filters -->
     <preference for="Appstractsoftware\MagentoAdapter\Api\CategoryFiltersServiceInterface" type="Appstractsoftware\MagentoAdapter\Model\CategoryFiltersService" />
@@ -90,7 +90,7 @@
         <plugin name="appstract_register_capture" type="Appstractsoftware\MagentoAdapter\Plugin\RegisterCaptureNotificationOperation" />
     </type>
     <type name="Magento\Sales\Model\ResourceModel\Order">
-        <plugin name="appstract_place_order_save" type="Appstractsoftware\MagentoAdapter\Plugin\OrderPlugin"/>
+        <plugin name="appstract_place_order_save" type="Appstractsoftware\MagentoAdapter\Plugin\OrderPlugin" />
     </type>
     <type name="Magento\SalesGraphQl\Model\OrderItem\DataProvider">
         <plugin name="appstract_data_provider" type="Appstractsoftware\MagentoAdapter\Plugin\DataProvider" />
@@ -136,7 +136,7 @@
     <type name="Magento\Catalog\Model\ResourceModel\Product\Collection">
         <plugin name="appstract_gql_products" type="Appstractsoftware\MagentoAdapter\Plugin\Collection" />
     </type>
-        <type name="Magento\CatalogGraphQl\DataProvider\Product\LayeredNavigation\Formatter\LayerFormatter">
+    <type name="Magento\CatalogGraphQl\DataProvider\Product\LayeredNavigation\Formatter\LayerFormatter">
         <plugin name="appstract_gql_layer_formatter" type="Appstractsoftware\MagentoAdapter\Plugin\LayerFormatter" />
     </type>
     <type name="Magento\Framework\Search\Search">
@@ -146,13 +146,15 @@
     <preference for="Magento\CatalogGraphQl\DataProvider\Product\LayeredNavigation\AttributeOptionProvider" type="Appstractsoftware\MagentoAdapter\Model\AttributeOptionProvider"></preference>
     <preference for="Magento\CatalogGraphQl\DataProvider\Product\LayeredNavigation\Builder\Attribute" type="Appstractsoftware\MagentoAdapter\Model\Attribute"></preference>
 
+    <!-- find parent of configurable product by id, sku -->
+    <preference for="Appstractsoftware\MagentoAdapter\Api\ConfigurableManagementInterface" type="Appstractsoftware\MagentoAdapter\Model\ConfigurableManagement" />
 
     <!-- Additional attributes for filter input -->
-    <type name="Magento\CatalogGraphQl\Model\Resolver\Products\FilterArgument\ProductEntityAttributesForAst" >
+    <type name="Magento\CatalogGraphQl\Model\Resolver\Products\FilterArgument\ProductEntityAttributesForAst">
         <arguments>
             <argument name="additionalAttributes" xsi:type="array">
-            <item name="news_from_date" xsi:type="string">news_from_date</item>
-            <item name="news_to_date" xsi:type="string">news_to_date</item>
+                <item name="news_from_date" xsi:type="string">news_from_date</item>
+                <item name="news_to_date" xsi:type="string">news_to_date</item>
             </argument>
         </arguments>
     </type>
