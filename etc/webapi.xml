@@ -2,36 +2,36 @@
 <routes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Webapi:etc/webapi.xsd">
     <!-- PRODUCTS SEARCH API -->
     <route url="/V1/products/search" method="GET">
-        <service class="Appstractsoftware\MagentoAdapter\Api\ProductsSearchServiceInterface" method="searchProducts"/>
+        <service class="Appstractsoftware\MagentoAdapter\Api\ProductsSearchServiceInterface" method="searchProducts" />
         <resources>
-            <resource ref="Magento_Catalog::products"/>
+            <resource ref="Magento_Catalog::products" />
         </resources>
     </route>
     <route url="/V1/products/search-query" method="GET">
-        <service class="Appstractsoftware\MagentoAdapter\Api\ProductsSearchServiceInterface" method="searchProductsByQuery"/>
+        <service class="Appstractsoftware\MagentoAdapter\Api\ProductsSearchServiceInterface" method="searchProductsByQuery" />
         <resources>
-            <resource ref="anonymous"/>
+            <resource ref="anonymous" />
         </resources>
     </route>
 
     <!-- ORDERS API -->
     <route url="/V1/orders/status/:id" method="GET">
-        <service class="Magento\Sales\Api\OrderManagementInterface" method="getStatus"/>
+        <service class="Magento\Sales\Api\OrderManagementInterface" method="getStatus" />
         <resources>
-            <resource ref="anonymous"/>
+            <resource ref="anonymous" />
         </resources>
     </route>
     <route url="/V1/orders/status/:orderId" method="POST">
-        <service class="Appstractsoftware\MagentoAdapter\Api\OrdersInterface" method="setStatus"/>
+        <service class="Appstractsoftware\MagentoAdapter\Api\OrdersInterface" method="setStatus" />
         <resources>
-            <resource ref="Appstractsoftware_MagentoAdapter::order_status"/>
+            <resource ref="Appstractsoftware_MagentoAdapter::order_status" />
         </resources>
     </route>
-    
+
     <route url="/V1/orders/mine" method="GET">
-        <service class="Appstractsoftware\MagentoAdapter\Api\OrdersManagmentInterface" method="getListForCustomer"/>
+        <service class="Appstractsoftware\MagentoAdapter\Api\OrdersManagmentInterface" method="getListForCustomer" />
         <resources>
-            <resource ref="self"/>
+            <resource ref="self" />
         </resources>
         <data>
             <parameter name="customerId" force="true">%customer_id%</parameter>
@@ -39,51 +39,51 @@
     </route>
 
     <route url="/V1/products/import-product" method="POST">
-        <service class="Appstractsoftware\MagentoAdapter\Api\ProductInterface" method="create"/>
+        <service class="Appstractsoftware\MagentoAdapter\Api\ProductInterface" method="create" />
         <resources>
-            <resource ref="anonymous"/>
+            <resource ref="anonymous" />
         </resources>
     </route>
 
     <!-- SHIPPING -->
     <route url="/V1/inpost/status" method="POST">
-        <service class="Appstractsoftware\MagentoAdapter\Api\InPostInterface" method="updateOrderStatus"/>
+        <service class="Appstractsoftware\MagentoAdapter\Api\InPostInterface" method="updateOrderStatus" />
         <resources>
-            <resource ref="Appstractsoftware_MagentoAdapter::inpost_order_status"/>
+            <resource ref="Appstractsoftware_MagentoAdapter::inpost_order_status" />
         </resources>
     </route>
 
     <!-- PAYMENTS -->
     <route url="/V1/payu/create-order" method="POST">
-        <service class="Appstractsoftware\MagentoAdapter\Api\PayUOrderInterface" method="createOrder"/>
+        <service class="Appstractsoftware\MagentoAdapter\Api\PayUOrderInterface" method="createOrder" />
         <resources>
-            <resource ref="anonymous"/>
+            <resource ref="anonymous" />
         </resources>
     </route>
     <route url="/V1/payu/order-status/:id" method="GET">
-        <service class="Appstractsoftware\MagentoAdapter\Api\PayUOrderInterface" method="getOrderStatus"/>
+        <service class="Appstractsoftware\MagentoAdapter\Api\PayUOrderInterface" method="getOrderStatus" />
         <resources>
-            <resource ref="anonymous"/>
+            <resource ref="anonymous" />
         </resources>
     </route>
     <route url="/V1/przelewy24/register-transaction" method="POST">
-        <service class="Appstractsoftware\MagentoAdapter\Api\Przelewy24Interface" method="registerTransaction"/>
+        <service class="Appstractsoftware\MagentoAdapter\Api\Przelewy24Interface" method="registerTransaction" />
         <resources>
-            <resource ref="anonymous"/>
+            <resource ref="anonymous" />
         </resources>
     </route>
 
     <!-- SET CUSTOMER TAX CLASS ID -->
     <route url="/V1/customer-group" method="POST">
-        <service class="Appstractsoftware\MagentoAdapter\Api\CustomerGroupInterface" method="setCustomerGroup"/>
+        <service class="Appstractsoftware\MagentoAdapter\Api\CustomerGroupInterface" method="setCustomerGroup" />
         <resources>
-            <resource ref="anonymous"/>
+            <resource ref="anonymous" />
         </resources>
     </route>
 
     <!-- NEWSLETTER API -->
     <route url="/V1/newsletter/subscribe" method="POST">
-        <service class="Appstractsoftware\MagentoAdapter\Api\Newsletter\NewsletterManagementInterface" method="subscribe"/>
+        <service class="Appstractsoftware\MagentoAdapter\Api\Newsletter\NewsletterManagementInterface" method="subscribe" />
         <resources>
             <resource ref="anonymous" />
         </resources>
@@ -91,59 +91,59 @@
 
     <!-- CATEGORY FILTERS API -->
     <route url="/V1/categories/:categoryId/filters" method="GET">
-        <service class="Appstractsoftware\MagentoAdapter\Api\CategoryFiltersServiceInterface" method="getCategoryFilters"/>
+        <service class="Appstractsoftware\MagentoAdapter\Api\CategoryFiltersServiceInterface" method="getCategoryFilters" />
         <resources>
-            <resource ref="anonymous"/>
+            <resource ref="anonymous" />
         </resources>
     </route>
 
     <!-- Product Attributes -->
     <route url="/V1/product/set-custom-attributes" method="POST">
-        <service class="Appstractsoftware\MagentoAdapter\Api\ProductInterface" method="setAttributes"/>
+        <service class="Appstractsoftware\MagentoAdapter\Api\ProductInterface" method="setAttributes" />
         <resources>
-            <resource ref="anonymous"/>
+            <resource ref="anonymous" />
         </resources>
     </route>
 
     <!-- PRODUCT OPTIONS API -->
     <route url="/V1/product-options/category" method="GET">
-        <service class="Appstractsoftware\MagentoAdapter\Api\ProductOptionsServiceInterface" method="getCategoryProductsOptions"/>
+        <service class="Appstractsoftware\MagentoAdapter\Api\ProductOptionsServiceInterface" method="getCategoryProductsOptions" />
         <resources>
-            <resource ref="anonymous"/>
+            <resource ref="anonymous" />
         </resources>
     </route>
     <route url="/V1/product-options/products/:sku" method="GET">
-        <service class="Appstractsoftware\MagentoAdapter\Api\ProductOptionsServiceInterface" method="getProductOptions"/>
+        <service class="Appstractsoftware\MagentoAdapter\Api\ProductOptionsServiceInterface" method="getProductOptions" />
         <resources>
-            <resource ref="anonymous"/>
+            <resource ref="anonymous" />
         </resources>
     </route>
 
     <!-- PRODUCT LINKS API -->
     <route url="/V1/products/:sku/links" method="GET">
-        <service class="Appstractsoftware\MagentoAdapter\Api\ProductLinksServiceInterface" method="getLinks"/>
+        <service class="Appstractsoftware\MagentoAdapter\Api\ProductLinksServiceInterface" method="getLinks" />
         <resources>
-            <resource ref="anonymous"/>
+            <resource ref="anonymous" />
         </resources>
     </route>
 
     <route url="/V1/product-links/:sku" method="GET">
-        <service class="Appstractsoftware\MagentoAdapter\Api\ProductLinksServiceInterface" method="getLinks"/>
+        <service class="Appstractsoftware\MagentoAdapter\Api\ProductLinksServiceInterface" method="getLinks" />
         <resources>
-            <resource ref="anonymous"/>
+            <resource ref="anonymous" />
         </resources>
     </route>
 
     <route url="/V1/product-links/:sku/:type" method="GET">
-        <service class="Appstractsoftware\MagentoAdapter\Api\ProductLinksServiceInterface" method="getLinksByType"/>
+        <service class="Appstractsoftware\MagentoAdapter\Api\ProductLinksServiceInterface" method="getLinksByType" />
         <resources>
-            <resource ref="anonymous"/>
+            <resource ref="anonymous" />
         </resources>
     </route>
 
     <!-- CART SHIPPING ADDRESS -->
     <route url="/V1/carts/mine/shipping-address" method="GET">
-        <service class="Appstractsoftware\MagentoAdapter\Api\Quote\ShippingAddressManagementServiceInterface" method="get"/>
+        <service class="Appstractsoftware\MagentoAdapter\Api\Quote\ShippingAddressManagementServiceInterface" method="get" />
         <resources>
             <resource ref="self" />
         </resources>
@@ -152,7 +152,7 @@
         </data>
     </route>
     <route url="/V1/carts/mine/shipping-address" method="POST">
-        <service class="Appstractsoftware\MagentoAdapter\Api\Quote\ShippingAddressManagementServiceInterface" method="assign"/>
+        <service class="Appstractsoftware\MagentoAdapter\Api\Quote\ShippingAddressManagementServiceInterface" method="assign" />
         <resources>
             <resource ref="self" />
         </resources>
@@ -161,88 +161,88 @@
         </data>
     </route>
     <route url="/V1/guest-carts/:cartId/shipping-address" method="GET">
-        <service class="Appstractsoftware\MagentoAdapter\Api\Quote\GuestShippingAddressManagementServiceInterface" method="get"/>
+        <service class="Appstractsoftware\MagentoAdapter\Api\Quote\GuestShippingAddressManagementServiceInterface" method="get" />
         <resources>
-            <resource ref="anonymous"/>
+            <resource ref="anonymous" />
         </resources>
     </route>
     <route url="/V1/guest-carts/:cartId/shipping-address" method="POST">
-        <service class="Appstractsoftware\MagentoAdapter\Api\Quote\GuestShippingAddressManagementServiceInterface" method="assign"/>
+        <service class="Appstractsoftware\MagentoAdapter\Api\Quote\GuestShippingAddressManagementServiceInterface" method="assign" />
         <resources>
-            <resource ref="anonymous"/>
+            <resource ref="anonymous" />
         </resources>
     </route>
 
     <!-- PRODUCT IMAGE BY QUERY -->
     <route url="/V1/products/images" method="GET">
-        <service class="Appstractsoftware\MagentoAdapter\Api\ProductImage\ProductImagesServiceInterface" method="getList"/>
+        <service class="Appstractsoftware\MagentoAdapter\Api\ProductImage\ProductImagesServiceInterface" method="getList" />
         <resources>
-            <resource ref="anonymous"/>
+            <resource ref="anonymous" />
         </resources>
     </route>
 
     <!-- Mailing -->
     <route url="/V1/send-email" method="POST">
-        <service class="Appstractsoftware\MagentoAdapter\Api\MailingServiceInterface" method="sendEmail"/>
+        <service class="Appstractsoftware\MagentoAdapter\Api\MailingServiceInterface" method="sendEmail" />
         <resources>
-            <resource ref="anonymous"/>
+            <resource ref="anonymous" />
         </resources>
     </route>
     <route url="/V1/send-contact-email" method="POST">
-        <service class="Appstractsoftware\MagentoAdapter\Api\MailingServiceInterface" method="sendContactEmail"/>
+        <service class="Appstractsoftware\MagentoAdapter\Api\MailingServiceInterface" method="sendContactEmail" />
         <resources>
-            <resource ref="anonymous"/>
+            <resource ref="anonymous" />
         </resources>
     </route>
 
     <!-- NEW PRODUCTS API -->
     <route url="/V1/products/new/:limit" method="GET">
-        <service class="Appstractsoftware\MagentoAdapter\Api\NewProductsRepositoryInterface" method="getList"/>
+        <service class="Appstractsoftware\MagentoAdapter\Api\NewProductsRepositoryInterface" method="getList" />
         <resources>
-            <resource ref="anonymous"/>
+            <resource ref="anonymous" />
         </resources>
     </route>
 
     <!-- BESTSELLER PRODUCTS API -->
     <route url="/V1/products/best-seller/:limit" method="GET">
-        <service class="Appstractsoftware\MagentoAdapter\Api\BestSellerRepositoryInterface" method="getList"/>
+        <service class="Appstractsoftware\MagentoAdapter\Api\BestSellerRepositoryInterface" method="getList" />
         <resources>
-            <resource ref="anonymous"/>
+            <resource ref="anonymous" />
         </resources>
     </route>
 
     <!-- MOST VIEWED PRODUCTS API -->
     <route url="/V1/products/most-viewed/:limit" method="GET">
-        <service class="Appstractsoftware\MagentoAdapter\Api\MostViewedRepositoryInterface" method="getList"/>
+        <service class="Appstractsoftware\MagentoAdapter\Api\MostViewedRepositoryInterface" method="getList" />
         <resources>
-            <resource ref="anonymous"/>
+            <resource ref="anonymous" />
         </resources>
     </route>
 
     <!-- TOP RATED PRODUCTS API -->
     <route url="/V1/products/top-rated/:limit" method="GET">
-        <service class="Appstractsoftware\MagentoAdapter\Api\TopRatedRepositoryInterface" method="getList"/>
+        <service class="Appstractsoftware\MagentoAdapter\Api\TopRatedRepositoryInterface" method="getList" />
         <resources>
-            <resource ref="anonymous"/>
+            <resource ref="anonymous" />
         </resources>
     </route>
 
     <!-- WISHLIST API -->
     <route url="/V1/wishlist/me/product" method="POST">
-        <service class="Appstractsoftware\MagentoAdapter\Api\WishlistServiceInterface" method="addProductToWishlistByCustomerId"/>
+        <service class="Appstractsoftware\MagentoAdapter\Api\WishlistServiceInterface" method="addProductToWishlistByCustomerId" />
         <resources>
-            <resource ref="self"/>
+            <resource ref="self" />
         </resources>
         <data>
-            <parameter name="customerId" force="true">%customer_id%</parameter>            <!-- Provided by resource self -->
+            <parameter name="customerId" force="true">%customer_id%</parameter> <!-- Provided by resource self -->
             <parameter name="product.id" force="false">%product_id%</parameter>
             <parameter name="product.sku" force="false">%sku%</parameter>
         </data>
     </route>
     <route url="/V1/wishlist/:id/product" method="POST">
-        <service class="Appstractsoftware\MagentoAdapter\Api\WishlistServiceInterface" method="addProductToWishlistById"/>
+        <service class="Appstractsoftware\MagentoAdapter\Api\WishlistServiceInterface" method="addProductToWishlistById" />
         <resources>
-            <resource ref="Appstractsoftware_MagentoAdapter::wishlist_admin"/>
+            <resource ref="Appstractsoftware_MagentoAdapter::wishlist_admin" />
         </resources>
         <data>
             <parameter name="product.id" force="false">%product_id%</parameter>
@@ -250,9 +250,9 @@
         </data>
     </route>
     <route url="/V1/wishlist/customer/:customerId/product" method="POST">
-        <service class="Appstractsoftware\MagentoAdapter\Api\WishlistServiceInterface" method="addProductToWishlistByCustomerId"/>
+        <service class="Appstractsoftware\MagentoAdapter\Api\WishlistServiceInterface" method="addProductToWishlistByCustomerId" />
         <resources>
-            <resource ref="Appstractsoftware_MagentoAdapter::wishlist_admin"/>
+            <resource ref="Appstractsoftware_MagentoAdapter::wishlist_admin" />
         </resources>
         <data>
             <parameter name="product.id" force="false">%product_id%</parameter>
@@ -261,75 +261,75 @@
     </route>
 
     <route url="/V1/wishlist/me" method="GET">
-        <service class="Appstractsoftware\MagentoAdapter\Api\WishlistServiceInterface" method="getWishlistByCustomerId"/>
+        <service class="Appstractsoftware\MagentoAdapter\Api\WishlistServiceInterface" method="getWishlistByCustomerId" />
         <resources>
-            <resource ref="self"/>
+            <resource ref="self" />
         </resources>
         <data>
-            <parameter name="customerId" force="true">%customer_id%</parameter>            <!-- Provided by resource self -->
+            <parameter name="customerId" force="true">%customer_id%</parameter> <!-- Provided by resource self -->
         </data>
     </route>
     <route url="/V1/wishlist/:id" method="GET">
-        <service class="Appstractsoftware\MagentoAdapter\Api\WishlistServiceInterface" method="getWishlistById"/>
+        <service class="Appstractsoftware\MagentoAdapter\Api\WishlistServiceInterface" method="getWishlistById" />
         <resources>
-            <resource ref="Appstractsoftware_MagentoAdapter::wishlist_admin"/>
+            <resource ref="Appstractsoftware_MagentoAdapter::wishlist_admin" />
         </resources>
     </route>
     <route url="/V1/wishlist/customer/:customerId" method="GET">
-        <service class="Appstractsoftware\MagentoAdapter\Api\WishlistServiceInterface" method="getWishlistByCustomerId"/>
+        <service class="Appstractsoftware\MagentoAdapter\Api\WishlistServiceInterface" method="getWishlistByCustomerId" />
         <resources>
-            <resource ref="Appstractsoftware_MagentoAdapter::wishlist_admin"/>
+            <resource ref="Appstractsoftware_MagentoAdapter::wishlist_admin" />
         </resources>
     </route>
     <route url="/V1/wishlist/sharing/:sharingCode" method="GET">
-        <service class="Appstractsoftware\MagentoAdapter\Api\WishlistServiceInterface" method="getWishlistBySharingCode"/>
+        <service class="Appstractsoftware\MagentoAdapter\Api\WishlistServiceInterface" method="getWishlistBySharingCode" />
         <resources>
-            <resource ref="Appstractsoftware_MagentoAdapter::wishlist_admin"/>
+            <resource ref="Appstractsoftware_MagentoAdapter::wishlist_admin" />
         </resources>
     </route>
 
     <route url="/V1/wishlist/:id" method="DELETE">
-        <service class="Appstractsoftware\MagentoAdapter\Api\WishlistServiceInterface" method="deleteWishlistById"/>
+        <service class="Appstractsoftware\MagentoAdapter\Api\WishlistServiceInterface" method="deleteWishlistById" />
         <resources>
-            <resource ref="Appstractsoftware_MagentoAdapter::wishlist_admin"/>
+            <resource ref="Appstractsoftware_MagentoAdapter::wishlist_admin" />
         </resources>
     </route>
     <route url="/V1/wishlist/:id/item/:itemId" method="DELETE">
-        <service class="Appstractsoftware\MagentoAdapter\Api\WishlistServiceInterface" method="deleteItemByItemIdFromWishlistById"/>
+        <service class="Appstractsoftware\MagentoAdapter\Api\WishlistServiceInterface" method="deleteItemByItemIdFromWishlistById" />
         <resources>
-            <resource ref="Appstractsoftware_MagentoAdapter::wishlist_admin"/>
+            <resource ref="Appstractsoftware_MagentoAdapter::wishlist_admin" />
         </resources>
     </route>
     <route url="/V1/wishlist/customer/:customerId/item/:itemId" method="DELETE">
-        <service class="Appstractsoftware\MagentoAdapter\Api\WishlistServiceInterface" method="deleteItemByItemIdFromWishlistByCustomerId"/>
+        <service class="Appstractsoftware\MagentoAdapter\Api\WishlistServiceInterface" method="deleteItemByItemIdFromWishlistByCustomerId" />
         <resources>
-            <resource ref="Appstractsoftware_MagentoAdapter::wishlist_admin"/>
+            <resource ref="Appstractsoftware_MagentoAdapter::wishlist_admin" />
         </resources>
     </route>
     <route url="/V1/wishlist/me/item/:itemId" method="DELETE">
-        <service class="Appstractsoftware\MagentoAdapter\Api\WishlistServiceInterface" method="deleteItemByItemIdFromWishlistByCustomerId"/>
+        <service class="Appstractsoftware\MagentoAdapter\Api\WishlistServiceInterface" method="deleteItemByItemIdFromWishlistByCustomerId" />
         <resources>
-            <resource ref="self"/>
+            <resource ref="self" />
         </resources>
         <data>
-            <parameter name="customerId" force="true">%customer_id%</parameter>            <!-- Provided by resource self -->
+            <parameter name="customerId" force="true">%customer_id%</parameter> <!-- Provided by resource self -->
         </data>
     </route>
 
     <!-- Prepared admin-customer cart API -->
     <route url="/V1/prepared-cart" method="POST">
-        <service class="Appstractsoftware\MagentoAdapter\Api\PreparedCartRepositoryInterface" method="createGuestCartBasedOnAdminCustomerCart"/>
+        <service class="Appstractsoftware\MagentoAdapter\Api\PreparedCartRepositoryInterface" method="createGuestCartBasedOnAdminCustomerCart" />
         <resources>
-            <resource ref="self"/>
+            <resource ref="self" />
         </resources>
         <data>
             <parameter name="cartId" force="true">%cart_id%</parameter>
         </data>
     </route>
     <route url="/V1/prepared-cart" method="DELETE">
-        <service class="Appstractsoftware\MagentoAdapter\Api\PreparedCartRepositoryInterface" method="emptyPreparedAdminCustomerCart"/>
+        <service class="Appstractsoftware\MagentoAdapter\Api\PreparedCartRepositoryInterface" method="emptyPreparedAdminCustomerCart" />
         <resources>
-            <resource ref="self"/>
+            <resource ref="self" />
         </resources>
         <data>
             <parameter name="customerId" force="true">%customer_id%</parameter>
@@ -337,7 +337,7 @@
         </data>
     </route>
     <route url="/V1/prepared-cart/apply/:preparedCartId" method="POST">
-        <service class="Appstractsoftware\MagentoAdapter\Api\PreparedCartRepositoryInterface" method="applyPreparedQuestCartToCustomerCart"/>
+        <service class="Appstractsoftware\MagentoAdapter\Api\PreparedCartRepositoryInterface" method="applyPreparedQuestCartToCustomerCart" />
         <resources>
             <resource ref="self" />
         </resources>
@@ -345,9 +345,9 @@
 
     <!-- Acctivate account based on custom resource -->
     <route url="/V1/customers/:email/activate-account" method="PUT">
-        <service class="Magento\Customer\Api\AccountManagementInterface" method="activate"/>
+        <service class="Magento\Customer\Api\AccountManagementInterface" method="activate" />
         <resources>
-            <resource ref="Appstractsoftware_MagentoAdapter::activate_account"/>
+            <resource ref="Appstractsoftware_MagentoAdapter::activate_account" />
         </resources>
     </route>
 
@@ -360,5 +360,18 @@
         <data>
             <parameter name="customerId" force="true">%customer_id%</parameter>
         </data>
+    </route>
+
+    <route method="GET" url="/V1/find-configurable/:childId">
+        <service class="Appstractsoftware\MagentoAdapter\Api\ConfigurableManagementInterface" method="getParentIdsByChild" />
+        <resources>
+            <resource ref="Magento_Catalog::products" />
+        </resources>
+    </route>
+    <route method="GET" url="/V1/find-configurable/child-sku/:childSku">
+        <service class="Appstractsoftware\MagentoAdapter\Api\ConfigurableManagementInterface" method="getParentIdsByChildSku" />
+        <resources>
+            <resource ref="Magento_Catalog::products" />
+        </resources>
     </route>
 </routes>
