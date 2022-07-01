@@ -50,7 +50,7 @@ class ConfigurableManagement implements \Appstractsoftware\MagentoAdapter\Api\Co
   {
     $child = $this->productRepository->get($childSku);
 
-    if ($child->getTypeId() != \Magento\ConfigurableProduct\Model\Product\Type\Configurable::TYPE_CODE) {
+    if ($child->getTypeId() == \Magento\ConfigurableProduct\Model\Product\Type\Configurable::TYPE_CODE) {
       return [];
     }
     return $this->getParentIdsByChild($child->getId());
